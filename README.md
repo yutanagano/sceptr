@@ -1,12 +1,11 @@
-# BLASTR
+# BLAsTR
 
-### **This is a prototype for internal use only.**
+### **This is an unpublished prototype for internal use only.**
 
-> NOTE: Current models only support beta chain data. Support for alpha and paired-chain is coming soon.
+> NOTE: Current models only support beta chain data.
+> Support for alpha and paired-chain is coming soon.
 
-## **B**ERT **L**everaged for the **A**nalysis of **T** cell **R**eceptors
-
-BLASTR is a BERT-like attention model trained on T cell receptor (TCR) data.
+**B**ERT **L**everaged for the **A**nalysi**s** of **T** cell **R**eceptors (**BLAsTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
 It maps TCRs to vector representations, which can be used for downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
 
 ## Installation
@@ -36,12 +35,42 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 
 ## Usage
 
-TODO
+### `blastr.embed(data: DataFrame) -> ndarray`
 
-### Default functions
+Map a table of TCRs provided as a pandas `DataFrame` in the above format to a set of vector representations.
 
-#### `blastr.embed()`
+Parameters:
 
-#### `blastr.cdist()`
+- data (`DataFrame`): DataFrame in the presribed format.
 
-#### `blastr.pdist()`
+Returns:
+
+A 2D [numpy](https://numpy.org/) [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) object where every row vector corresponds to a row in the original TCR `DataFrame`.
+The returned array will have shape (N, 128) where N is the number of TCRs in the input data and 128 is the dimensionality of the blastr model.
+
+### `blastr.cdist(data_a: DataFrame, data_b: DataFrame) -> ndarray`
+
+Generate a cdist matrix between two collections of TCRs.
+
+Parameters:
+
+- data_a (`DataFrame`): DataFrame in the prescribed format, representing TCRs from collection A.
+- data_b (`DataFrame`): DataFrame in the prescribed format, representing TCRs from collection B.
+
+Returns:
+
+A 2D numpy `ndarray` representing a cdist matrix between TCRs from collection A and B.
+The returned array will have shape (X, Y) where X is the number of TCRs in collection A and Y is the number of TCRs in collection B.
+
+### `blastr.pdist(data: DataFrame) -> ndarray`
+
+Generate a pdist set of distances between each pair of TCRs in the input data.
+
+Parameters:
+
+- data (`DataFrame`): DataFrame in the prescribed format.
+
+Returns
+
+A 2D numpy `ndarray` representing a pdist vector of distances between each pair of TCRs in the input data.
+The returned array will have shape (1/2 * N * (N-1),), where N is the number of TCRs in the input data.
