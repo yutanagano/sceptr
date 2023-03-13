@@ -10,8 +10,7 @@ from pandas import DataFrame
 
 
 default_model = ModelWrapper(
-    config=BCDRBERT_ACL_CNS_CONFIG,
-    state_dict=BCDRBERT_ACL_CNS_SD
+    config=BCDRBERT_ACL_CNS_CONFIG, state_dict=BCDRBERT_ACL_CNS_SD
 )
 
 
