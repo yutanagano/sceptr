@@ -42,6 +42,7 @@ class ModelWrapper:
 
         self.model = model
         self._tokeniser = tokeniser
+        self._device = device
 
     @property
     def name(self) -> str:
@@ -49,13 +50,13 @@ class ModelWrapper:
 
     def embed(self, data: DataFrame) -> ndarray:
         dl = self._generate_dataloader(data)
-        return self._generate_embeddings(dl).detach().numpy()
+        return self._generate_embeddings(dl).detach().cpu().numpy()
 
     def pdist(self, data: DataFrame) -> ndarray:
         dl = self._generate_dataloader(data)
         embedded = self._generate_embeddings(dl)
 
-        return torch.pdist(embedded, p=2).detach().numpy()
+        return torch.pdist(embedded, p=2).detach().cpu().numpy()
 
     def cdist(self, data_a: DataFrame, data_b: DataFrame) -> ndarray:
         dl_1 = self._generate_dataloader(data_a)
@@ -64,7 +65,7 @@ class ModelWrapper:
         embedded_1 = self._generate_embeddings(dl_1)
         embedded_2 = self._generate_embeddings(dl_2)
 
-        return torch.cdist(embedded_1, embedded_2, p=2).detach().numpy()
+        return torch.cdist(embedded_1, embedded_2, p=2).detach().cpu().numpy()
 
     def _generate_dataloader(self, data: DataFrame) -> TCRDataLoader:
         # Create missing columns if any and mark as empty
@@ -89,5 +90,5 @@ class ModelWrapper:
 
     @torch.no_grad()
     def _generate_embeddings(self, dataloader: TCRDataLoader) -> torch.Tensor:
-        embedded = [self.model.embed(batch) for batch in dataloader]
+        embedded = [self.model.embed(batch.to(self._device)) for batch in dataloader]
         return torch.concat(embedded)
