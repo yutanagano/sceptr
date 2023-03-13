@@ -13,5 +13,5 @@ setup(
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     package_data={"blastr": ["resources/*", "model_saves/*/*"]},
-    install_requires=["pandas>=1.3", "torch>=1.13"],
+    install_requires=["pandas>=1.1", "tidytcells>=1.6", "torch>=1.10"],
 )
