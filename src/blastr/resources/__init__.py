@@ -1,5 +1,5 @@
+from importlib.resources import files
 import json
-from pkg_resources import resource_stream
 import tidytcells as tt
 
 AMINO_ACIDS = (
@@ -38,5 +38,5 @@ FUNCTIONAL_TRBJS = sorted(
     list(tt.tcr.query(precision="gene", functionality="F", contains="TRBJ"))
 )
 
-with resource_stream(__name__, "v_cdrs.json") as f:
+with files(__name__).joinpath("v_cdrs.json").open("rb") as f:
     V_CDRS = json.load(f)
