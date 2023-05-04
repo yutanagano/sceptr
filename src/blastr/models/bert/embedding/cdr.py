@@ -42,6 +42,39 @@ class BCDREmbedding(Module):
         ) * math.sqrt(self.embedding_dim)
 
 
+class CDREmbedding(Module):
+    """
+    CDR embedder for paired-chain models.
+
+    Compatible tokenisers: CDRTokeniser
+    """
+
+    def __init__(self, embedding_dim: int) -> None:
+        super().__init__()
+
+        self.embedding_dim = embedding_dim
+        self.token_embedding = Embedding(
+            num_embeddings=23,  # <pad> + <mask> + <cls> + 20 amino acids
+            embedding_dim=embedding_dim,
+            padding_idx=0,
+        )
+        self.position_embedding = SinPositionEmbedding(
+            num_embeddings=100, embedding_dim=embedding_dim
+        )
+        self.compartment_embedding = Embedding(
+            num_embeddings=7,  # <pad> + 3 CDRs for alpha and beta chains
+            embedding_dim=embedding_dim,
+            padding_idx=0,
+        )
+
+    def forward(self, x: Tensor) -> Tensor:
+        return (
+            self.token_embedding(x[:, :, 0])
+            + self.position_embedding(x[:, :, 1])
+            + self.compartment_embedding(x[:, :, 3])
+        ) * math.sqrt(self.embedding_dim)
+
+
 class BCDREmbeddingBDPos(BCDREmbedding):
     """
     CDR embedder for beta only models with bidirectional position embedding.

@@ -2,8 +2,7 @@
 
 ### **This is an unpublished prototype for internal use only.**
 
-> NOTE: Current models only support beta chain data.
-> Support for alpha and paired-chain is coming soon.
+> NOTE: The latest version of BLAsTR no longer supports Python versions earlier than 3.9.
 
 **B**ERT **L**everaged for the **A**nalysi**s** of **T** cell **R**eceptors (**BLAsTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
 It maps TCRs to vector representations, which can be used for downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
@@ -29,6 +28,9 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 
 | Column name | Column datatype | Column contents |
 |---|---|---|
+|TRAV|`str`|IMGT symbol for the alpha chain V gene (with allele specifier)|
+|CDR3A|`str`|Amino acid sequence of the alpha chain CDR3, including the first C and last W/F residues, in all caps|
+|TRAJ|`str`|IMGT symbol for the alpha chain J gene (with allele specifier)|
 |TRBV|`str`|IMGT symbol for the beta chain V gene (with allele specifier)|
 |CDR3B|`str`|Amino acid sequence of the beta chain CDR3, including the first C and last W/F residues, in all caps|
 |TRBJ|`str`|IMGT symbol for the beta chain J gene (with allele specifier)|

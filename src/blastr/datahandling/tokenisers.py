@@ -233,15 +233,15 @@ class BCDRTokeniser(_AATokeniser):
         include_cdr1 = include_cdr2 = include_cdr3 = True
 
         if noising:
-            include_cdr1 = random.random() < self._p_drop_cdr
-            include_cdr2 = random.random() < self._p_drop_cdr
-            include_cdr3 = random.random() < self._p_drop_cdr
+            include_cdr1 = random.random() >= self._p_drop_cdr
+            include_cdr2 = random.random() >= self._p_drop_cdr
+            include_cdr3 = random.random() >= self._p_drop_cdr
 
             # Make sure filter doesn't cause the whole TCR to be censored
             if not (
                 (cdr1b and include_cdr1)
                 or (cdr2b and include_cdr2)
-                or (cdr3b and include_cdr3)
+                or (notna(cdr3b) and include_cdr3)
             ):
                 include_cdr1 = include_cdr2 = include_cdr3 = True
 
@@ -253,7 +253,7 @@ class BCDRTokeniser(_AATokeniser):
         if cdr2b and include_cdr2:
             tokenised.extend(self._tokenise_cdr(cdr2b, 2, noising))
 
-        if cdr3b and include_cdr3:
+        if notna(cdr3b) and include_cdr3:
             tokenised.extend(self._tokenise_cdr(cdr3b, 3, noising))
 
         return torch.tensor(tokenised, dtype=torch.long)
@@ -275,3 +275,135 @@ class BCDRTokeniser(_AATokeniser):
                 tokenised.append([self._aa_to_index[aa], i + 1, cdr_size, cmpt_idx])
 
         return tokenised
+
+
+class CDRTokeniser(_AATokeniser):
+    """
+    Tokeniser that takes the alpha and beta V genes and CDR3s, and represents
+    the receptor as the set of CDRs 1, 2 and 3 for both chains.
+    """
+
+    def __init__(
+        self, p_drop_chain: float, p_drop_cdr: float, p_drop_aa: float
+    ) -> None:
+        super().__init__()
+        self._p_drop_chain = p_drop_chain
+        self._p_drop_cdr = p_drop_cdr
+        self._p_drop_aa = p_drop_aa
+
+    def tokenise(self, tcr: Series, noising: bool = False) -> Tensor:
+        """
+        Tokenise a TCR in terms of the amino acid sequences of its 6 CDRs.
+
+        Amino acids get mapped as in the following: 'A' -> 3, 'C' -> 4, ...
+        'Y' -> 22.
+
+        :return:
+            Tensor with beta CDR AA residues.
+            Dim 0 - token ID
+            Dim 1 - token pos
+            Dim 2 - compartment length
+            Dim 3 - compartment ID
+        """
+
+        tokenised = [[2, 0, 0, 0]]
+
+        # Potentially drop a chain
+        include_a = include_b = True
+        has_a_data = tcr.loc[["TRAV", "CDR3A"]].notna().any()
+        has_b_data = tcr.loc[["TRBV", "CDR3B"]].notna().any()
+
+        if noising:
+            include_a = random.random() >= self._p_drop_chain
+            include_b = random.random() >= self._p_drop_chain
+
+            # prevent censoring both chains
+            if not ((has_a_data and include_a) or (has_b_data and include_b)):
+                include_a = include_b = True
+
+        # Tokenise chains
+        if has_a_data and include_a:
+            tokenised.extend(self._tokenise_chain(tcr, "A", noising))
+
+        if has_b_data and include_b:
+            tokenised.extend(self._tokenise_chain(tcr, "B", noising))
+
+        # Return
+        if len(tokenised) == 1:
+            raise ValueError(f"No TCR data found in row {tcr.name}.")
+
+        return torch.tensor(tokenised, dtype=torch.long)
+
+    def _tokenise_chain(self, tcr: Series, chain: str, noising: bool) -> list:
+        cmpt_idx_start = 1 if chain == "A" else 4
+
+        tokenised = []
+
+        # Get CDRs
+        v_gene = tcr.loc[f"TR{chain}V"]
+
+        cdr1, cdr2 = self._get_vcdrs(v_gene)
+        cdr3 = tcr.loc[f"CDR3{chain}"]
+
+        # Potentially drop some cdrs
+        include_cdr1 = include_cdr2 = include_cdr3 = True
+
+        if noising:
+            include_cdr1 = random.random() >= self._p_drop_cdr
+            include_cdr2 = random.random() >= self._p_drop_cdr
+            include_cdr3 = random.random() >= self._p_drop_cdr
+
+            # Make sure filter doesn't cause the whole TCR to be censored
+            if not (
+                (cdr1 and include_cdr1)
+                or (cdr2 and include_cdr2)
+                or (notna(cdr3) and include_cdr3)
+            ):
+                include_cdr1 = include_cdr2 = include_cdr3 = True
+
+        # Tokenise cdrs
+        if cdr1 and include_cdr1:
+            tokenised.extend(self._tokenise_cdr(cdr1, cmpt_idx_start, noising))
+
+        if cdr2 and include_cdr2:
+            tokenised.extend(self._tokenise_cdr(cdr2, cmpt_idx_start + 1, noising))
+
+        if notna(cdr3) and include_cdr3:
+            tokenised.extend(self._tokenise_cdr(cdr3, cmpt_idx_start + 2, noising))
+
+        return tokenised
+
+    def _tokenise_cdr(self, cdr: str, cmpt_idx: int, noising: bool) -> list:
+        cdr_size = len(cdr)
+
+        tokenised = []
+        for i, aa in enumerate(cdr):
+            # If noising, randomly drop some AAs
+            if noising and random.random() < self._p_drop_aa:
+                continue
+
+            tokenised.append([self._aa_to_index[aa], i + 1, cdr_size, cmpt_idx])
+
+        # Make sure filter doesn't cause the whole CDR to be censored
+        if not tokenised:
+            for i, aa in enumerate(cdr):
+                tokenised.append([self._aa_to_index[aa], i + 1, cdr_size, cmpt_idx])
+
+        return tokenised
+
+    @staticmethod
+    def _get_vcdrs(v_gene: str) -> tuple:
+        if not v_gene in V_CDRS:
+            return (None, None)
+
+        try:
+            cdr1 = V_CDRS[v_gene]["CDR1-IMGT"]
+        except KeyError:
+            cdr1 = None
+
+        try:
+            cdr2 = V_CDRS[v_gene]["CDR2-IMGT"]
+        except KeyError:
+            cdr2 = None
+
+        return (cdr1, cdr2)

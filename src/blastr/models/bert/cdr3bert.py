@@ -31,7 +31,7 @@ class _CDR3BERTBase(_BERTBase):
         self.generator = torch.nn.Linear(d_model, 20)
 
 
-class CDR3BERT_a(_CDR3BERTBase):
+class BCDR3BERTMPos(_CDR3BERTBase):
     """
     CDR3BERT model that only gets amino acid information.
     """
@@ -52,7 +52,7 @@ class CDR3BERT_a(_CDR3BERTBase):
         self.embedder = CDR3Embedding_a(embedding_dim=d_model)
 
 
-class CDR3BERT_ap(_CDR3BERTBase):
+class BCDR3BERT(_CDR3BERTBase):
     """
     CDR3BERT model that gets amino acid and positional information.
     """
@@ -73,7 +73,7 @@ class CDR3BERT_ap(_CDR3BERTBase):
         self.embedder = CDR3Embedding_ap(embedding_dim=d_model)
 
 
-class CDR3BERT_ar(_CDR3BERTBase):
+class BCDR3BERTRPos(_CDR3BERTBase):
     """
     CDR3BERT model that gets amino acid and relative positional information.
     """
@@ -94,7 +94,7 @@ class CDR3BERT_ar(_CDR3BERTBase):
         self.embedder = CDR3Embedding_ar(embedding_dim=d_model)
 
 
-class CDR3BERT_ab(_CDR3BERTBase):
+class BCDR3BERTBDPos(_CDR3BERTBase):
     """
     CDR3BERT model that gets amino acid and bidirectional positional
     information.
@@ -116,7 +116,7 @@ class CDR3BERT_ab(_CDR3BERTBase):
         self.embedder = CDR3Embedding_ab(embedding_dim=d_model)
 
 
-class CDR3BERT_ac(_CDR3BERTBase):
+class CDR3BERTMPos(_CDR3BERTBase):
     """
     CDR3BERT model that gets amino acid and chain information.
     """
@@ -137,7 +137,7 @@ class CDR3BERT_ac(_CDR3BERTBase):
         self.embedder = CDR3Embedding_ac(embedding_dim=d_model)
 
 
-class CDR3BERT_apc(_CDR3BERTBase):
+class CDR3BERT(_CDR3BERTBase):
     """
     CDR3BERT model that gets amino acid, chain, and residue position
     information.
@@ -159,7 +159,7 @@ class CDR3BERT_apc(_CDR3BERTBase):
         self.embedder = CDR3Embedding_apc(embedding_dim=d_model)
 
 
-class CDR3ClsBERT_ap(_BERTClsEmbedBase, CDR3BERT_ap):
+class BCDR3ClsBERT(_BERTClsEmbedBase, BCDR3BERT):
     """
     CDR3BERT_ap model which uses the <cls> token to embed.
     """
@@ -178,7 +178,7 @@ class CDR3ClsBERT_ap(_BERTClsEmbedBase, CDR3BERT_ap):
         )
 
 
-class CDR3ClsBERT_ab(_BERTClsEmbedBase, CDR3BERT_ab):
+class BCDR3ClsBERTBDPos(_BERTClsEmbedBase, BCDR3BERTBDPos):
     """
     CDR3BERT_ab model which uses the <cls> token to embed.
     """
@@ -197,7 +197,7 @@ class CDR3ClsBERT_ab(_BERTClsEmbedBase, CDR3BERT_ab):
         )
 
 
-class CDR3ClsBERT_apc(_BERTClsEmbedBase, CDR3BERT_apc):
+class CDR3ClsBERT(_BERTClsEmbedBase, CDR3BERT):
     """
     CDR3BERT_acp model which uses the <cls> token to embed.
     """

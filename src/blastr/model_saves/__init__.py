@@ -1,11 +1,12 @@
+from importlib.resources import files
 import json
-from pkg_resources import resource_stream
 import torch
 
 
-# BCDRBERT +ACL (cns)
+# Main model
+MAIN_MODEL_NAME = "CDRBERT_+ACL_cns_020_cdrcns_001_chaincns_020"
 
-with resource_stream(__name__, "BCDRBERT_+ACL_cns/config.json") as f:
+with (files(__name__) / MAIN_MODEL_NAME / "config.json").open("rb") as f:
     BCDRBERT_ACL_CNS_CONFIG = json.load(f)
-with resource_stream(__name__, "BCDRBERT_+ACL_cns/state_dict.pt") as f:
+with (files(__name__) / MAIN_MODEL_NAME / "state_dict.pt").open("rb") as f:
     BCDRBERT_ACL_CNS_SD = torch.load(f)
