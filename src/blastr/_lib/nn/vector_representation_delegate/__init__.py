@@ -1,0 +1,6 @@
+from .vector_representation_delegate import VectorRepresentationDelegate
+
+from .average_pool_vector_representation_delegate import (
+    AveragePoolVectorRepresentationDelegate,
+)
+from .cls_vector_representation_delegate import ClsVectorRepresentationDelegate
