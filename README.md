@@ -46,8 +46,9 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 The eponymously named `blastr` submodule is the easiest way to use BLAsTR.
 It loads the default BLAsTR variant (currently `beta_cdr_bert_unsupervised`) and exposes its methods directly as module-level functions.
 
-#### `blastr.blastr.calc_vector_representations(tcrs: DataFrame) -> ndarray`
 ---
+
+#### `blastr.blastr.calc_vector_representations(tcrs: DataFrame) -> ndarray`
 
 Map a table of TCRs provided as a pandas `DataFrame` in the above format to a set of vector representations.
 
@@ -60,8 +61,9 @@ Returns:
 A 2D [numpy](https://numpy.org/) [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) object where every row vector corresponds to a row in the original TCR `DataFrame`.
 The returned array will have shape (N, D) where N is the number of TCRs in the input data and D is the dimensionality of the blastr model.
 
-#### `blastr.blastr.calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray`
 ---
+
+#### `blastr.blastr.calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray`
 
 Generate a cdist matrix between two collections of TCRs.
 
@@ -75,8 +77,9 @@ Returns:
 A 2D numpy `ndarray` representing a cdist matrix between TCRs from collection A and B.
 The returned array will have shape (X, Y) where X is the number of TCRs in collection A and Y is the number of TCRs in collection B.
 
-#### `blastr.blastr.calc_pdist_vector(tcrs: DataFrame) -> ndarray`
 ---
+
+#### `blastr.blastr.calc_pdist_vector(tcrs: DataFrame) -> ndarray`
 
 Generate a pdist set of distances between each pair of TCRs in the input data.
 
@@ -88,6 +91,8 @@ Returns
 
 A 2D numpy `ndarray` representing a pdist vector of distances between each pair of TCRs in the input data.
 The returned array will have shape (1/2 * N * (N-1),), where N is the number of TCRs in the input data.
+
+---
 
 ### Loading specific BLAsTR variants (`blastr.variant`)
 
