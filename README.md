@@ -44,7 +44,7 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 ### Functional API (`blastr.blastr`)
 
 The eponymously named `blastr` submodule is the easiest way to use BLAsTR.
-It loads the default BLAsTR variant (currently `beta_cdr_bert_unsupervised`) and exposes its methods directly as module-level functions.
+It loads the default BLAsTR variant (currently `beta_cdr_bert_unsupervised_large`) and exposes its methods directly as module-level functions.
 
 ---
 
@@ -96,8 +96,6 @@ The returned array will have shape (1/2 * N * (N-1),), where N is the number of 
 
 ### Loading specific BLAsTR variants (`blastr.variant`)
 
-> NOTE: Currently, only the default BLAsTR variant (beta_cdr_bert_unsupervised) is available, but more will be added soon.
-
 Because BLAsTR is still a project in development, there exist multiple variants of the model.
 For more curious users, these model variants will be available to load and use through the `blastr.variant` submodule.
 
@@ -107,3 +105,4 @@ This `BLAsTR` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 Currently available variants:
 
 - `blastr.variant.beta_cdr_bert_unsupervised`
+- `blastr.variant.beta_cdr_bert_unsupervised_large`
