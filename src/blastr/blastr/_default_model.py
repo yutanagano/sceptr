@@ -1,9 +1,9 @@
-from blastr.variant import beta_cdr_bert_unsupervised
+from blastr.variant import beta_cdr_bert_unsupervised_large
 from numpy import ndarray
 from pandas import DataFrame
 
 
-default_model = beta_cdr_bert_unsupervised()
+default_model = beta_cdr_bert_unsupervised_large()
 
 
 def calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray:

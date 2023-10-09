@@ -22,3 +22,4 @@ def load_model_save(model_name: str) -> ModelSave:
 
 
 beta_cdr_bert_unsupervised_model_save = load_model_save("Beta_CDR_BERT_Unsupervised")
+beta_cdr_bert_unsupervised_large_model_save = load_model_save("Beta_CDR_BERT_Unsupervised_Large")
