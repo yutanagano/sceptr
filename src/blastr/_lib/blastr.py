@@ -36,6 +36,12 @@ class Blastr(TcrRepresentationModel):
         return bert_representations_as_ndarray
 
     def _make_dataloader_for(self, tcrs: DataFrame) -> SingleDatasetDataLoader:
+        tcrs = tcrs.copy()
+
+        for col in ("Epitope", "MHCA", "MHCB"):
+            if col not in tcrs:
+                tcrs[col] = None
+
         dataset = TcrDataset(tcrs)
         batch_collator = DefaultBatchCollator(self._tokeniser)
         return SingleDatasetDataLoader(

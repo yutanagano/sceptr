@@ -1,4 +1,5 @@
 /.pytest_cache
 /.venv
+/.ropeproject
 __pycache__
 *.egg-info
