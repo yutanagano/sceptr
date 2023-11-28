@@ -1,19 +1,20 @@
-# BLAsTR
+# SCEPTR
 
 ### **This is an unpublished prototype for internal use only.**
 
-> NOTE: The latest version of BLAsTR no longer supports Python versions earlier than 3.9.
+> NOTE: The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
-> NOTE: The latest version of BLAsTR is a beta-chain only model. An updated paired-chain model is returning very soon.
+> NOTE: The default model provided by the functional API is beta-chain only, but a paired-chain model variant is also available.
+> See section: `sceptr.variant` below.
 
-**B**ERT **L**everaged for the **A**nalysi**s** of **T** cell **R**eceptors (**BLAsTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
+Simple Contrastive Embedding of the Peptide sequence of T cell Receptors (**SCEPTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
 It maps TCRs to vector representations, which can be used for downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
 
 ## Installation
 
 1. Clone this repository.
 2. Open a terminal window, and activate a [python](https://www.python.org/) environment (e.g. via [venv](https://docs.python.org/3/library/venv.html) or [conda](https://conda.io/))
-3. With your chosen environment active, run the following command inside the cloned repository directory. This will install a copy of `blastr` into that environment, and you should be able to use `blastr` in any python script as long as the same python environment is active.
+3. With your chosen environment active, run the following command inside the cloned repository directory. This will install a copy of `sceptr` into that environment, and you should be able to use `sceptr` in any python script as long as the same python environment is active.
 
 ```bash
 $ python -m pip install .
@@ -21,9 +22,9 @@ $ python -m pip install .
 
 ## Prescribed data format
 
-> NOTE: The latest version of BLAsTR is back to being a beta-chain only model, which means that even if you supply the model with data including alpha chains, it will not use this data.
+> NOTE: The version of SCEPTR provided via the functional API is a beta-chain only model, which means that even if you supply the model with data including alpha chains, it will not use this data.
 
-BLASTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
+SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
 Therefore, all TCR data should be represented as a `DataFrame` with the following structure and data types.
 The column order is irrelevant.
 Each row should represent one TCR.
@@ -41,14 +42,14 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 
 ## Usage
 
-### Functional API (`blastr.blastr`)
+### Functional API (`sceptr.sceptr`)
 
-The eponymously named `blastr` submodule is the easiest way to use BLAsTR.
-It loads the default BLAsTR variant (currently `beta_cdr_bert_unsupervised_large`) and exposes its methods directly as module-level functions.
+The eponymous `sceptr` submodule is the easiest way to use SCEPTR.
+It loads the default SCEPTR variant (currently `b_sceptr`) and exposes its methods directly as module-level functions.
 
 ---
 
-#### `blastr.blastr.calc_vector_representations(tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_vector_representations(tcrs: DataFrame) -> ndarray`
 
 Map a table of TCRs provided as a pandas `DataFrame` in the above format to a set of vector representations.
 
@@ -59,11 +60,11 @@ Parameters:
 Returns:
 
 A 2D [numpy](https://numpy.org/) [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) object where every row vector corresponds to a row in the original TCR `DataFrame`.
-The returned array will have shape (N, D) where N is the number of TCRs in the input data and D is the dimensionality of the blastr model.
+The returned array will have shape (N, D) where N is the number of TCRs in the input data and D is the dimensionality of the SCEPTR model.
 
 ---
 
-#### `blastr.blastr.calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray`
 
 Generate a cdist matrix between two collections of TCRs.
 
@@ -79,7 +80,7 @@ The returned array will have shape (X, Y) where X is the number of TCRs in colle
 
 ---
 
-#### `blastr.blastr.calc_pdist_vector(tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_pdist_vector(tcrs: DataFrame) -> ndarray`
 
 Generate a pdist set of distances between each pair of TCRs in the input data.
 
@@ -94,15 +95,15 @@ The returned array will have shape (1/2 * N * (N-1),), where N is the number of 
 
 ---
 
-### Loading specific BLAsTR variants (`blastr.variant`)
+### Loading specific SCEPTR variants (`sceptr.variant`)
 
-Because BLAsTR is still a project in development, there exist multiple variants of the model.
-For more curious users, these model variants will be available to load and use through the `blastr.variant` submodule.
+Because SCEPTR is still a project in development, there exist multiple variants of the model.
+For more curious users, these model variants will be available to load and use through the `sceptr.variant` submodule.
 
-The module exposes functions, each named after a particular model variant, which when called, will return a `BLAsTR` object corresponding to the selected model variant.
-This `BLAsTR` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the `blastr.blastr` submodule.
+The module exposes functions, each named after a particular model variant, which when called, will return a `Sceptr` object corresponding to the selected model variant.
+This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the `sceptr.sceptr` submodule.
 
 Currently available variants:
 
-- `blastr.variant.beta_cdr_bert_unsupervised`
-- `blastr.variant.beta_cdr_bert_unsupervised_large`
+- `sceptr.variant.ab_sceptr`
+- `sceptr.variant.b_sceptr`
