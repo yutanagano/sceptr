@@ -65,7 +65,9 @@
         },
         "batch_collator": {
             "class": "ClBatchCollator",
-            "initargs": {}
+            "initargs": {
+                "drop_chains": true
+            }
         }
     },
     "loss": {
