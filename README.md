@@ -4,10 +4,7 @@
 
 > NOTE: The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
-> NOTE: The default model provided by the functional API is beta-chain only, but a paired-chain model variant is also available.
-> See section: `sceptr.variant` below.
-
-Simple Contrastive Embedding of the Peptide sequence of T cell Receptors (**SCEPTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
+**S**imple **C**ontrastive **E**mbedding of the **P**eptide sequence of **T** cell **R**eceptors (**SCEPTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
 It maps TCRs to vector representations, which can be used for downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
 
 ## Installation
@@ -21,8 +18,6 @@ $ python -m pip install .
 ```
 
 ## Prescribed data format
-
-> NOTE: The version of SCEPTR provided via the functional API is a beta-chain only model, which means that even if you supply the model with data including alpha chains, it will not use this data.
 
 SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
 Therefore, all TCR data should be represented as a `DataFrame` with the following structure and data types.
@@ -45,7 +40,7 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 ### Functional API (`sceptr.sceptr`)
 
 The eponymous `sceptr` submodule is the easiest way to use SCEPTR.
-It loads the default SCEPTR variant (currently `b_sceptr`) and exposes its methods directly as module-level functions.
+It loads the default SCEPTR variant (currently `ab_sceptr`) and exposes its methods directly as module-level functions.
 
 ---
 
@@ -105,5 +100,5 @@ This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 
 Currently available variants:
 
-- `sceptr.variant.ab_sceptr`
-- `sceptr.variant.b_sceptr`
+- `sceptr.variant.ab_sceptr` (default model used by the functional API)
+- `sceptr.variant.b_sceptr` (beta-chain only variant, slightly better when only using beta chain data)
