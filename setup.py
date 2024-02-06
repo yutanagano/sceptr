@@ -15,7 +15,7 @@ setup(
     package_data={"sceptr": ["_model_saves/*/*"]},
     install_requires=[
         "pandas==2.0.2",
-        "tidytcells==1.8.5",
+        "tidytcells>=2",
         "torch==2.0.1",
         "scipy==1.10.1",
     ],

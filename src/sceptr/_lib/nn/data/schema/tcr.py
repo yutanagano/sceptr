@@ -1,6 +1,6 @@
 from enum import Enum
 import re
-from tidytcells import tcr
+from tidytcells import tr
 from typing import Optional, Union
 
 
@@ -13,8 +13,8 @@ def get_v_gene_indices(gene_symbol):
     return (group_num, sub_num_if_any)
 
 
-functional_travs = tcr.query(contains="TRAV", functionality="F", precision="gene")
-functional_trbvs = tcr.query(contains="TRBV", functionality="F", precision="gene")
+functional_travs = tr.query(contains_pattern="TRAV", functionality="F", precision="gene")
+functional_trbvs = tr.query(contains_pattern="TRBV", functionality="F", precision="gene")
 
 
 TravGene = Enum(
@@ -41,7 +41,7 @@ class Tcrv:
             return None
 
         allele_symbol = self.__repr__()
-        cdr1 = tcr.get_aa_sequence(allele_symbol)["CDR1-IMGT"]
+        cdr1 = tr.get_aa_sequence(allele_symbol)["CDR1-IMGT"]
         return cdr1
 
     @property
@@ -50,7 +50,7 @@ class Tcrv:
             return None
 
         allele_symbol = self.__repr__()
-        cdr2 = tcr.get_aa_sequence(allele_symbol)["CDR2-IMGT"]
+        cdr2 = tr.get_aa_sequence(allele_symbol)["CDR2-IMGT"]
         return cdr2
 
     def __eq__(self, __value: object) -> bool:
