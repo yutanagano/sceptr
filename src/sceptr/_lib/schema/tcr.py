@@ -1,3 +1,4 @@
+import copy
 from enum import Enum
 import re
 from tidytcells import tr
@@ -13,8 +14,12 @@ def get_v_gene_indices(gene_symbol):
     return (group_num, sub_num_if_any)
 
 
-functional_travs = tr.query(contains_pattern="TRAV", functionality="F", precision="gene")
-functional_trbvs = tr.query(contains_pattern="TRBV", functionality="F", precision="gene")
+functional_travs = tr.query(
+    contains_pattern="TRAV", functionality="F", precision="gene"
+)
+functional_trbvs = tr.query(
+    contains_pattern="TRBV", functionality="F", precision="gene"
+)
 
 
 TravGene = Enum(
@@ -50,8 +55,12 @@ class Tcrv:
             return None
 
         allele_symbol = self.__repr__()
-        cdr2 = tr.get_aa_sequence(allele_symbol)["CDR2-IMGT"]
-        return cdr2
+        aa_sequence_dictionary = tr.get_aa_sequence(allele_symbol)
+
+        if "CDR2-IMGT" not in aa_sequence_dictionary:
+            return ""
+
+        return aa_sequence_dictionary["CDR2-IMGT"]
 
     def __eq__(self, __value: object) -> bool:
         return self.gene == __value.gene and self.allele_num == __value.allele_num
@@ -101,6 +110,23 @@ class Tcr:
     @property
     def cdr2b_sequence(self) -> Optional[str]:
         return self._trbv.cdr2_sequence
+    
+    @property
+    def both_chains_specified(self) -> bool:
+        tra_specified = (not self._trav._gene_is_unknown()) or (not self.junction_a_sequence is None)
+        trb_specified = (not self._trbv._gene_is_unknown()) or (not self.junction_b_sequence is None)
+        return tra_specified and trb_specified
+
+    def copy(self) -> "Tcr":
+        return copy.deepcopy(self)
+
+    def drop_tra(self) -> None:
+        self._trav = Tcrv(None, None)
+        self.junction_a_sequence = None
+
+    def drop_trb(self) -> None:
+        self._trbv = Tcrv(None, None)
+        self.junction_b_sequence = None
 
     def __eq__(self, __value: object) -> bool:
         return (

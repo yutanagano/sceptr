@@ -5,9 +5,9 @@ from typing import List, Optional, Tuple
 from sceptr._lib.nn.data.tokeniser.tokeniser import Tokeniser
 from sceptr._lib.nn.data.tokeniser.token_indices import (
     AminoAcidTokenIndex,
-    BetaCdrCompartmentIndex,
+    SingleChainCdrCompartmentIndex,
 )
-from sceptr._lib.nn.data.schema.tcr import Tcr
+from sceptr._lib.schema import Tcr
 
 
 class BetaCdrTokeniser(Tokeniser):
@@ -27,17 +27,17 @@ class BetaCdrTokeniser(Tokeniser):
             AminoAcidTokenIndex.CLS,
             0,
             0,
-            BetaCdrCompartmentIndex.NULL,
+            SingleChainCdrCompartmentIndex.NULL,
         )
 
         cdr1b = self._convert_to_numerical_form(
-            tcr.cdr1b_sequence, BetaCdrCompartmentIndex.CDR1
+            tcr.cdr1b_sequence, SingleChainCdrCompartmentIndex.CDR1
         )
         cdr2b = self._convert_to_numerical_form(
-            tcr.cdr2b_sequence, BetaCdrCompartmentIndex.CDR2
+            tcr.cdr2b_sequence, SingleChainCdrCompartmentIndex.CDR2
         )
         cdr3b = self._convert_to_numerical_form(
-            tcr.junction_b_sequence, BetaCdrCompartmentIndex.CDR3
+            tcr.junction_b_sequence, SingleChainCdrCompartmentIndex.CDR3
         )
 
         all_cdrs_tokenised = [initial_cls_vector] + cdr1b + cdr2b + cdr3b
@@ -49,7 +49,7 @@ class BetaCdrTokeniser(Tokeniser):
         return torch.tensor(all_cdrs_tokenised, dtype=torch.long)
 
     def _convert_to_numerical_form(
-        self, aa_sequence: Optional[str], cdr_index: BetaCdrCompartmentIndex
+        self, aa_sequence: Optional[str], cdr_index: SingleChainCdrCompartmentIndex
     ) -> List[Tuple[int]]:
         if aa_sequence is None:
             return []

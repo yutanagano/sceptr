@@ -73,6 +73,8 @@ class SelfAttentionStackWithInitialProjection(SelfAttentionStack):
     ) -> None:
         super().__init__()
 
+        self.d_model = d_model
+
         self._initial_projector = Linear(
             in_features=embedding_dim, out_features=d_model, bias=False
         )

@@ -3,11 +3,8 @@ from torch import Tensor
 from typing import List, Optional, Tuple
 
 from sceptr._lib.nn.data.tokeniser.tokeniser import Tokeniser
-from sceptr._lib.nn.data.tokeniser.token_indices import (
-    AminoAcidTokenIndex,
-    DefaultTokenIndex,
-)
-from sceptr._lib.nn.data.schema.tcr import Tcr
+from sceptr._lib.nn.data.tokeniser.token_indices import AminoAcidTokenIndex, DefaultTokenIndex
+from sceptr._lib.schema import Tcr
 
 
 class BetaCdr3Tokeniser(Tokeniser):

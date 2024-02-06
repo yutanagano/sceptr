@@ -5,7 +5,7 @@ from typing import Iterable, Tuple
 
 from sceptr._lib.nn.data.tcr_dataloader import TcrDataLoader
 from sceptr._lib.nn.data.batch_collator import BatchCollator
-from sceptr._lib.nn.data.schema.tcr_pmhc_pair import TcrPmhcPair
+from sceptr._lib.schema import TcrPmhcPair
 
 
 class SingleDatasetDataLoader(DataLoader, TcrDataLoader):

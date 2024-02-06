@@ -6,6 +6,7 @@ from torch.utils.data import DistributedSampler
 from types import ModuleType
 
 import sceptr._lib.nn.data.tokeniser as tokeniser_module
+import sceptr._lib.nn.trainable_model as trainable_model_module
 import sceptr._lib.nn.self_attention_stack as self_attention_stack_module
 import sceptr._lib.nn.mlm_token_prediction_projector as mlm_token_prediction_projector_module
 import sceptr._lib.nn.vector_representation_delegate as vector_representation_delegate_module
@@ -15,10 +16,10 @@ import sceptr._lib.nn.data.batch_collator as batch_collator_module
 from sceptr._lib.nn.data.tcr_dataloader import (
     TcrDataLoader,
     SingleDatasetDataLoader,
-    DoubleDatasetDataLoader,
 )
 from sceptr._lib.nn.data.tokeniser import Tokeniser
 from sceptr._lib.nn.data.tcr_dataset import TcrDataset
+from sceptr._lib.nn.trainable_model import TrainableModel
 from sceptr._lib.nn.bert import Bert
 from sceptr._lib.nn.token_embedder.token_embedder import TokenEmbedder
 from sceptr._lib.nn.self_attention_stack import SelfAttentionStack
@@ -45,6 +46,17 @@ class ConfigReader:
     ) -> DistributedDataParallel:
         trainable_model = self._get_trainable_model_on_device(device)
         return DistributedDataParallel(trainable_model)
+
+    def _get_trainable_model_on_device(self, device: torch.device) -> TrainableModel:
+        trainable_model_wrapper_class_name = self._config["model"]["trainable_model"][
+            "class"
+        ]
+        TrainableModelWrapperClass = getattr(
+            trainable_model_module, trainable_model_wrapper_class_name
+        )
+        bert = self.get_bert_on_device(device)
+        bert = self._load_bert_with_pretrained_parameters_if_available(bert)
+        return TrainableModelWrapperClass(bert)
 
     def get_bert_on_device(self, device: torch.device) -> Bert:
         token_embedder = self._get_token_embedder()
@@ -113,8 +125,6 @@ class ConfigReader:
 
         if data_loader_class == "SingleDatasetDataLoader":
             dataloader = self._get_single_dataset_training_dataloader_on_device(device)
-        elif data_loader_class == "DistributedDoubleDatasetDataLoader":
-            dataloader = self._get_double_dataset_training_dataloader_on_device(device)
         else:
             raise ValueError(f"Unrecognised dataloader class: {data_loader_class}")
 
@@ -137,50 +147,6 @@ class ConfigReader:
         return SingleDatasetDataLoader(
             dataset=dataset,
             sampler=DistributedSampler(dataset, shuffle=True),
-            batch_collator=batch_collator,
-            device=device,
-            **dataloader_initargs,
-        )
-
-    def _get_double_dataset_training_dataloader_on_device(
-        self, device: torch.device
-    ) -> DoubleDatasetDataLoader:
-        paths_to_training_data_csvs_as_str = self._config["data"]["training_data"][
-            "csv_paths"
-        ]
-        dataloader_initargs = self._config["data"]["training_data"]["dataloader"][
-            "initargs"
-        ]
-
-        tokeniser = self.get_tokeniser()
-        dataset_1 = self._get_dataset(Path(paths_to_training_data_csvs_as_str[0]))
-        dataset_2 = self._get_dataset(Path(paths_to_training_data_csvs_as_str[1]))
-        batch_collator = self._get_batch_collator_with_tokeniser(tokeniser)
-
-        return DoubleDatasetDataLoader(
-            dataset_1=dataset_1,
-            dataset_2=dataset_2,
-            batch_collator=batch_collator,
-            device=device,
-            **dataloader_initargs,
-        )
-
-    def _get_validation_dataloader_on_device(
-        self, device: torch.device
-    ) -> TcrDataLoader:
-        path_to_validation_data_csv_as_str = self._config["data"]["validation_data"][
-            "csv_paths"
-        ][0]
-        dataloader_initargs = self._config["data"]["validation_data"]["dataloader"][
-            "initargs"
-        ]
-
-        tokeniser = self.get_tokeniser()
-        dataset = self._get_dataset(Path(path_to_validation_data_csv_as_str))
-        batch_collator = self._get_batch_collator_with_tokeniser(tokeniser)
-
-        return SingleDatasetDataLoader(
-            dataset=dataset,
             batch_collator=batch_collator,
             device=device,
             **dataloader_initargs,

@@ -1,5 +1,5 @@
-from sceptr._lib.nn.data.schema.tcr import Tcr
-from sceptr._lib.nn.data.schema.pmhc import Pmhc
+from sceptr._lib.schema import Tcr
+from sceptr._lib.schema import Pmhc
 
 
 class TcrPmhcPair:

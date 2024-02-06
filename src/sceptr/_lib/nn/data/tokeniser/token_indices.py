@@ -33,7 +33,7 @@ class AminoAcidTokenIndex(IntEnum):
     Y = 22
 
 
-class BetaCdrCompartmentIndex(IntEnum):
+class SingleChainCdrCompartmentIndex(IntEnum):
     NULL = DefaultTokenIndex.NULL
     CDR1 = 1
     CDR2 = 2

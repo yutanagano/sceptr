@@ -4,7 +4,7 @@ from torch.nn import utils
 
 from sceptr._lib.nn.data.batch_collator import BatchCollator
 from sceptr._lib.nn.data.tokeniser.token_indices import DefaultTokenIndex
-from sceptr._lib.nn.data.schema.tcr_pmhc_pair import TcrPmhcPair
+from sceptr._lib.schema import TcrPmhcPair
 
 
 class DefaultBatchCollator(BatchCollator):

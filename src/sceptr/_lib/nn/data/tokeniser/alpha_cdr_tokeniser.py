@@ -1,15 +1,21 @@
+# TODO: Merge with beta tokeniser
+
+
 import torch
 from torch import Tensor
 from typing import List, Optional, Tuple
 
 from sceptr._lib.nn.data.tokeniser.tokeniser import Tokeniser
-from sceptr._lib.nn.data.tokeniser.token_indices import AminoAcidTokenIndex, CdrCompartmentIndex
+from sceptr._lib.nn.data.tokeniser.token_indices import (
+    AminoAcidTokenIndex,
+    SingleChainCdrCompartmentIndex,
+)
 from sceptr._lib.schema import Tcr
 
 
-class CdrTokeniser(Tokeniser):
+class AlphaCdrTokeniser(Tokeniser):
     """
-    Tokenise TCR in terms of its alpha and beta chain CDRs 1 2 and 3.
+    Tokenise TCR in terms of its alpha chain CDRs 1 2 and 3.
 
     Dim 0: token index
     Dim 1: topen position
@@ -20,40 +26,33 @@ class CdrTokeniser(Tokeniser):
     token_vocabulary_index = AminoAcidTokenIndex
 
     def tokenise(self, tcr: Tcr) -> Tensor:
-        initial_cls_vector = (AminoAcidTokenIndex.CLS, 0, 0, CdrCompartmentIndex.NULL)
-
-        cdr1a = self._convert_to_numerical_form(
-            tcr.cdr1a_sequence, CdrCompartmentIndex.CDR1A
-        )
-        cdr2a = self._convert_to_numerical_form(
-            tcr.cdr2a_sequence, CdrCompartmentIndex.CDR2A
-        )
-        cdr3a = self._convert_to_numerical_form(
-            tcr.junction_a_sequence, CdrCompartmentIndex.CDR3A
+        initial_cls_vector = (
+            AminoAcidTokenIndex.CLS,
+            0,
+            0,
+            SingleChainCdrCompartmentIndex.NULL,
         )
 
         cdr1b = self._convert_to_numerical_form(
-            tcr.cdr1b_sequence, CdrCompartmentIndex.CDR1B
+            tcr.cdr1a_sequence, SingleChainCdrCompartmentIndex.CDR1
         )
         cdr2b = self._convert_to_numerical_form(
-            tcr.cdr2b_sequence, CdrCompartmentIndex.CDR2B
+            tcr.cdr2a_sequence, SingleChainCdrCompartmentIndex.CDR2
         )
         cdr3b = self._convert_to_numerical_form(
-            tcr.junction_b_sequence, CdrCompartmentIndex.CDR3B
+            tcr.junction_a_sequence, SingleChainCdrCompartmentIndex.CDR3
         )
 
-        all_cdrs_tokenised = (
-            [initial_cls_vector] + cdr1a + cdr2a + cdr3a + cdr1b + cdr2b + cdr3b
-        )
+        all_cdrs_tokenised = [initial_cls_vector] + cdr1b + cdr2b + cdr3b
 
         number_of_tokens_other_than_initial_cls = len(all_cdrs_tokenised) - 1
         if number_of_tokens_other_than_initial_cls == 0:
-            raise RuntimeError(f"tcr {tcr} does not contain any TCR information")
+            raise RuntimeError(f"tcr {tcr} does not contain any TRA information")
 
         return torch.tensor(all_cdrs_tokenised, dtype=torch.long)
 
     def _convert_to_numerical_form(
-        self, aa_sequence: Optional[str], cdr_index: CdrCompartmentIndex
+        self, aa_sequence: Optional[str], cdr_index: SingleChainCdrCompartmentIndex
     ) -> List[Tuple[int]]:
         if aa_sequence is None:
             return []
