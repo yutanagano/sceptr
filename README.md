@@ -56,7 +56,7 @@ It loads the default SCEPTR variant (currently `ab_sceptr`) and exposes its meth
 
 ---
 
-#### `sceptr.sceptr.calc_vector_representations(tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_vector_representations(instances: DataFrame) -> ndarray`
 
 Map a table of TCRs provided as a pandas `DataFrame` in the above format to a set of vector representations.
 
@@ -71,7 +71,7 @@ The returned array will have shape (N, D) where N is the number of TCRs in the i
 
 ---
 
-#### `sceptr.sceptr.calc_cdist_matrix(anchor_tcrs: DataFrame, comparison_tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray`
 
 Generate a cdist matrix between two collections of TCRs.
 
@@ -87,7 +87,7 @@ The returned array will have shape (X, Y) where X is the number of TCRs in colle
 
 ---
 
-#### `sceptr.sceptr.calc_pdist_vector(tcrs: DataFrame) -> ndarray`
+#### `sceptr.sceptr.calc_pdist_vector(instances: DataFrame) -> ndarray`
 
 Generate a pdist set of distances between each pair of TCRs in the input data.
 
