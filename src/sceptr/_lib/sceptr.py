@@ -28,8 +28,8 @@ class Sceptr(TcrRepresentationModel):
         self._bert = bert.eval()
         self._device = device
 
-    def calc_vector_representations(self, tcrs: DataFrame) -> ndarray:
-        tcr_dataloader = self._make_dataloader_for(tcrs)
+    def calc_vector_representations(self, instances: DataFrame) -> ndarray:
+        tcr_dataloader = self._make_dataloader_for(instances)
         bert_representations = self._get_bert_representations_of_tcrs_in(tcr_dataloader)
         bert_representations_as_ndarray = bert_representations.numpy()
 
@@ -78,7 +78,7 @@ class Sceptr(TcrRepresentationModel):
         return distance.pdist(tcr_representations, metric="euclidean")
 
 
-def load_blastr_save(path: Path) -> Sceptr:
+def load_sceptr_save(path: Path) -> Sceptr:
     with open(path / "config.json", "r") as f:
         config = json.load(f)
     config_reader = ConfigReader(config)
