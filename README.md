@@ -113,4 +113,5 @@ This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 Currently available variants:
 
 - `sceptr.variant.ab_sceptr` (default model used by the functional API)
-- `sceptr.variant.b_sceptr` (beta-chain only variant, slightly better when only using beta chain data)
+- `sceptr.variant.a_sceptr` (alpha-chain only variant)
+- `sceptr.variant.b_sceptr` (beta-chain only variant)
