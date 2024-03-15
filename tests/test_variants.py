@@ -12,7 +12,7 @@ def dummy_data():
 
 
 @pytest.mark.parametrize(
-    "model", (variant.ab_sceptr(), variant.a_sceptr(), variant.b_sceptr())
+    "model", (variant.ab_sceptr(), variant.ab_sceptr_large(), variant.a_sceptr(), variant.b_sceptr())
 )
 class TestVariant:
     def test_load_variant(self, model):

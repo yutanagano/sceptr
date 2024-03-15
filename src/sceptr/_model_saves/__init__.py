@@ -24,3 +24,4 @@ def load_model_save(model_name: str) -> ModelSave:
 a_sceptr_model_save = load_model_save("A_SCEPTR")
 b_sceptr_model_save = load_model_save("B_SCEPTR")
 ab_sceptr_model_save = load_model_save("AB_SCEPTR")
+ab_sceptr_large_model_save = load_model_save("AB_SCEPTR_large")
