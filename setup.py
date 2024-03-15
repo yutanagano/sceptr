@@ -19,4 +19,9 @@ setup(
         "torch~=2.0",
         "scipy~=1.10",
     ],
+    extras_require={
+        "dev": [
+            "pytest"
+        ]
+    }
 )
