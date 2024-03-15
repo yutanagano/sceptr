@@ -1,7 +1,7 @@
 from torch import FloatTensor, LongTensor
 from torch.nn import Module
 
-from src.nn.data.tokeniser.token_indices import DefaultTokenIndex
+from sceptr._lib.nn.data.tokeniser.token_indices import DefaultTokenIndex
 
 
 class SimpleRelativePositionEmbedding(Module):

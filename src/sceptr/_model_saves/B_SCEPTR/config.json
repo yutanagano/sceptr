@@ -7,7 +7,7 @@
         "name": "B SCEPTR",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
-            "class": "BetaCdrSimpleEmbedder",
+            "class": "SingleChainCdrSimpleEmbedder",
             "initargs": {}
         },
         "self_attention_stack": {
