@@ -1,15 +1,15 @@
 import torch
 from torch import FloatTensor, LongTensor
 
-from sceptr._lib.nn.data.tokeniser.token_indices import (
+from src.nn.data.tokeniser.token_indices import (
     AminoAcidTokenIndex,
     CdrCompartmentIndex,
 )
-from sceptr._lib.nn.token_embedder import TokenEmbedder
-from sceptr._lib.nn.token_embedder.simple_relative_position_embedding import (
+from src.nn.token_embedder import TokenEmbedder
+from src.nn.token_embedder.simple_relative_position_embedding import (
     SimpleRelativePositionEmbedding,
 )
-from sceptr._lib.nn.token_embedder.one_hot_token_index_embedding import (
+from src.nn.token_embedder.one_hot_token_index_embedding import (
     OneHotTokenIndexEmbedding,
 )
 

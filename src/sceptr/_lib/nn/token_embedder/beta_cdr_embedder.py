@@ -3,17 +3,17 @@ import torch
 from torch import Tensor
 from torch.nn import Embedding
 
-from sceptr._lib.nn.data.tokeniser.token_indices import (
+from src.nn.data.tokeniser.token_indices import (
     DefaultTokenIndex,
     AminoAcidTokenIndex,
     SingleChainCdrCompartmentIndex,
 )
-from sceptr._lib.nn.token_embedder.token_embedder import TokenEmbedder
-from sceptr._lib.nn.token_embedder.simple_relative_position_embedding import (
+from src.nn.token_embedder.token_embedder import TokenEmbedder
+from src.nn.token_embedder.simple_relative_position_embedding import (
     SimpleRelativePositionEmbedding,
 )
-from sceptr._lib.nn.token_embedder.sin_position_embedding import SinPositionEmbedding
-from sceptr._lib.nn.token_embedder.one_hot_token_index_embedding import (
+from src.nn.token_embedder.sin_position_embedding import SinPositionEmbedding
+from src.nn.token_embedder.one_hot_token_index_embedding import (
     OneHotTokenIndexEmbedding,
 )
 
