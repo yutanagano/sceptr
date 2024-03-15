@@ -36,27 +36,35 @@
     },
     "data": {
         "training_data": {
+            "dataset": {
+                "class": "TcrDataset",
+                "initargs": {}
+            },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 512,
+                    "batch_size": 1024,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/train.csv"
+                "ignore/train.csv"
             ]
         },
         "validation_data": {
+            "dataset": {
+                "class": "TcrDataset",
+                "initargs": {}
+            },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 512,
+                    "batch_size": 1024,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/test.csv"
+                "ignore/test.csv"
             ]
         },
         "tokeniser": {
@@ -78,7 +86,7 @@
             }
         },
         "contrastive_loss": {
-            "class": "BatchContrastiveLoss",
+            "class": "DotProductLoss",
             "initargs": {
                 "temp": 0.05
             }
@@ -90,5 +98,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 100
+    "num_epochs": 200
 }
