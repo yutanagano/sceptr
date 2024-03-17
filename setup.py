@@ -14,6 +14,7 @@ setup(
     packages=find_packages(where="src"),
     package_data={"sceptr": ["_model_saves/*/*"]},
     install_requires=[
+        "blosum~=2.0",
         "pandas~=2.0",
         "tidytcells~=2.0",
         "torch~=2.0",
