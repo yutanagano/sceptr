@@ -33,6 +33,12 @@ class AminoAcidTokenIndex(IntEnum):
     Y = 22
 
 
+class Cdr3CompartmentIndex(IntEnum):
+    NULL = DefaultTokenIndex.NULL
+    CDR3A = 1
+    CDR3B = 2
+
+
 class SingleChainCdrCompartmentIndex(IntEnum):
     NULL = DefaultTokenIndex.NULL
     CDR1 = 1
