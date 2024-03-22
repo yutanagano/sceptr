@@ -38,7 +38,7 @@ class Sceptr(TcrRepresentationModel):
     def _make_dataloader_for(self, tcrs: DataFrame) -> SingleDatasetDataLoader:
         tcrs = tcrs.copy()
 
-        for col in ("Epitope", "MHCA", "MHCB"):
+        for col in ("TRAV", "CDR3A", "TRAJ", "TRBV", "CDR3B", "TRBJ", "Epitope", "MHCA", "MHCB"):
             if col not in tcrs:
                 tcrs[col] = None
 
