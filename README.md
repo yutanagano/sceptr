@@ -2,7 +2,8 @@
 
 ### **This is an unpublished prototype for internal use only.**
 
-> NOTE: The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
+> [!NOTE]
+> The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
 **S**imple **C**ontrastive **E**mbedding of the **P**eptide sequence of **T** cell **R**eceptors (**SCEPTR**) is a BERT-like attention model trained on T cell receptor (TCR) data.
 It maps TCRs to vector representations, which can be used for downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
