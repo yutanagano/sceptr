@@ -1,5 +1,5 @@
 from sceptr import variant
-from sceptr._lib.sceptr import Sceptr
+from sceptr.model import Sceptr
 import numpy as np
 import pandas as pd
 import pytest
