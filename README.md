@@ -9,12 +9,11 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 
 ## Installation
 
-1. Clone this repository.
-2. Open a terminal window, and activate a [python](https://www.python.org/) environment (e.g. via [venv](https://docs.python.org/3/library/venv.html) or [conda](https://conda.io/))
-3. With your chosen environment active, run the following command inside the cloned repository directory. This will install a copy of `sceptr` into that environment, and you should be able to use `sceptr` in any python script as long as the same python environment is active.
+From your Python environment, run the following replacing `<VERSION_TAG>` with the appropriate version specifier.
+The latest release tags can be found by checking the 'releases' section on the github repository page.
 
 ```bash
-$ python -m pip install .
+pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
 ```
 
 ## Prescribed data format
