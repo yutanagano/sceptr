@@ -9,7 +9,7 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 
 ## Installation
 
-From your Python environment, run the following replacing `<VERSION_TAG>` with the appropriate version specifier.
+From your Python environment, run the following replacing `<VERSION_TAG>` with the appropriate version specifier (e.g. `v1.0.0-alpha.1`).
 The latest release tags can be found by checking the 'releases' section on the github repository page.
 
 ```bash
