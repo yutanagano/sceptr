@@ -17,7 +17,7 @@ pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
 ```
 
 > [!IMPORTANT]
-> The library code that powers `sceptr` is now outsourced to a separate package, `libtcrlm`, which is also a private repository (until SCEPTR is published).
+> The library code that powers `sceptr` is now outsourced to a separate package, `libtcrlm`, which is also a private repository (both this repo and `libtcrlm` will become public once SCEPTR is published).
 > This means that to install `sceptr`, **users must also be granted access to the `libtcrlm` repository on github.**
 > Please notify @yutanagano if you would like to continue using the latest version of `sceptr` and have not yet been granted access to this repository.
 > This was done to avoid code duplication between this `sceptr` deployment repo and the development/training repo.
@@ -110,6 +110,10 @@ The returned array will have shape (1/2 * N * (N-1),), where N is the number of 
 
 ### Loading specific SCEPTR variants (`sceptr.variant`)
 
+> [!TIP]
+> If your machine doesn't have a CUDA-capable GPU, or a smaller GPU, the larger variants may take a long time to run.
+> The regular variants have comparable performance and should run quicker.
+
 Because SCEPTR is still a project in development, there exist multiple variants of the model.
 For more curious users, these model variants will be available to load and use through the `sceptr.variant` submodule.
 
@@ -124,7 +128,3 @@ Currently available variants:
 - `sceptr.variant.ab_sceptr_xlarge_cdr3_only_mlm_only` (extra larger variant using only the CDR3 sequences as input, only trained on MLM, with model dimensionality 768)
 - `sceptr.variant.a_sceptr` (alpha-chain only variant)
 - `sceptr.variant.b_sceptr` (beta-chain only variant)
-
-> [!TIP]
-> If your machine doesn't have a CUDA-capable GPU, or a smaller GPU, the larger variants may take a long time to run.
-> The regular variants have comparable performance and should run quicker.
