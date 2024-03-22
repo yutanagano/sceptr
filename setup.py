@@ -15,6 +15,7 @@ setup(
     package_data={"sceptr": ["_model_saves/*/*"]},
     install_requires=[
         "blosum~=2.0",
+        "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@v1.0.0-alpha.1",
         "pandas~=2.0",
         "tidytcells~=2.0",
         "torch~=2.0",
