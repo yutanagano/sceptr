@@ -1,7 +1,7 @@
 from importlib import resources
 import json
-from sceptr._lib.sceptr import Sceptr
-from sceptr._lib.config_reader import ConfigReader
+from sceptr.model import Sceptr
+from libtcrlm.config_reader import ConfigReader
 import torch
 
 
@@ -23,7 +23,8 @@ def load_variant(model_name: str) -> Sceptr:
 
     name = config_reader.get_model_name()
     tokeniser = config_reader.get_tokeniser()
-    bert = config_reader.get_bert_on_device(device)
+    bert = config_reader.get_bert()
     bert.load_state_dict(state_dict)
+    bert.to(device)
 
     return Sceptr(name=name, tokeniser=tokeniser, bert=bert, device=device)
