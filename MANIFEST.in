@@ -1,1 +1,2 @@
-include VERSION.txt
+include src/sceptr/_model_saves/*/*.json
+include src/sceptr/_model_saves/*/*.pt

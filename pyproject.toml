@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sceptr"
+authors = [
+    {name = "Yuta Nagano", email = "yutanagano51@proton.me"}
+]
+description = "Simple Contrastive Embedding of the Peptide sequence of T cell Receptors."
+dependencies = [
+    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@v1.0.0-alpha.1",
+    "numpy~=1.26",
+    "pandas~=2.0",
+    "torch~=2.0",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "sceptr.VERSION"}
