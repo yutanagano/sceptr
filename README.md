@@ -30,6 +30,7 @@ SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata
 Therefore, all TCR data should be represented as a `DataFrame` with the following structure and data types.
 The column order is irrelevant.
 Each row should represent one TCR.
+Incomplete rows are allowed (e.g. only beta chain data available) as long as the SCEPTR variant that is being used has at least some partial information to go on.
 
 For easier cleaning and standardisation of TCR data, check out [tidytcells](https://pypi.org/project/tidytcells/).
 
