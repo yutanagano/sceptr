@@ -19,7 +19,8 @@ dynamic = ["version"]
 [project.optional-dependencies]
 dev = [
     "pytest",
-    "pytest-cov"
+    "pytest-cov",
+    "tox"
 ]
 
 [tool.setuptools]

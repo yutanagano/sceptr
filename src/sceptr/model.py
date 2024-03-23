@@ -38,25 +38,31 @@ class Sceptr:
                 instances[col] = None
 
         tcrs = schema.generate_tcr_series(instances)
-        
+
         representations = []
         for idx in range(0, len(tcrs), BATCH_SIZE):
-            batch = tcrs.iloc[idx:idx+BATCH_SIZE]
+            batch = tcrs.iloc[idx : idx + BATCH_SIZE]
             tokenised_batch = [self._tokeniser.tokenise(tcr) for tcr in batch]
             padded_batch = utils.rnn.pad_sequence(
-                sequences=tokenised_batch, batch_first=True, padding_value=DefaultTokenIndex.NULL
+                sequences=tokenised_batch,
+                batch_first=True,
+                padding_value=DefaultTokenIndex.NULL,
             )
-            batch_representation = self._bert.get_vector_representations_of(padded_batch.to(self._device))
+            batch_representation = self._bert.get_vector_representations_of(
+                padded_batch.to(self._device)
+            )
             representations.append(batch_representation)
 
         return torch.concatenate(representations, dim=0)
-    
+
     def calc_cdist_matrix(self, anchors: DataFrame, comparisons: DataFrame) -> ndarray:
         anchor_representations = self._calc_torch_representations(anchors)
         comparison_representations = self._calc_torch_representations(comparisons)
-        cdist_matrix = torch.cdist(anchor_representations, comparison_representations, p=2)
+        cdist_matrix = torch.cdist(
+            anchor_representations, comparison_representations, p=2
+        )
         return cdist_matrix.cpu().numpy()
-    
+
     def calc_pdist_vector(self, instances: DataFrame) -> ndarray:
         representations = self._calc_torch_representations(instances)
         pdist_vector = torch.pdist(representations, p=2)
