@@ -50,7 +50,8 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 The eponymous `sceptr` submodule is the easiest way to use SCEPTR.
 It loads the default SCEPTR variant (currently `ab_sceptr`) and exposes its methods directly as module-level functions.
 
-> NOTE: To use the functional API, import the `sceptr` submodule like so:
+> [!TIP]
+> To use the functional API, import the `sceptr` submodule like so:
 > ```
 > from sceptr import sceptr
 > ```
