@@ -23,3 +23,11 @@ def ab_sceptr_blosum():
 
 def ab_sceptr_xlarge_cdr3_only_mlm_only():
     return load_variant("AB_SCEPTR_Large_CDR3_only_MLM_only")
+
+
+def ab_sceptr_cdr3_only():
+    return load_variant("AB_SCEPTR_CDR3_only")
+
+
+def ab_sceptr_cdr3_only_mlm_only():
+    return load_variant("AB_SCEPTR_CDR3_only_MLM_only")
