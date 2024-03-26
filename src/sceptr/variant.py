@@ -34,4 +34,4 @@ def ab_sceptr_cdr3_only_mlm_only():
 
 
 def ab_sceptr_mlm_only():
-    return load_variant("AC_SCEPTR_MLM_only")
+    return load_variant("AB_SCEPTR_MLM_only")
