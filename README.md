@@ -10,6 +10,29 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 
 ## Installation
 
+### Prerequisites
+
+> [!IMPORTANT]
+> To install `sceptr` properly, you must have [`git-lfs`](https://git-lfs.com/) installed on your system.
+> This is because you must be able to download the trained model weights properly during your install.
+> The trained model weight files are relatively large, and are therefore not tracked directly by `git` and `github`.
+> Instead, the version control system tracks a stub file which references a file hosted on the `git-lfs` servers.
+> To properly de-reference these stub files at install time, you need a copy of `git-lfs`.
+>
+> The library code that powers `sceptr` is now outsourced to a separate package, `libtcrlm`, which is also a private repository (both this repo and `libtcrlm` will become public once SCEPTR is published).
+> This means that to install `sceptr`, **users must also be granted access to the `libtcrlm` repository on github.**
+> Please notify @yutanagano if you would like to continue using the latest version of `sceptr` and have not yet been granted access to this repository.
+> This was done to avoid code duplication between this `sceptr` deployment repo and the development/training repo.
+> Apologies to anyone inconvenienced!
+
+> [!NOTE]
+> The following prerequisites will disappear once all repositories are made public and a copy of all the install files are uploaded to PyPI.
+
+1. `git-lfs` must be installed on your system.
+2. You must have access to the `libtcrlm` repo (contact @yutanagano to request access).
+
+### Using `pip`
+
 From your Python environment, run the following replacing `<VERSION_TAG>` with the appropriate version specifier (e.g. `v1.0.0-alpha.1`).
 The latest release tags can be found by checking the 'releases' section on the github repository page.
 
@@ -17,12 +40,15 @@ The latest release tags can be found by checking the 'releases' section on the g
 pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
 ```
 
-> [!IMPORTANT]
-> The library code that powers `sceptr` is now outsourced to a separate package, `libtcrlm`, which is also a private repository (both this repo and `libtcrlm` will become public once SCEPTR is published).
-> This means that to install `sceptr`, **users must also be granted access to the `libtcrlm` repository on github.**
-> Please notify @yutanagano if you would like to continue using the latest version of `sceptr` and have not yet been granted access to this repository.
-> This was done to avoid code duplication between this `sceptr` deployment repo and the development/training repo.
-> Apologies to anyone inconvenienced!
+### Manual install
+
+You can also clone the repository, and from within your Python environment, navigate to the project root directory and run:
+
+```bash
+pip install .
+```
+
+Note that even for manual installation, you still need `git-lfs` to properly de-reference the stub files at `git-clone`-ing time.
 
 ## Prescribed data format
 
