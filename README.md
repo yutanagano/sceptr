@@ -13,7 +13,7 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 ### Prerequisites
 
 > [!IMPORTANT]
-> To install `sceptr` properly, you must have [`git-lfs`](https://git-lfs.com/) installed on your system.
+> To install `sceptr` properly, you must have [`git-lfs`](https://git-lfs.com/) installed and set up on your system.
 > This is because you must be able to download the trained model weights properly during your install.
 > The trained model weight files are relatively large, and are therefore not tracked directly by `git` and `github`.
 > Instead, the version control system tracks a stub file which references a file hosted on the `git-lfs` servers.
@@ -28,7 +28,7 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 > [!NOTE]
 > The following prerequisites will disappear once all repositories are made public and a copy of all the install files are uploaded to PyPI.
 
-1. `git-lfs` must be installed on your system.
+1. [`git-lfs`](https://git-lfs.com/) must be installed and set up on your system.
 2. You must have access to the `libtcrlm` repo (contact @yutanagano to request access).
 
 ### Using `pip`
