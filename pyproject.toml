@@ -9,7 +9,7 @@ authors = [
 ]
 description = "Simple Contrastive Embedding of the Peptide sequence of T cell Receptors."
 dependencies = [
-    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@3f6450ca10d0127483779f7791b42a22d1d80910",
+    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@c5008428f31ee240a45894fd2cab72e4e94ff45c",
     "numpy~=1.26",
     "pandas~=2.0",
     "torch~=2.0",
