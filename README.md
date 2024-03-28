@@ -152,10 +152,12 @@ This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 Currently available variants:
 
 - `sceptr.variant.ab_sceptr` (default model used by the functional API)
-- `sceptr.variant.ab_sceptr_large` (larger variant of the paired-chain model, with model dimensionality 128)
-- `sceptr.variant.ab_sceptr_blosum` (variant using BLOSUM62 embeddings instead of one-hot)
+- `sceptr.variant.ab_sceptr_mlm_only` (default model trained without autocontrastive learning)
+- `sceptr.variant.ab_sceptr_classic` (similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models)
+- `sceptr.variant.ab_sceptr_classic_mlm_only` (classic variant trained without autocontrastive learning)
 - `sceptr.variant.ab_sceptr_cdr3_only` (only uses the CDR3 loops as input)
 - `sceptr.variant.ab_sceptr_cdr3_only_mlm_only` (only uses CDR3 loops as input, and did not receive contrastive learning)
-- `sceptr.variant.ab_sceptr_xlarge_cdr3_only_mlm_only` (extra larger variant using only the CDR3 sequences as input, only trained on MLM, with model dimensionality 768)
+- `sceptr.variant.ab_sceptr_large` (larger variant of the paired-chain model, with model dimensionality 128)
+- `sceptr.variant.ab_sceptr_blosum` (variant using BLOSUM62 embeddings instead of one-hot)
 - `sceptr.variant.a_sceptr` (alpha-chain only variant)
 - `sceptr.variant.b_sceptr` (beta-chain only variant)
