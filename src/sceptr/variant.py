@@ -33,6 +33,10 @@ def ab_sceptr_blosum():
     return load_variant("AB_SCEPTR_BLOSUM")
 
 
+def ab_sceptr_finetuned():
+    return load_variant("AB_SCEPTR_finetuned")
+
+
 def a_sceptr():
     return load_variant("A_SCEPTR")
 
