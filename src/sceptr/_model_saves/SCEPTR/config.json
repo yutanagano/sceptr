@@ -4,7 +4,7 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR",
+        "name": "SCEPTR",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
             "class": "CdrSimpleEmbedder",

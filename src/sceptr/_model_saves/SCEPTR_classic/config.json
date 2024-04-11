@@ -1,11 +1,11 @@
 {
     "training_delegate": {
-        "class": "MlmTrainingDelegate",
+        "class": "ClTrainingDelegate",
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (classic, MLM only)",
-        "path_to_pretrained_state_dict": null,
+        "name": "SCEPTR (classic)",
+        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_classic_MLM_only/state_dict.pt",
         "token_embedder": {
             "class": "CdrEmbedder",
             "initargs": {
@@ -27,11 +27,11 @@
             }
         },
         "vector_representation_delegate": {
-            "class": "AveragePoolVectorRepresentationDelegate",
+            "class": "ClsVectorRepresentationDelegate",
             "initargs": {}
         },
         "trainable_model": {
-            "class": "MlmTrainableModel",
+            "class": "ClTrainableModel",
             "initargs": {}
         }
     },
@@ -73,8 +73,10 @@
             "initargs": {}
         },
         "batch_collator": {
-            "class": "MlmBatchCollator",
-            "initargs": {}
+            "class": "ClBatchCollator",
+            "initargs": {
+                "drop_chains": true
+            }
         }
     },
     "loss": {

@@ -4,26 +4,25 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (classic)",
-        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_classic_MLM_only/state_dict.pt",
+        "name": "SCEPTR (large)",
+        "path_to_pretrained_state_dict": null,
         "token_embedder": {
-            "class": "CdrEmbedder",
-            "initargs": {
-                "embedding_dim": 64
-            }
+            "class": "CdrSimpleEmbedder",
+            "initargs": {}
         },
         "self_attention_stack": {
-            "class": "SelfAttentionStackWithBuiltins",
+            "class": "SelfAttentionStackWithInitialProjection",
             "initargs": {
-                "num_layers": 3,
-                "d_model": 64,
+                "num_layers": 4,
+                "embedding_dim": 29,
+                "d_model": 128,
                 "nhead": 8
             }
         },
         "mlm_token_prediction_projector": {
             "class": "AminoAcidTokenProjector",
             "initargs": {
-                "d_model": 64
+                "d_model": 128
             }
         },
         "vector_representation_delegate": {
@@ -44,12 +43,12 @@
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 1024,
+                    "batch_size": 512,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/train.csv"
+                "ignore/train.csv"
             ]
         },
         "validation_data": {
@@ -60,12 +59,12 @@
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 1024,
+                    "batch_size": 512,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/test.csv"
+                "ignore/test.csv"
             ]
         },
         "tokeniser": {
@@ -99,5 +98,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 100
+    "num_epochs": 200
 }

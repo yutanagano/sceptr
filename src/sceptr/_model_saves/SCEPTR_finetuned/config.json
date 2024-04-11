@@ -4,17 +4,17 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (CDR3 only)",
-        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_CDR3_only_MLM_only/state_dict.pt",
+        "name": "SCEPTR (finetuned)",
+        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR/state_dict.pt",
         "token_embedder": {
-            "class": "Cdr3SimpleEmbedder",
+            "class": "CdrSimpleEmbedder",
             "initargs": {}
         },
         "self_attention_stack": {
             "class": "SelfAttentionStackWithInitialProjection",
             "initargs": {
                 "num_layers": 3,
-                "embedding_dim": 25,
+                "embedding_dim": 29,
                 "d_model": 64,
                 "nhead": 8
             }
@@ -30,15 +30,17 @@
             "initargs": {}
         },
         "trainable_model": {
-            "class": "ClTrainableModel",
+            "class": "ClFineTunableModel",
             "initargs": {}
         }
     },
     "data": {
         "training_data": {
             "dataset": {
-                "class": "TcrDataset",
-                "initargs": {}
+                "class": "EpitopeBalancedTcrDataset",
+                "initargs": {
+                    "num_samples_per_pmhc_per_epoch": 100000
+                }
             },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
@@ -48,13 +50,15 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/train.csv"
+                "tcr_data/preprocessed/benchmarking/train.csv"
             ]
         },
         "validation_data": {
             "dataset": {
-                "class": "TcrDataset",
-                "initargs": {}
+                "class": "EpitopeBalancedTcrDataset",
+                "initargs": {
+                    "num_samples_per_pmhc_per_epoch": 1000
+                }
             },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
@@ -64,11 +68,11 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/test.csv"
+                "tcr_data/preprocessed/benchmarking/test.csv"
             ]
         },
         "tokeniser": {
-            "class": "Cdr3Tokeniser",
+            "class": "CdrTokeniser",
             "initargs": {}
         },
         "batch_collator": {
@@ -94,9 +98,10 @@
     },
     "optimiser": {
         "initargs": {
-            "n_warmup_steps": 10000,
+            "n_warmup_steps": 1000,
+            "decay": false,
             "d_model": 64
         }
     },
-    "num_epochs": 100
+    "num_epochs": 10
 }

@@ -1,36 +1,36 @@
 {
     "training_delegate": {
-        "class": "ClTrainingDelegate",
+        "class": "MlmTrainingDelegate",
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (large)",
+        "name": "SCEPTR (CDR3 only, MLM only)",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
-            "class": "CdrSimpleEmbedder",
+            "class": "Cdr3SimpleEmbedder",
             "initargs": {}
         },
         "self_attention_stack": {
             "class": "SelfAttentionStackWithInitialProjection",
             "initargs": {
-                "num_layers": 4,
-                "embedding_dim": 29,
-                "d_model": 128,
+                "num_layers": 3,
+                "embedding_dim": 25,
+                "d_model": 64,
                 "nhead": 8
             }
         },
         "mlm_token_prediction_projector": {
             "class": "AminoAcidTokenProjector",
             "initargs": {
-                "d_model": 128
+                "d_model": 64
             }
         },
         "vector_representation_delegate": {
-            "class": "ClsVectorRepresentationDelegate",
+            "class": "AveragePoolVectorRepresentationDelegate",
             "initargs": {}
         },
         "trainable_model": {
-            "class": "ClTrainableModel",
+            "class": "MlmTrainableModel",
             "initargs": {}
         }
     },
@@ -43,12 +43,12 @@
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 512,
+                    "batch_size": 1024,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "ignore/train.csv"
+                "tcr_data/preprocessed/tanno/train.csv"
             ]
         },
         "validation_data": {
@@ -59,23 +59,21 @@
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
                 "initargs": {
-                    "batch_size": 512,
+                    "batch_size": 1024,
                     "num_workers": 4
                 }
             },
             "csv_paths": [
-                "ignore/test.csv"
+                "tcr_data/preprocessed/tanno/test.csv"
             ]
         },
         "tokeniser": {
-            "class": "CdrTokeniser",
+            "class": "Cdr3Tokeniser",
             "initargs": {}
         },
         "batch_collator": {
-            "class": "ClBatchCollator",
-            "initargs": {
-                "drop_chains": true
-            }
+            "class": "MlmBatchCollator",
+            "initargs": {}
         }
     },
     "loss": {
@@ -98,5 +96,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 200
+    "num_epochs": 100
 }

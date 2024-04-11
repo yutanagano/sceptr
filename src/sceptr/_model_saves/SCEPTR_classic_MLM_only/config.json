@@ -4,17 +4,18 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (CDR3 only, MLM only)",
+        "name": "SCEPTR (classic, MLM only)",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
-            "class": "Cdr3SimpleEmbedder",
-            "initargs": {}
+            "class": "CdrEmbedder",
+            "initargs": {
+                "embedding_dim": 64
+            }
         },
         "self_attention_stack": {
-            "class": "SelfAttentionStackWithInitialProjection",
+            "class": "SelfAttentionStackWithBuiltins",
             "initargs": {
                 "num_layers": 3,
-                "embedding_dim": 25,
                 "d_model": 64,
                 "nhead": 8
             }
@@ -68,7 +69,7 @@
             ]
         },
         "tokeniser": {
-            "class": "Cdr3Tokeniser",
+            "class": "CdrTokeniser",
             "initargs": {}
         },
         "batch_collator": {

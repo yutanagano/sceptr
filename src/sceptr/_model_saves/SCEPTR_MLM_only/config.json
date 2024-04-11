@@ -1,11 +1,11 @@
 {
     "training_delegate": {
-        "class": "ClTrainingDelegate",
+        "class": "MlmTrainingDelegate",
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (finetuned)",
-        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR/state_dict.pt",
+        "name": "SCEPTR (MLM only)",
+        "path_to_pretrained_state_dict": null,
         "token_embedder": {
             "class": "CdrSimpleEmbedder",
             "initargs": {}
@@ -26,21 +26,19 @@
             }
         },
         "vector_representation_delegate": {
-            "class": "ClsVectorRepresentationDelegate",
+            "class": "AveragePoolVectorRepresentationDelegate",
             "initargs": {}
         },
         "trainable_model": {
-            "class": "ClFineTunableModel",
+            "class": "MlmTrainableModel",
             "initargs": {}
         }
     },
     "data": {
         "training_data": {
             "dataset": {
-                "class": "EpitopeBalancedTcrDataset",
-                "initargs": {
-                    "num_samples_per_pmhc_per_epoch": 100000
-                }
+                "class": "TcrDataset",
+                "initargs": {}
             },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
@@ -50,15 +48,13 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/benchmarking/train.csv"
+                "tcr_data/preprocessed/tanno/train.csv"
             ]
         },
         "validation_data": {
             "dataset": {
-                "class": "EpitopeBalancedTcrDataset",
-                "initargs": {
-                    "num_samples_per_pmhc_per_epoch": 1000
-                }
+                "class": "TcrDataset",
+                "initargs": {}
             },
             "dataloader": {
                 "class": "SingleDatasetDataLoader",
@@ -68,7 +64,7 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/benchmarking/test.csv"
+                "tcr_data/preprocessed/tanno/test.csv"
             ]
         },
         "tokeniser": {
@@ -76,10 +72,8 @@
             "initargs": {}
         },
         "batch_collator": {
-            "class": "ClBatchCollator",
-            "initargs": {
-                "drop_chains": true
-            }
+            "class": "MlmBatchCollator",
+            "initargs": {}
         }
     },
     "loss": {
@@ -98,10 +92,9 @@
     },
     "optimiser": {
         "initargs": {
-            "n_warmup_steps": 1000,
-            "decay": false,
+            "n_warmup_steps": 10000,
             "d_model": 64
         }
     },
-    "num_epochs": 10
+    "num_epochs": 100
 }
