@@ -149,15 +149,22 @@ For more curious users, these model variants will be available to load and use t
 The module exposes functions, each named after a particular model variant, which when called, will return a `Sceptr` object corresponding to the selected model variant.
 This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the `sceptr.sceptr` submodule.
 
-Currently available variants:
+#### Paired-chain variants
 
-- `sceptr.variant.ab_sceptr` (default model used by the functional API)
-- `sceptr.variant.ab_sceptr_mlm_only` (default model trained without autocontrastive learning)
-- `sceptr.variant.ab_sceptr_classic` (similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models)
-- `sceptr.variant.ab_sceptr_classic_mlm_only` (classic variant trained without autocontrastive learning)
-- `sceptr.variant.ab_sceptr_cdr3_only` (only uses the CDR3 loops as input)
-- `sceptr.variant.ab_sceptr_cdr3_only_mlm_only` (only uses CDR3 loops as input, and did not receive contrastive learning)
-- `sceptr.variant.ab_sceptr_large` (larger variant of the paired-chain model, with model dimensionality 128)
-- `sceptr.variant.ab_sceptr_blosum` (variant using BLOSUM62 embeddings instead of one-hot)
-- `sceptr.variant.a_sceptr` (alpha-chain only variant)
-- `sceptr.variant.b_sceptr` (beta-chain only variant)
+|Name|Description|
+|---|---|
+|`sceptr.variant.default`|default model used by the functional API|
+|`sceptr.variant.mlm_only`|default model trained without autocontrastive learning|
+|`sceptr.variant.classic`|similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models|
+|`sceptr.variant.classic_mlm_only`|classic variant trained without autocontrastive learning|
+|`sceptr.variant.cdr3_only`|only uses the CDR3 loops as input|
+|`sceptr.variant.cdr3_only_mlm_only`|only uses CDR3 loops as input, and did not receive autocontrastive learning|
+|`sceptr.variant.large`|larger variant of the paired-chain model, with model dimensionality 128|
+|`sceptr.variant.blosum`|variant using BLOSUM62 embeddings instead of one-hot|
+
+#### Single-chain variants
+
+|Name|Description
+|---|---|
+|`sceptr.variant.a_sceptr`|alpha-chain only variant|
+|`sceptr.variant.b_sceptr`|beta-chain only variant|
