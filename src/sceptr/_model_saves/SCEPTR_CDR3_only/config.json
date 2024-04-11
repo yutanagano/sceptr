@@ -4,7 +4,7 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (CDR3 only)",
+        "name": "SCEPTR (CDR3 only)",
         "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_CDR3_only_MLM_only/state_dict.pt",
         "token_embedder": {
             "class": "Cdr3SimpleEmbedder",

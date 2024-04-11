@@ -4,7 +4,7 @@
         "initargs": {}
     },
     "model": {
-        "name": "AB SCEPTR (BLOSUM)",
+        "name": "SCEPTR (BLOSUM)",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
             "class": "CdrBlosumEmbedder",
