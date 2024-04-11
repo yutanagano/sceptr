@@ -28,3 +28,8 @@ include-package-data = true
 
 [tool.setuptools.dynamic]
 version = {attr = "sceptr.VERSION"}
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:The PyTorch API"
+]
