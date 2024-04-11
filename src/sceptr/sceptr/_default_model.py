@@ -1,9 +1,9 @@
-from sceptr.variant import ab_sceptr
+from sceptr import variant
 from numpy import ndarray
 from pandas import DataFrame
 
 
-default_model = ab_sceptr()
+default_model = variant.default()
 
 
 def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
