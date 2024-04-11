@@ -22,6 +22,7 @@ def dummy_data():
         variant.ab_sceptr_cdr3_only_mlm_only(),
         variant.ab_sceptr_large(),
         variant.ab_sceptr_blosum(),
+        variant.ab_sceptr_finetuned(),
         variant.a_sceptr(),
         variant.b_sceptr(),
     ),
