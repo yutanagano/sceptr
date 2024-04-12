@@ -33,6 +33,10 @@ def blosum():
     return load_variant("SCEPTR_BLOSUM")
 
 
+def olga():
+    return load_variant("SCEPTR_OLGA")
+
+
 def finetuned():
     return load_variant("SCEPTR_finetuned")
 
