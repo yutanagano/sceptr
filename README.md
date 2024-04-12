@@ -139,10 +139,6 @@ The returned array will have shape (1/2 * N * (N-1),), where N is the number of 
 
 ### Loading specific SCEPTR variants (`sceptr.variant`)
 
-> [!TIP]
-> If your machine doesn't have a CUDA-capable GPU, or a smaller GPU, the larger variants may take a long time to run.
-> The regular variants have comparable performance and should run quicker.
-
 Because SCEPTR is still a project in development, there exist multiple variants of the model.
 For more curious users, these model variants will be available to load and use through the `sceptr.variant` submodule.
 
