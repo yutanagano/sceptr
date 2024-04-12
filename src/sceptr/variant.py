@@ -29,8 +29,20 @@ def large():
     return load_variant("SCEPTR_large")
 
 
+def small():
+    return load_variant("SCEPTR_small")
+
+
+def tiny():
+    return load_variant("SCEPTR_tiny")
+
+
 def blosum():
     return load_variant("SCEPTR_BLOSUM")
+
+
+def average_pooling():
+    return load_variant("SCEPTR_average_pooling")
 
 
 def olga():

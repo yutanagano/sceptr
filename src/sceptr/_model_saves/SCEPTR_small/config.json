@@ -1,0 +1,102 @@
+{
+    "training_delegate": {
+        "class": "ClTrainingDelegate",
+        "initargs": {}
+    },
+    "model": {
+        "name": "SCEPTR (small)",
+        "path_to_pretrained_state_dict": null,
+        "token_embedder": {
+            "class": "CdrSimpleEmbedder",
+            "initargs": {}
+        },
+        "self_attention_stack": {
+            "class": "SelfAttentionStackWithInitialProjection",
+            "initargs": {
+                "num_layers": 3,
+                "embedding_dim": 29,
+                "d_model": 32,
+                "nhead": 8
+            }
+        },
+        "mlm_token_prediction_projector": {
+            "class": "AminoAcidTokenProjector",
+            "initargs": {
+                "d_model": 32
+            }
+        },
+        "vector_representation_delegate": {
+            "class": "ClsVectorRepresentationDelegate",
+            "initargs": {}
+        },
+        "trainable_model": {
+            "class": "ClTrainableModel",
+            "initargs": {}
+        }
+    },
+    "data": {
+        "training_data": {
+            "dataset": {
+                "class": "TcrDataset",
+                "initargs": {}
+            },
+            "dataloader": {
+                "class": "SingleDatasetDataLoader",
+                "initargs": {
+                    "batch_size": 2048,
+                    "num_workers": 4
+                }
+            },
+            "csv_paths": [
+                "ignore/train.csv"
+            ]
+        },
+        "validation_data": {
+            "dataset": {
+                "class": "TcrDataset",
+                "initargs": {}
+            },
+            "dataloader": {
+                "class": "SingleDatasetDataLoader",
+                "initargs": {
+                    "batch_size": 2048,
+                    "num_workers": 4
+                }
+            },
+            "csv_paths": [
+                "ignore/test.csv"
+            ]
+        },
+        "tokeniser": {
+            "class": "CdrTokeniser",
+            "initargs": {}
+        },
+        "batch_collator": {
+            "class": "ClBatchCollator",
+            "initargs": {
+                "drop_chains": true
+            }
+        }
+    },
+    "loss": {
+        "cross_entropy_loss": {
+            "class": "AdjustedCrossEntropyLoss",
+            "initargs": {
+                "label_smoothing": 0.1
+            }
+        },
+        "contrastive_loss": {
+            "class": "DotProductLoss",
+            "initargs": {
+                "temp": 0.05
+            }
+        }
+    },
+    "optimiser": {
+        "initargs": {
+            "n_warmup_steps": 10000,
+            "d_model": 64
+        }
+    },
+    "num_epochs": 200
+}
