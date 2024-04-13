@@ -45,6 +45,10 @@ def average_pooling():
     return load_variant("SCEPTR_average_pooling")
 
 
+def unpaired():
+    return load_variant("SCEPTR_unpaired")
+
+
 def olga():
     return load_variant("SCEPTR_OLGA")
 
