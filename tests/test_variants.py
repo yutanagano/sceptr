@@ -25,6 +25,7 @@ def dummy_data():
         variant.tiny(),
         variant.blosum(),
         variant.average_pooling(),
+        variant.unpaired(),
         variant.olga(),
         variant.finetuned(),
         variant.a_sceptr(),
