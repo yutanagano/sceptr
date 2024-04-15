@@ -27,6 +27,7 @@ def dummy_data():
         variant.average_pooling(),
         variant.unpaired(),
         variant.olga(),
+        variant.dropout_noise_only(),
         variant.finetuned(),
         variant.a_sceptr(),
         variant.b_sceptr(),

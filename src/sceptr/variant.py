@@ -53,6 +53,10 @@ def olga():
     return load_variant("SCEPTR_OLGA")
 
 
+def dropout_noise_only():
+    return load_variant("SCEPTR_dropout_noise_only")
+
+
 def finetuned():
     return load_variant("SCEPTR_finetuned")
 
