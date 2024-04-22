@@ -4,8 +4,8 @@
         "initargs": {}
     },
     "model": {
-        "name": "SCEPTR (finetuned)",
-        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR/state_dict.pt",
+        "name": "SCEPTR (finetuned without bg)",
+        "path_to_pretrained_state_dict": "model_saves/SCEPTR/state_dict.pt",
         "token_embedder": {
             "class": "CdrSimpleEmbedder",
             "initargs": {}
@@ -57,7 +57,7 @@
             "dataset": {
                 "class": "EpitopeBalancedTcrDataset",
                 "initargs": {
-                    "num_samples_per_pmhc_per_epoch": 1000
+                    "num_samples_per_pmhc_per_epoch": 100
                 }
             },
             "dataloader": {
@@ -68,7 +68,7 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/benchmarking/test.csv"
+                "tcr_data/preprocessed/benchmarking/valid.csv"
             ]
         },
         "tokeniser": {
@@ -78,7 +78,8 @@
         "batch_collator": {
             "class": "ClBatchCollator",
             "initargs": {
-                "drop_chains": true
+                "frac_dropped_tokens": 0.2,
+                "prob_drop_chain": 0.5
             }
         }
     },
@@ -103,5 +104,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 10
+    "num_epochs": 20
 }
