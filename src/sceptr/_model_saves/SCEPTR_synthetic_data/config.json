@@ -4,7 +4,7 @@
         "initargs": {}
     },
     "model": {
-        "name": "SCEPTR (unpaired)",
+        "name": "SCEPTR (synthetic data)",
         "path_to_pretrained_state_dict": null,
         "token_embedder": {
             "class": "CdrSimpleEmbedder",
@@ -48,7 +48,7 @@
                 }
             },
             "csv_paths": [
-                "tcr_data/preprocessed/tanno/train_randomly_paired.csv"
+                "tcr_data/preprocessed/olga/olga_size_matched.csv"
             ]
         },
         "validation_data": {

@@ -45,12 +45,12 @@ def average_pooling():
     return load_variant("SCEPTR_average_pooling")
 
 
-def unpaired():
-    return load_variant("SCEPTR_unpaired")
+def shuffled_data():
+    return load_variant("SCEPTR_shuffled_data")
 
 
-def olga():
-    return load_variant("SCEPTR_OLGA")
+def synthetic_data():
+    return load_variant("SCEPTR_synthetic_data")
 
 
 def dropout_noise_only():
