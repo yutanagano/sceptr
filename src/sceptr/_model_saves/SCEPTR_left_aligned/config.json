@@ -4,7 +4,7 @@
         "initargs": {}
     },
     "model": {
-        "name": "SCEPTR (classic)",
+        "name": "SCEPTR (left-aligned)",
         "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_classic_MLM_only/state_dict.pt",
         "token_embedder": {
             "class": "CdrEmbedder",

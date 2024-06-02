@@ -9,12 +9,12 @@ def mlm_only():
     return load_variant("SCEPTR_MLM_only")
 
 
-def classic():
-    return load_variant("SCEPTR_classic")
+def left_aligned():
+    return load_variant("SCEPTR_left_aligned")
 
 
-def classic_mlm_only():
-    return load_variant("SCEPTR_classic_MLM_only")
+def left_aligned_mlm_only():
+    return load_variant("SCEPTR_left_aligned_MLM_only")
 
 
 def cdr3_only():
