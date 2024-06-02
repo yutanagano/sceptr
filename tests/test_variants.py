@@ -16,8 +16,8 @@ def dummy_data():
     (
         variant.default(),
         variant.mlm_only(),
-        variant.classic(),
-        variant.classic_mlm_only(),
+        variant.left_aligned(),
+        variant.left_aligned_mlm_only(),
         variant.cdr3_only(),
         variant.cdr3_only_mlm_only(),
         variant.large(),
