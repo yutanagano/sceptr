@@ -9,7 +9,7 @@ authors = [
 ]
 description = "Simple Contrastive Embedding of the Primary sequence of T cell Receptors."
 dependencies = [
-    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@c5008428f31ee240a45894fd2cab72e4e94ff45c",
+    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@v1.0.0",
     "numpy~=1.26",
     "pandas~=2.0",
     "torch~=2.0",
