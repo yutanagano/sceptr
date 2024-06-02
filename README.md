@@ -151,8 +151,8 @@ This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 |---|---|
 |`sceptr.variant.default`|default model used by the functional API|
 |`sceptr.variant.mlm_only`|default model trained without autocontrastive learning|
-|`sceptr.variant.classic`|similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models|
-|`sceptr.variant.classic_mlm_only`|classic variant trained without autocontrastive learning|
+|`sceptr.variant.left_aligned`|similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models|
+|`sceptr.variant.left_aligned_mlm_only`|left-aligned variant trained without autocontrastive learning|
 |`sceptr.variant.cdr3_only`|only uses the CDR3 loops as input|
 |`sceptr.variant.cdr3_only_mlm_only`|only uses CDR3 loops as input, and did not receive autocontrastive learning|
 |`sceptr.variant.large`|larger variant with model dimensionality 128|
