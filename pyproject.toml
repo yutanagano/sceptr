@@ -7,7 +7,7 @@ name = "sceptr"
 authors = [
     {name = "Yuta Nagano", email = "yutanagano51@proton.me"}
 ]
-description = "Simple Contrastive Embedding of the Peptide sequence of T cell Receptors."
+description = "Simple Contrastive Embedding of the Primary sequence of T cell Receptors."
 dependencies = [
     "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@c5008428f31ee240a45894fd2cab72e4e94ff45c",
     "numpy~=1.26",
