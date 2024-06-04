@@ -1,0 +1,42 @@
+name: publish to PyPI
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out branch
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: install build
+        run: python3 -m pip install build --user
+      - name: build wheel and source tarball
+        run: python3 -m build
+      - name: store distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+  publish:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/sceptr
+    permissions:
+      id-token: write
+    steps:
+      - name: download dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
