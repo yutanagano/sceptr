@@ -66,12 +66,12 @@ For easier cleaning and standardisation of TCR data, check out [tidytcells](http
 
 | Column name | Column datatype | Column contents |
 |---|---|---|
-|TRAV|`str`|IMGT symbol for the alpha chain V gene (with allele specifier)|
+|TRAV|`str`|IMGT symbol for the alpha chain V gene|
 |CDR3A|`str`|Amino acid sequence of the alpha chain CDR3, including the first C and last W/F residues, in all caps|
-|TRAJ|`str`|IMGT symbol for the alpha chain J gene (with allele specifier)|
-|TRBV|`str`|IMGT symbol for the beta chain V gene (with allele specifier)|
+|TRAJ|`str`|IMGT symbol for the alpha chain J gene|
+|TRBV|`str`|IMGT symbol for the beta chain V gene|
 |CDR3B|`str`|Amino acid sequence of the beta chain CDR3, including the first C and last W/F residues, in all caps|
-|TRBJ|`str`|IMGT symbol for the beta chain J gene (with allele specifier)|
+|TRBJ|`str`|IMGT symbol for the beta chain J gene|
 
 ## Usage
 
