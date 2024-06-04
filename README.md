@@ -1,7 +1,5 @@
 # SCEPTR
 
-### **This is an unpublished prototype for internal use only.**
-
 > [!NOTE]
 > The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
