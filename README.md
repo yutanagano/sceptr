@@ -54,6 +54,8 @@ If this happens, you can temporarily set the `GIT_CLONE_PROTECTION_ACTIVE` envir
 GIT_CLONE_PROTECTION_ACTIVE=false pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
 ```
 
+This is [a known issue](https://github.com/git-lfs/git-lfs/issues/5749) for `git` version `2.45.1` and [is fixed](https://lore.kernel.org/git/xmqqr0dheuw5.fsf@gitster.g/T/#u) from version `2.45.2`.
+
 ## Prescribed data format
 
 SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
