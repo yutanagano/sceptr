@@ -56,13 +56,15 @@ This is [a known issue](https://github.com/git-lfs/git-lfs/issues/5749) for `git
 
 ## Prescribed data format
 
+> [!IMPORTANT]
+> SCEPTR only recognises TCR V/J gene symbols that are IMGT-compliant, and also known to be functional (i.e. known pseudogenes or ORFs are not allowed).
+> For easy standardisation of TCR gene nomenclature in your data, as well as filtering your data for functional V/J genes, check out [tidytcells](https://pypi.org/project/tidytcells/).
+
 SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
 Therefore, all TCR data should be represented as a `DataFrame` with the following structure and data types.
 The column order is irrelevant.
 Each row should represent one TCR.
 Incomplete rows are allowed (e.g. only beta chain data available) as long as the SCEPTR variant that is being used has at least some partial information to go on.
-
-For easier cleaning and standardisation of TCR data, check out [tidytcells](https://pypi.org/project/tidytcells/).
 
 | Column name | Column datatype | Column contents |
 |---|---|---|
