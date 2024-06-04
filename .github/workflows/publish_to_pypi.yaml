@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: check out branch
         uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: set up python
         uses: actions/setup-python@v5
         with:
