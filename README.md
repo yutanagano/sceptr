@@ -1,7 +1,5 @@
 # SCEPTR
 
-### **This is an unpublished prototype for internal use only.**
-
 > [!NOTE]
 > The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
@@ -10,28 +8,17 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 
 ## Installation
 
-### Prerequisites
+### From PyPI (Recommended)
+
+Coming soon.
+
+### From Source
 
 > [!IMPORTANT]
-> To install `sceptr` properly, you must have [`git-lfs`](https://git-lfs.com/) installed and set up on your system.
-> This is because you must be able to download the trained model weights properly during your install.
-> The trained model weight files are relatively large, and are therefore not tracked directly by `git` and `github`.
-> Instead, the version control system tracks a stub file which references a file hosted on the `git-lfs` servers.
-> To properly de-reference these stub files at install time, you need a copy of `git-lfs`.
->
-> The library code that powers `sceptr` is now outsourced to a separate package, `libtcrlm`, which is also a private repository (both this repo and `libtcrlm` will become public once SCEPTR is published).
-> This means that to install `sceptr`, **users must also be granted access to the `libtcrlm` repository on github.**
-> Please notify @yutanagano if you would like to continue using the latest version of `sceptr` and have not yet been granted access to this repository.
-> This was done to avoid code duplication between this `sceptr` deployment repo and the development/training repo.
-> Apologies to anyone inconvenienced!
+> To install `sceptr` from source, you must have [`git-lfs`](https://git-lfs.com/) installed and set up on your system.
+> This is because you must be able to download the trained model weights directly from the Git LFS servers during your install.
 
-> [!NOTE]
-> The following prerequisites will disappear once all repositories are made public and a copy of all the install files are uploaded to PyPI.
-
-1. [`git-lfs`](https://git-lfs.com/) must be installed and set up on your system.
-2. You must have access to the `libtcrlm` repo (contact @yutanagano to request access).
-
-### Using `pip`
+#### Using `pip`
 
 From your Python environment, run the following replacing `<VERSION_TAG>` with the appropriate version specifier (e.g. `v1.0.0-alpha.1`).
 The latest release tags can be found by checking the 'releases' section on the github repository page.
@@ -40,7 +27,7 @@ The latest release tags can be found by checking the 'releases' section on the g
 pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
 ```
 
-### Manual install
+#### Manual install
 
 You can also clone the repository, and from within your Python environment, navigate to the project root directory and run:
 
@@ -50,7 +37,28 @@ pip install .
 
 Note that even for manual installation, you still need `git-lfs` to properly de-reference the stub files at `git-clone`-ing time.
 
+#### Troubleshooting
+
+A recent security update to `git` has resulted in some difficulties cloning repositories that rely on `git-lfs`.
+This can result in an error message with a message along the lines of:
+
+```
+fatal: active `post-checkout` hook found during `git clone`
+```
+
+If this happens, you can temporarily set the `GIT_CLONE_PROTECTION_ACTIVE` environment variable to `false` by prepending `GIT_CLONE_PROTECTION_ACTIVE=false` before the install command like below:
+
+```bash
+GIT_CLONE_PROTECTION_ACTIVE=false pip install git+https://github.com/yutanagano/sceptr.git@<VERSION_TAG>
+```
+
+This is [a known issue](https://github.com/git-lfs/git-lfs/issues/5749) for `git` version `2.45.1` and [is fixed](https://lore.kernel.org/git/xmqqr0dheuw5.fsf@gitster.g/T/#u) from version `2.45.2`.
+
 ## Prescribed data format
+
+> [!IMPORTANT]
+> SCEPTR only recognises TCR V/J gene symbols that are IMGT-compliant, and also known to be functional (i.e. known pseudogenes or ORFs are not allowed).
+> For easy standardisation of TCR gene nomenclature in your data, as well as filtering your data for functional V/J genes, check out [tidytcells](https://pypi.org/project/tidytcells/).
 
 SCEPTR expects to receive TCR data in the form of [pandas](https://pandas.pydata.org/) [`DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) instances.
 Therefore, all TCR data should be represented as a `DataFrame` with the following structure and data types.
@@ -58,16 +66,14 @@ The column order is irrelevant.
 Each row should represent one TCR.
 Incomplete rows are allowed (e.g. only beta chain data available) as long as the SCEPTR variant that is being used has at least some partial information to go on.
 
-For easier cleaning and standardisation of TCR data, check out [tidytcells](https://pypi.org/project/tidytcells/).
-
 | Column name | Column datatype | Column contents |
 |---|---|---|
-|TRAV|`str`|IMGT symbol for the alpha chain V gene (with allele specifier)|
+|TRAV|`str`|IMGT symbol for the alpha chain V gene|
 |CDR3A|`str`|Amino acid sequence of the alpha chain CDR3, including the first C and last W/F residues, in all caps|
-|TRAJ|`str`|IMGT symbol for the alpha chain J gene (with allele specifier)|
-|TRBV|`str`|IMGT symbol for the beta chain V gene (with allele specifier)|
+|TRAJ|`str`|IMGT symbol for the alpha chain J gene|
+|TRBV|`str`|IMGT symbol for the beta chain V gene|
 |CDR3B|`str`|Amino acid sequence of the beta chain CDR3, including the first C and last W/F residues, in all caps|
-|TRBJ|`str`|IMGT symbol for the beta chain J gene (with allele specifier)|
+|TRBJ|`str`|IMGT symbol for the beta chain J gene|
 
 ## Usage
 
