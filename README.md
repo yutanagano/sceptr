@@ -8,9 +8,11 @@ It maps TCRs to vector representations, which can be used for downstream TCR and
 
 ## Installation
 
-### From PyPI (Recommended)
+### From [PyPI](https://pypi.org/project/sceptr/) (Recommended)
 
-Coming soon.
+```bash
+pip install sceptr
+```
 
 ### From Source
 
