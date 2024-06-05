@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "libtcrlm @ git+https://github.com/yutanagano/libtcrlm.git@v1.0.0",
+    "libtcrlm~=1.0",
     "numpy~=1.26",
     "pandas~=2.0",
     "torch~=2.0",
