@@ -30,6 +30,10 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.urls]
+Repository = "https://github.com/yutanagano/sceptr"
+Issues = "https://github.com/yutanagano/sceptr/issues"
+
 [project.optional-dependencies]
 dev = [
     "pytest",
