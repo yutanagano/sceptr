@@ -38,7 +38,9 @@ Issues = "https://github.com/yutanagano/sceptr/issues"
 dev = [
     "pytest",
     "pytest-cov",
-    "tox"
+    "tox",
+    "sphinx",
+    "sphinx_book_theme",
 ]
 
 [tool.setuptools]

@@ -5,7 +5,7 @@
     },
     "model": {
         "name": "SCEPTR (average pooling)",
-        "path_to_pretrained_state_dict": "model_saves/AB_SCEPTR_MLM_only/state_dict.pt",
+        "path_to_pretrained_state_dict": null,
         "token_embedder": {
             "class": "CdrSimpleEmbedder",
             "initargs": {}
@@ -74,7 +74,8 @@
         "batch_collator": {
             "class": "ClBatchCollator",
             "initargs": {
-                "drop_chains": true
+                "frac_dropped_tokens": 0.2,
+                "prob_drop_chain": 0.5
             }
         }
     },
@@ -98,5 +99,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 100
+    "num_epochs": 200
 }

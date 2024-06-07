@@ -96,5 +96,5 @@
             "d_model": 64
         }
     },
-    "num_epochs": 100
+    "num_epochs": 200
 }

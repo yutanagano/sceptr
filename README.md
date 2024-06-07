@@ -147,8 +147,7 @@ The returned array will have shape (1/2 * N * (N-1),), where N is the number of 
 
 ### Loading specific SCEPTR variants (`sceptr.variant`)
 
-Because SCEPTR is still a project in development, there exist multiple variants of the model.
-For more curious users, these model variants will be available to load and use through the `sceptr.variant` submodule.
+For more curious users, model variants are available to load and use through the `sceptr.variant` submodule.
 
 The module exposes functions, each named after a particular model variant, which when called, will return a `Sceptr` object corresponding to the selected model variant.
 This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the `sceptr.sceptr` submodule.
@@ -160,7 +159,6 @@ This `Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdis
 |`sceptr.variant.default`|default model used by the functional API|
 |`sceptr.variant.mlm_only`|default model trained without autocontrastive learning|
 |`sceptr.variant.left_aligned`|similar to default model but with learnable token embeddings and a sinusoidal position information embedding method more similar to the original NLP BERT/transformer models|
-|`sceptr.variant.left_aligned_mlm_only`|left-aligned variant trained without autocontrastive learning|
 |`sceptr.variant.cdr3_only`|only uses the CDR3 loops as input|
 |`sceptr.variant.cdr3_only_mlm_only`|only uses CDR3 loops as input, and did not receive autocontrastive learning|
 |`sceptr.variant.large`|larger variant with model dimensionality 128|
