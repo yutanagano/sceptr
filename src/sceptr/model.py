@@ -23,7 +23,7 @@ class Sceptr:
     name : str
         The name of the model variant.
     """
-    
+
     name: str = None
     distance_bins = np.linspace(0, 2, num=21)
 

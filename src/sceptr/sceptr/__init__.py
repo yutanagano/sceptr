@@ -3,7 +3,6 @@ This submodule provides easy access to SCEPTR's functional API.
 The functional API uses the default SCEPTR model.
 """
 
-
 from sceptr import variant
 from numpy import ndarray
 from pandas import DataFrame

@@ -5,7 +5,6 @@ The submodule exposes functions, each named after a particular variant, which wh
 Each of their function signatures are equivalent to the functional API, so you can just plug and play!
 """
 
-
 from sceptr._model_saves import load_variant
 
 
@@ -186,7 +185,7 @@ def finetuned():
     .. note ::
         This model is fine-tuned explicity for discriminating between the pMHC specificities listed above.
         While it does indeed become much better than the default model at that specific task, its general performance is otherwise *demonstrably worse* compared to the default.
-    
+
     Returns
     -------
     :py:class:`~sceptr.model.Sceptr`
