@@ -1,6 +1,4 @@
 """
-SCEPTR Variants
-===============
 For the curious/power users, several model variants are available to load and use through this submodule.
 The submodule exposes functions, each named after a particular variant, which when called will return a `Sceptr` instance corresponding to the selected model variant.
 `Sceptr` instances expose the same methods as in the functional API: namely `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations`.

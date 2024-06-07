@@ -14,6 +14,9 @@ It maps TCRs to vector representations, which enables alignment-free downstream 
    :caption: Contents:
 
    installation
+   usage
+   api
+   citing
 
 Indices and tables
 ==================
