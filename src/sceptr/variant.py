@@ -13,10 +13,6 @@ def left_aligned():
     return load_variant("SCEPTR_left_aligned")
 
 
-def left_aligned_mlm_only():
-    return load_variant("SCEPTR_left_aligned_MLM_only")
-
-
 def cdr3_only():
     return load_variant("SCEPTR_CDR3_only")
 
