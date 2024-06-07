@@ -1,5 +1,10 @@
 # SCEPTR
 
+![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
+<!-- [![Docs](https://readthedocs.org/projects/tidytcells/badge/?version=latest)](https://tidytcells.readthedocs.io) -->
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/tidytcells?tab=MIT-1-ov-file#readme)
+<!-- [![DOI](https://img.shields.io/badge/DOI-10.3389/fimmu.2023.1276106-pink)](https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2023.1276106) -->
+
 > [!NOTE]
 > The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 
