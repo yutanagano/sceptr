@@ -39,7 +39,8 @@ dev = [
     "pytest",
     "pytest-cov",
     "tox",
-    "sphinx"
+    "sphinx",
+    "sphinx_book_theme",
 ]
 
 [tool.setuptools]

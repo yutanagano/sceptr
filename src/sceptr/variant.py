@@ -1,7 +1,7 @@
 """
 For the curious/power users, several model variants are available to load and use through this submodule.
-The submodule exposes functions, each named after a particular variant, which when called will return a `Sceptr` instance corresponding to the selected model variant.
-`Sceptr` instances expose the same methods as in the functional API: namely `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations`.
+The submodule exposes functions, each named after a particular variant, which when called will return a :py:class:`~sceptr.model.Sceptr` instance corresponding to the selected model variant.
+:py:class:`~sceptr.model.Sceptr` instances expose the same methods as in the functional API: namely `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations`.
 Each of their function signatures are equivalent to the functional API, so you can just plug and play!
 """
 
@@ -15,9 +15,9 @@ def default():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the default model state loaded.
-        Calling methods on this `Sceptr` instance is equivalent to using the functional API.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the default model state loaded.
+        Calling methods on this :py:class:`~sceptr.model.Sceptr` instance is equivalent to using the functional API.
     """
     return load_variant("SCEPTR")
 
@@ -29,8 +29,8 @@ def mlm_only():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the MLM-only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the MLM-only model state loaded.
     """
     return load_variant("SCEPTR_MLM_only")
 
@@ -42,8 +42,8 @@ def left_aligned():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the left-aligned model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the left-aligned model state loaded.
     """
     return load_variant("SCEPTR_left_aligned")
 
@@ -55,8 +55,8 @@ def cdr3_only():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the CDR3-only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the CDR3-only model state loaded.
     """
     return load_variant("SCEPTR_CDR3_only")
 
@@ -68,8 +68,8 @@ def cdr3_only_mlm_only():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the CDR3-only MLM-only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the CDR3-only MLM-only model state loaded.
     """
     return load_variant("SCEPTR_CDR3_only_MLM_only")
 
@@ -81,8 +81,8 @@ def large():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the large model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the large model state loaded.
     """
     return load_variant("SCEPTR_large")
 
@@ -94,8 +94,8 @@ def small():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the small model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the small model state loaded.
     """
     return load_variant("SCEPTR_small")
 
@@ -107,8 +107,8 @@ def tiny():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the tiny model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the tiny model state loaded.
     """
     return load_variant("SCEPTR_tiny")
 
@@ -120,8 +120,8 @@ def blosum():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the BLOSUM model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the BLOSUM model state loaded.
     """
     return load_variant("SCEPTR_BLOSUM")
 
@@ -133,8 +133,8 @@ def average_pooling():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the average-pooling model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the average-pooling model state loaded.
     """
     return load_variant("SCEPTR_average_pooling")
 
@@ -146,8 +146,8 @@ def shuffled_data():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the shuffled-data model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the shuffled-data model state loaded.
     """
     return load_variant("SCEPTR_shuffled_data")
 
@@ -159,8 +159,8 @@ def synthetic_data():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the synthetic-data model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the synthetic-data model state loaded.
     """
     return load_variant("SCEPTR_synthetic_data")
 
@@ -172,8 +172,8 @@ def dropout_noise_only():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the dropout noise only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the dropout noise only model state loaded.
     """
     return load_variant("SCEPTR_dropout_noise_only")
 
@@ -189,8 +189,8 @@ def finetuned():
     
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the fine-tuned model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the fine-tuned model state loaded.
     """
     return load_variant("SCEPTR_finetuned")
 
@@ -206,8 +206,8 @@ def a_sceptr():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the alpha chain-only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the alpha chain-only model state loaded.
     """
     return load_variant("A_SCEPTR")
 
@@ -223,7 +223,7 @@ def b_sceptr():
 
     Returns
     -------
-    `Sceptr`
-        A `Sceptr` instance with the beta chain-only model state loaded.
+    :py:class:`~sceptr.model.Sceptr`
+        A :py:class:`~sceptr.model.Sceptr` instance with the beta chain-only model state loaded.
     """
     return load_variant("B_SCEPTR")
