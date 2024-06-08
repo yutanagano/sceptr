@@ -1,17 +1,16 @@
 """
 SCEPTR is a small, fast, and performant TCR representation model for alignment-free TCR analysis.
-The top module provides easy access to SCEPTR through a functional API which uses the default :py:class:`~sceptr.model.Sceptr` model.
+The root module provides easy access to SCEPTR through a functional API which uses the default :py:class:`~sceptr.model.Sceptr` model.
 """
 
 from sceptr import variant
+from sceptr.model import Sceptr
+import sys
 from numpy import ndarray
 from pandas import DataFrame
 
 
 VERSION = "1.0.0-beta.1"
-
-
-default_model = variant.default()
 
 
 def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
@@ -31,7 +30,7 @@ def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
         A 2D numpy ndarray representing a cdist matrix between TCRs from `anchors` and `comparisons`.
         The returned array will have shape (X, Y) where X is the number of TCRs in `anchors` and Y is the number of TCRs in `comparisons`.
     """
-    return default_model.calc_cdist_matrix(anchors, comparisons)
+    return get_default_model().calc_cdist_matrix(anchors, comparisons)
 
 
 def calc_pdist_vector(instances: DataFrame) -> ndarray:
@@ -49,7 +48,7 @@ def calc_pdist_vector(instances: DataFrame) -> ndarray:
         A 2D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
         The returned array will have shape (1/2 * N * (N-1),), where N is the number of TCRs in `instances`.
     """
-    return default_model.calc_pdist_vector(instances)
+    return get_default_model().calc_pdist_vector(instances)
 
 
 def calc_vector_representations(instances: DataFrame) -> ndarray:
@@ -67,4 +66,10 @@ def calc_vector_representations(instances: DataFrame) -> ndarray:
         A 2D numpy ndarray object where every row vector corresponds to a row in `instances`.
         The returned array will have shape (N, D) where N is the number of TCRs in `instances` and D is the dimensionality of the SCEPTR model.
     """
-    return default_model.calc_vector_representations(instances)
+    return get_default_model().calc_vector_representations(instances)
+
+
+def get_default_model() -> Sceptr:
+    if "_DEFAULT_MODEL" not in dir(sys.modules[__name__]):
+        setattr(sys.modules[__name__], "_DEFAULT_MODEL", variant.default())
+    return _DEFAULT_MODEL
