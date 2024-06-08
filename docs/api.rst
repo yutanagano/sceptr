@@ -6,3 +6,4 @@ API reference
 
 	sceptr
 	sceptr_variant
+	sceptr_model
