@@ -47,7 +47,7 @@ dev = [
 include-package-data = true
 
 [tool.setuptools.dynamic]
-version = {attr = "sceptr.VERSION"}
+version = {attr = "sceptr.__version__"}
 
 [tool.pytest.ini_options]
 filterwarnings = [
