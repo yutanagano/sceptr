@@ -11,7 +11,7 @@ import sceptr
 project = "sceptr"
 copyright = "2024, Yuta Nagano"
 author = "Yuta Nagano"
-version = sceptr.__version__
+release = sceptr.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
