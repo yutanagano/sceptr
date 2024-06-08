@@ -1,5 +1,8 @@
 # SCEPTR
 
+![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/tidytcells?tab=MIT-1-ov-file#readme)
+
 > [!NOTE]
 > The latest version of SCEPTR no longer supports Python versions earlier than 3.9.
 

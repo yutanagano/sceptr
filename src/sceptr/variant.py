@@ -1,7 +1,7 @@
 """
 For the curious/power users, several model variants are available to load and use through this submodule.
 The submodule exposes functions, each named after a particular variant, which when called will return a :py:class:`~sceptr.model.Sceptr` instance corresponding to the selected model variant.
-:py:class:`~sceptr.model.Sceptr` instances expose the same methods as in the functional API: namely `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations`.
+:py:class:`~sceptr.model.Sceptr` instances expose the same methods as in the functional API: namely :py:func:`~sceptr.model.Sceptr.calc_pdist_vector`, :py:func:`~sceptr.model.Sceptr.calc_cdist_matrix`, and :py:func:`~sceptr.model.Sceptr.calc_vector_representations`.
 Each of their function signatures are equivalent to the functional API, so you can just plug and play!
 """
 
@@ -180,7 +180,7 @@ def dropout_noise_only():
 def finetuned():
     """
     Load the fine-tuned variant of SCEPTR.
-    This variant is fine-tuned using supervised contrastive learning for six pMHCs with peptides GILGFVFTL, NLVPMVATV, SPRWYFYYL, TFEYVSQPFLMDLE, TTDPSFLGRY and YLQPRTFLL (from [VDJdb](https://vdjdb.cdr3.net/))|
+    This variant is fine-tuned using supervised contrastive learning for six pMHCs with peptides GILGFVFTL, NLVPMVATV, SPRWYFYYL, TFEYVSQPFLMDLE, TTDPSFLGRY and YLQPRTFLL (from `VDJdb <https://vdjdb.cdr3.net/>`_)
 
     .. note ::
         This model is fine-tuned explicity for discriminating between the pMHC specificities listed above.
