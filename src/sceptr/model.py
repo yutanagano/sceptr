@@ -42,7 +42,7 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame in the presribed format.
+            DataFrame in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
@@ -86,9 +86,9 @@ class Sceptr:
         Parameters
         ----------
         anchors : DataFrame
-            DataFrame in the prescribed format, representing TCRs from collection A.
+            DataFrame in the :ref:`prescribed format <data_format>`.
         comparisons : DataFrame
-            DataFrame in the prescribed format, representing TCRs from collection B.
+            DataFrame in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
@@ -110,7 +110,7 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame in the prescribed format.
+            DataFrame in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------

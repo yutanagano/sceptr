@@ -18,9 +18,9 @@ def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
     Parameters
     ----------
     anchors : DataFrame
-        DataFrame in the prescribed format, representing TCRs from collection A.
+        DataFrame in the :ref:`prescribed format <data_format>`.
     comparisons : DataFrame
-        DataFrame in the prescribed format, representing TCRs from collection B.
+        DataFrame in the :ref:`prescribed format <data_format>`.
 
     Returns
     -------
@@ -38,7 +38,7 @@ def calc_pdist_vector(instances: DataFrame) -> ndarray:
     Parameters
     ----------
     instances : DataFrame
-        DataFrame in the prescribed format.
+        DataFrame in the :ref:`prescribed format <data_format>`.
 
     Returns
     -------
@@ -56,7 +56,7 @@ def calc_vector_representations(instances: DataFrame) -> ndarray:
     Parameters
     ----------
     instances : DataFrame
-        DataFrame in the presribed format.
+        DataFrame in the :ref:`prescribed format <data_format>`.
 
     Returns
     -------

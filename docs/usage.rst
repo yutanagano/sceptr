@@ -1,6 +1,34 @@
 Usage
 =====
 
+Functional API (:py:mod:`sceptr.sceptr`)
+----------------------------------------
+
+.. tip::
+	To use the functional API, import the `sceptr` submodule like so:
+
+	>>> from sceptr import sceptr
+
+	Attempting to access the submodule as an attribute of the top level module
+
+	>>> import sceptr
+	>>> # ... load data, etc ...
+	>>> sceptr.sceptr.calc_vector_representations(df)
+
+	will result in an error.
+
+The eponymous :py:mod:`sceptr.sceptr` submodule is the easiest way to use SCEPTR.
+It loads the default SCEPTR variant and exposes its methods directly as module-level functions.
+
+Model Variants (:py:mod:`sceptr.variant`)
+-----------------------------------------
+
+For more curious users, model variants are available to load and use through the :py:mod:`sceptr.variant` submodule.
+The module exposes functions, each named after a particular model variant, which when called, will return a :py:class:`~sceptr.model.Sceptr` object corresponding to the selected model variant.
+This :py:class:`~sceptr.model.Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the :py:mod:`sceptr.sceptr` submodule.
+
+.. _data_format:
+
 Prescribed data format
 ----------------------
 
@@ -29,30 +57,3 @@ Incomplete rows are allowed (e.g. only beta chain data available) as long as the
 +-------------+-----------------+-----------------------------------------------------------------------------------------------------+
 |TRBJ         |`str`            |IMGT symbol for the beta chain J gene                                                                |
 +-------------+-----------------+-----------------------------------------------------------------------------------------------------+
-
-
-Functional API (:py:mod:`sceptr.sceptr`)
-----------------------------------------
-
-.. tip::
-	To use the functional API, import the `sceptr` submodule like so:
-
-	>>> from sceptr import sceptr
-
-	Attempting to access the submodule as an attribute of the top level module
-
-	>>> import sceptr
-	>>> # ... load data, etc ...
-	>>> sceptr.sceptr.calc_vector_representations(df)
-
-	will result in an error.
-
-The eponymous :py:mod:`sceptr.sceptr` submodule is the easiest way to use SCEPTR.
-It loads the default SCEPTR variant and exposes its methods directly as module-level functions.
-
-Model Variants (:py:mod:`sceptr.variant`)
------------------------------------------
-
-For more curious users, model variants are available to load and use through the :py:mod:`sceptr.variant` submodule.
-The module exposes functions, each named after a particular model variant, which when called, will return a :py:class:`~sceptr.model.Sceptr` object corresponding to the selected model variant.
-This :py:class:`~sceptr.model.Sceptr` object will then have the methods: `calc_pdist_vector`, `calc_cdist_matrix`, and `calc_vector_representations` available to use, with function signatures exactly as defined above for the functional API in the :py:mod:`sceptr.sceptr` submodule.
