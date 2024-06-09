@@ -1,5 +1,5 @@
 ``sceptr.model``
 ================
 
-.. automodule:: sceptr.model
+.. autoclass:: sceptr.model.Sceptr()
 	:members:

@@ -37,7 +37,7 @@ class Sceptr:
 
     def calc_vector_representations(self, instances: DataFrame) -> ndarray:
         """
-        Map a table of TCRs provided as a pandas DataFrame in the above format to a set of vector representations.
+        Map a table of TCRs provided as a pandas DataFrame in the above format to their corresponding vector representations.
 
         Parameters
         ----------
@@ -48,7 +48,7 @@ class Sceptr:
         -------
         ndarray
             A 2D numpy ndarray object where every row vector corresponds to a row in `instances`.
-            The returned array will have shape (N, D) where N is the number of TCRs in `instances` and D is the dimensionality of the SCEPTR model.
+            The returned array will have shape :math:`(N, D)` where :math:`N` is the number of TCRs in `instances` and :math:`D` is the dimensionality of the current model variant.
         """
         torch_representations = self._calc_torch_representations(instances)
         return torch_representations.cpu().numpy()
@@ -94,7 +94,7 @@ class Sceptr:
         -------
         ndarray
             A 2D numpy ndarray representing a cdist matrix between TCRs from `anchors` and `comparisons`.
-            The returned array will have shape (X, Y) where X is the number of TCRs in `anchors` and Y is the number of TCRs in `comparisons`.
+            The returned array will have shape :math:`(X, Y)` where :math:`X` is the number of TCRs in `anchors` and :math:`Y` is the number of TCRs in `comparisons`.
         """
         anchor_representations = self._calc_torch_representations(anchors)
         comparison_representations = self._calc_torch_representations(comparisons)
@@ -104,8 +104,8 @@ class Sceptr:
         return cdist_matrix.cpu().numpy()
 
     def calc_pdist_vector(self, instances: DataFrame) -> ndarray:
-        """
-        Generate a pdist set of distances between each pair of TCRs in the input data.
+        r"""
+        Generate a pdist vector of distances between each pair of TCRs in the input data.
 
         Parameters
         ----------
@@ -116,7 +116,7 @@ class Sceptr:
         -------
         ndarray
             A 2D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
-            The returned array will have shape (1/2 * N * (N-1),), where N is the number of TCRs in `instances`.
+            The returned array will have shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number of TCRs in `instances`.
         """
         representations = self._calc_torch_representations(instances)
         pdist_vector = torch.pdist(representations, p=2)
