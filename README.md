@@ -23,5 +23,5 @@ What's even better is that they are fully compliant with [pyrepseq](https://pyre
 ## Installation
 
 ```bash
-pip install sceptr
+$ pip install sceptr
 ```
