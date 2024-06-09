@@ -2,6 +2,7 @@
 
 # SCEPTR
 
+[![Latest release](https://img.shields.io/pypi/v/sceptr)](https://pypi.org/p/sceptr)
 ![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/tidytcells?tab=MIT-1-ov-file#readme)
 
