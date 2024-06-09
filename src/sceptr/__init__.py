@@ -45,7 +45,7 @@ def calc_pdist_vector(instances: DataFrame) -> ndarray:
     Returns
     -------
     ndarray
-        A 2D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
+        A 1D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
         The returned array will have shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number of TCRs in `instances`.
     """
     return get_default_model().calc_pdist_vector(instances)
