@@ -31,6 +31,8 @@ dependencies = [
 dynamic = ["version"]
 
 [project.urls]
+Homepage = "https://sceptr.readthedocs.io"
+Documentation = "https://sceptr.readthedocs.io"
 Repository = "https://github.com/yutanagano/sceptr"
 Issues = "https://github.com/yutanagano/sceptr/issues"
 
