@@ -6,7 +6,7 @@
 ![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/tidytcells?tab=MIT-1-ov-file#readme)
 
-### Check out the [documentation page](about:blank).
+### Check out the [documentation page](https://sceptr.readthedocs.io).
 
 </div>
 
