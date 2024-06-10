@@ -2,7 +2,8 @@ API reference
 =============
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 1
 
-	sceptr_sceptr
+	sceptr
 	sceptr_variant
+	sceptr_model

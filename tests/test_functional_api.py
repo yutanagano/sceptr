@@ -1,4 +1,4 @@
-from sceptr import sceptr
+import sceptr
 import numpy as np
 import pandas as pd
 import pytest
