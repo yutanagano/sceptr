@@ -44,6 +44,7 @@ dev = [
     "sphinx",
     "sphinx_book_theme",
 ]
+docs = ["sphinx_book_theme"]
 
 [tool.setuptools]
 include-package-data = true
