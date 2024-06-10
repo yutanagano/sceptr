@@ -15,7 +15,7 @@ description = "Fast and performant TCR representation model"
 readme = "README.md"
 keywords = ["TCR", "TR", "T cell", "transformer", "bert", "MLM", "immunology", "bioinformatics"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
