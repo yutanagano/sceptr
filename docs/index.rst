@@ -2,7 +2,7 @@ SCEPTR
 ======
 
 **SCEPTR** (\ **S**\ imple **C**\ ontrastive **E**\ mbedding of the **P**\ rimary sequence of **T** cell **R**\ eceptors) is a small, fast, and performant TCR representation model that can be used for alignment-free downstream TCR and TCR repertoire analysis such as TCR clustering or classification.
-Our `manuscript (coming soon) <about:blank>`_ demonstrates SCEPTR's state-of-the-art performance (as of 2024) on downstream TCR specificity prediction.
+Our `preprint <https://arxiv.org/abs/2406.06397>`_ demonstrates SCEPTR's state-of-the-art performance (as of 2024) on downstream TCR specificity prediction.
 
 SCEPTR is a BERT-like transformer-based neural network implemented in `Pytorch <https://pytorch.org>`_.
 With the default model providing best-in-class performance with only 153,108 parameters (typical protein language models have tens or hundreds of millions), SCEPTR runs fast- even on a CPU!
@@ -18,7 +18,7 @@ What's even better is that they are fully compliant with `pyrepseq <https://pyre
    A visual introduction to how SCEPTR works, taken from our SCEPTR preprint.
    SCEPTR is a TCR language model (a,b) pre-trained using masked-language modelling and autocontrastive learning (c,d).
    (a) The default model uses the ``<cls>`` pooling method, but there is also a variant that is trained to use average-pooling (see :py:func:`sceptr.variant.average_pooling`).
-   Please see the manuscript for more details.
+   Please see the `preprint <https://arxiv.org/abs/2406.06397>`_  for more details.
 
 .. toctree::
    :maxdepth: 2

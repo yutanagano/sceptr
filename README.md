@@ -12,7 +12,7 @@
 </div>
 
 **SCEPTR** (**S**imple **C**ontrastive **E**mbedding of the **P**rimary sequence of **T** cell **R**eceptors) is a small, fast, and accurate TCR representation model that can be used for alignment-free TCR  analysis, including for TCR-pMHC interaction prediction and TCR clustering (metaclonotype discovery).
-Our [manuscript (coming soon)](about:blank) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
+Our [preprint](https://arxiv.org/abs/2406.06397) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
 
 SCEPTR is a BERT-like transformer-based neural network implemented in [Pytorch](https://pytorch.org).
 With the default model providing best-in-class performance with only 153,108 parameters (typical protein language models have tens or hundreds of millions), SCEPTR runs fast- even on a CPU!
