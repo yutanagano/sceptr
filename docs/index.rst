@@ -18,7 +18,7 @@ What's even better is that they are fully compliant with `pyrepseq <https://pyre
    A visual introduction to how SCEPTR works, taken from our SCEPTR preprint.
    SCEPTR is a TCR language model (a,b) pre-trained using masked-language modelling and autocontrastive learning (c,d).
    (a) The default model uses the ``<cls>`` pooling method, but there is also a variant that is trained to use average-pooling (see :py:func:`sceptr.variant.average_pooling`).
-   Please see the `preprint <https://arxiv.org/abs/2406.06397>`_  for more details.
+   Please see the preprint for more details.
 
 .. toctree::
    :maxdepth: 2
