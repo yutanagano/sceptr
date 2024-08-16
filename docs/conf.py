@@ -26,6 +26,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_book_theme"
+html_logo = "../sceptr.svg"
 html_theme_options = {
     "repository_url": "https://github.com/yutanagano/sceptr",
     "path_to_docs": "docs",
