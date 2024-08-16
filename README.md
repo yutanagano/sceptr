@@ -1,15 +1,18 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/yutanagano/tidytcells/main/sceptr.svg" width=700>
+<img src="https://raw.githubusercontent.com/yutanagano/sceptr/main/sceptr.svg" width=700>
 
 [![Latest release](https://img.shields.io/pypi/v/sceptr)](https://pypi.org/p/sceptr)
 ![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/sceptr/badge/?version=latest)](https://sceptr.readthedocs.io)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/sceptr?tab=MIT-1-ov-file#readme)
+[![arXiv](https://img.shields.io/badge/arXiv-arXiv:2406.06397-pink)](https://arxiv.org/abs/2406.06397v1)
 
 ### Check out the [documentation page](https://sceptr.readthedocs.io).
 
 </div>
+
+---
 
 **SCEPTR** (**S**imple **C**ontrastive **E**mbedding of the **P**rimary sequence of **T** cell **R**eceptors) is a small, fast, and accurate TCR representation model that can be used for alignment-free TCR  analysis, including for TCR-pMHC interaction prediction and TCR clustering (metaclonotype discovery).
 Our [preprint](https://arxiv.org/abs/2406.06397) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
@@ -25,4 +28,19 @@ What's even better is that they are fully compliant with [pyrepseq](https://pyre
 
 ```bash
 pip install sceptr
+```
+
+## Citing SCEPTR
+Please cite our [preprint](https://arxiv.org/abs/2406.06397).
+
+### BibTex
+```bibtex
+@misc{nagano2024contrastive,
+      title={Contrastive learning of T cell receptor representations}, 
+      author={Yuta Nagano and Andrew Pyo and Martina Milighetti and James Henderson and John Shawe-Taylor and Benny Chain and Andreas Tiffeau-Mayer},
+      year={2024},
+      eprint={2406.06397},
+      archivePrefix={arXiv},
+      primaryClass={q-bio.BM}
+}
 ```
