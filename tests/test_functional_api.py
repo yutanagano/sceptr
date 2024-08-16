@@ -1,4 +1,5 @@
 import sceptr
+from sceptr.model import ResidueRepresentations
 import numpy as np
 import pandas as pd
 import pytest
@@ -14,8 +15,12 @@ def test_embed(dummy_data):
     result = sceptr.calc_vector_representations(dummy_data)
 
     assert type(result) == np.ndarray
-    assert len(result.shape) == 2
-    assert result.shape[0] == 3
+    assert result.shape == (3, 64)
+
+def test_residue_embed(dummy_data):
+    result = sceptr.calc_residue_representations(dummy_data)
+
+    assert type(result) == ResidueRepresentations
 
 
 def test_cdist(dummy_data):

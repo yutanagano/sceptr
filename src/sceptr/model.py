@@ -13,6 +13,10 @@ from libtcrlm import schema
 BATCH_SIZE = 512
 
 
+class ResidueRepresentations:
+    pass
+
+
 class Sceptr:
     """
     Loads a trained state of a SCEPTR (variant) and provides an easy interface for generating TCR representations and making inferences from them.
