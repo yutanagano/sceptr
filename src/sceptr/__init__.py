@@ -4,7 +4,7 @@ The root module provides easy access to SCEPTR through a functional API which us
 """
 
 from sceptr import variant
-from sceptr.model import Sceptr
+from sceptr.model import Sceptr, ResidueRepresentations
 import sys
 from numpy import ndarray
 from pandas import DataFrame
@@ -53,7 +53,7 @@ def calc_pdist_vector(instances: DataFrame) -> ndarray:
 
 def calc_vector_representations(instances: DataFrame) -> ndarray:
     """
-    Map a table of TCRs provided as a pandas DataFrame in the above format to their corresponding vector representations.
+    Map TCRs to their corresponding vector representations.
 
     Parameters
     ----------
@@ -67,6 +67,24 @@ def calc_vector_representations(instances: DataFrame) -> ndarray:
         The returned array will have shape :math:`(N, 64)` where :math:`N` is the number of TCRs in `instances`.
     """
     return get_default_model().calc_vector_representations(instances)
+
+
+def calc_residue_representations(instances: DataFrame) -> ResidueRepresentations:
+    """
+    Given multiple TCRs, map each TCR to a set of amino acid residue-level representations.
+    The residue-level representations are taken from the output of the penultimate self-attention layer, and are the same ones used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
+
+    Parameters
+    ----------
+    instances : DataFrame
+        DataFrame in the :ref:`prescribed format <data_format>`.
+
+    Returns
+    -------
+    :py:class:`~sceptr.model.ResidueRepresentations`
+        For details on how to interpret/use this output, please refer to the documentation for :py:class:`~sceptr.model.ResidueRepresentations`.
+    """
+    return get_default_model().calc_residue_representations(instances)
 
 
 def get_default_model() -> Sceptr:
