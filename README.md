@@ -1,6 +1,6 @@
 <div align="center">
 
-# SCEPTR
+<img src="https://raw.githubusercontent.com/yutanagano/tidytcells/main/sceptr.svg" width=700>
 
 [![Latest release](https://img.shields.io/pypi/v/sceptr)](https://pypi.org/p/sceptr)
 ![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
