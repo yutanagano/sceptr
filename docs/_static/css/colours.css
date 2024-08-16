@@ -1,0 +1,12 @@
+html {
+   --pst-color-primary: #845ef7;
+   --pst-color-secondary: #ff922b;
+}
+
+/* html[data-theme="light"] { */
+/*     --pst-color-primary: black; */
+/* } */
+/**/
+/* html[data-theme="dark"] { */
+/*     --pst-color-primary: white; */
+/* } */
