@@ -8,7 +8,6 @@ from libtcrlm.bert import Bert
 from libtcrlm.tokeniser import Tokeniser
 from libtcrlm.tokeniser.token_indices import DefaultTokenIndex
 from libtcrlm import schema
-from turtle import Shape
 
 
 BATCH_SIZE = 512
@@ -101,6 +100,10 @@ class ResidueRepresentations:
     representation_array: ndarray
     compartment_mask: ndarray
 
+    def __init__(self, representation_array: ndarray, compartment_mask: ndarray) -> None:
+        self.representation_array = representation_array
+        self.compartment_mask = compartment_mask
+
 
 class Sceptr:
     """
@@ -142,6 +145,7 @@ class Sceptr:
         torch_representations = self._calc_torch_representations(instances)
         return torch_representations.cpu().numpy()
 
+    @torch.no_grad()
     def calc_residue_representations(self, instances: DataFrame) -> ResidueRepresentations:
         """
         Given multiple TCRs, map each TCR to a set of amino acid residue-level representations.
@@ -182,16 +186,19 @@ class Sceptr:
 
             raw_token_embeddings = self._bert._embed(padded_batch)
             padding_mask = self._bert._get_padding_mask(padded_batch)
+
             residue_reps = self._bert._self_attention_stack.get_token_embeddings_at_penultimate_layer(raw_token_embeddings, padding_mask)
-            compartment_masks = padded_batch[:, :, 3]
+            residue_reps = residue_reps[:, 1:, :]
+
+            compartment_masks = padded_batch[:, 1:, 3]
 
             residue_reps_collection.append(residue_reps)
             compartment_masks_collection.append(compartment_masks)
 
-        residue_reps_combined = torch.concatenate(residue_reps_collection, dim=0)
-        compartment_masks_combined = torch.concatenate(compartment_masks_collection, dim=0)
+        residue_reps_combined = torch.concatenate(residue_reps_collection, dim=0).cpu().numpy()
+        compartment_masks_combined = torch.concatenate(compartment_masks_collection, dim=0).cpu().numpy()
 
-        return ResidueRepresentations()
+        return ResidueRepresentations(residue_reps_combined, compartment_masks_combined)
 
     @torch.no_grad()
     def _calc_torch_representations(self, instances: DataFrame) -> FloatTensor:
