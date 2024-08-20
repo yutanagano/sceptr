@@ -78,13 +78,13 @@ class ResidueRepresentations:
 
     >>> import sceptr
     >>> res_reps = sceptr.calc_residue_representations(tcrs)
+    >>> print(res_reps)
+    ResidueRepresentations[num_tcrs: 4, rep_dim: 64]
 
     Now, we can iterate through the residue-level representation subarray corresponding to each TCR, and filter out/obtain the representations for the beta chain CDR3 sequence.
 
     >>> cdr3b_reps = []
     >>> for reps, mask in zip(res_reps.representation_array, res_reps.compartment_mask):
-    ...     # reps.shape == (M, D)
-    ...     # mask.shape == (M,)
     ...     cdr3b_rep = reps[mask == 6] # collect only the residue representations for the beta CDR3 sequence
     ...     cdr3b_reps.append(cdr3b_rep)
 
