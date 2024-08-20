@@ -29,7 +29,10 @@ To begin analysing TCR data with sceptr, you must first load the TCR data into m
 2      TRAV13-2*01  CAERIRKGQVLTGGGNKLTF     TRBV9*01  CASSVGDLLTGELFF
 3  TRAV38-2/DV8*01     CAYRSAGGGTSYGKLTF     TRBV2*01   CASSPGTGGNEQYF
 
-:py:mod:`sceptr` exposes three intuitive functions: :py:func:`~sceptr.calc_cdist_matrix`, :py:func:`~sceptr.calc_pdist_vector`, and :py:func:`~sceptr.calc_vector_representations`.
+
+``calc_cdist_matrix``
+*********************
+
 As the name suggests, :py:func:`~sceptr.calc_cdist_matrix` gives you an easy way to calculate a cross-distance matrix between two sets of TCRs.
 
 >>> import sceptr
@@ -37,6 +40,9 @@ As the name suggests, :py:func:`~sceptr.calc_cdist_matrix` gives you an easy way
 >>> print(cdist_matrix)
 [[1.2849896 0.7521934]
  [1.4653426 1.4646543]]
+
+``calc_pdist_vector``
+*********************
 
 If you're only interested in calculating distances within a set, :py:func:`~sceptr.calc_pdist_vector` gives you a one-dimensional array of within-set distances.
 
@@ -48,16 +54,30 @@ If you're only interested in calculating distances within a set, :py:func:`~scep
 	The end result of using the :py:func:`~sceptr.calc_cdist_matrix` and :py:func:`~sceptr.calc_pdist_vector` functions are equivalent to generating sceptr's TCR representations first with :py:func:`~sceptr.calc_vector_representations`, then using `scipy <https://scipy.org/>`_'s `cdist <https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.cdist.html>`_ or `pdist <https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist>`_ functions to get the corresponding matrix or vector, respectively.
 	But on machines with `CUDA-enabled GPUs <https://en.wikipedia.org/wiki/CUDA>`_, directly using sceptr's :py:func:`~sceptr.calc_cdist_matrix` and :py:func:`~sceptr.calc_pdist_vector` functions will run faster, as it internally runs all computations on the GPU.
 
+``calc_vector_representations``
+*******************************
+
 If you want to directly operate on sceptr's TCR representations, you can use :py:func:`~sceptr.calc_vector_representations`.
 
 >>> reps = sceptr.calc_vector_representations(tcrs)
 >>> print(reps.shape)
 (4, 64)
 
+``calc_residue_representations``
+********************************
+
+The package also provides the user with an easy way to get access to SCEPTR's internal representations of each individual amino acid residue in the tokenised form of its input TCRs, as outputted by the penultimate layer of its self-attention stack.
+Interested users can use :py:func:`~sceptr.calc_residue_representations`.
+Please refer to the documentation for the :py:class:`~sceptr.model.ResidueRepresentations` class for details on how to interpret the output.
+
+>>> res_reps = sceptr.calc_residue_representations(tcrs)
+>>> print(res_reps)
+ResidueRepresentations[num_tcrs: 4, rep_dim: 64]
+
 .. _model_variants:
 
-Model Variants (:py:mod:`sceptr.variant`)
------------------------------------------
+Model variants
+--------------
 
 The :py:mod:`sceptr.variant` submodule allows users access a variety of non-default SCEPTR model variants, and use them for TCR analysis.
 The submodule exposes functions which return :py:class:`~sceptr.model.Sceptr` objects with the model state of the chosen variant loaded.
