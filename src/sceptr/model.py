@@ -5,7 +5,7 @@ import numpy as np
 from numpy import ndarray
 from pandas import DataFrame
 from libtcrlm.bert import Bert
-from libtcrlm.tokeniser import Tokeniser
+from libtcrlm.tokeniser import Tokeniser, CdrTokeniser
 from libtcrlm.tokeniser.token_indices import DefaultTokenIndex
 from libtcrlm import schema
 
@@ -164,6 +164,9 @@ class Sceptr:
         :py:class:`~sceptr.model.ResidueRepresentations`
             For details on how to interpret/use this output, please refer to the documentation for :py:class:`~sceptr.model.ResidueRepresentations`.
         """
+        if not isinstance(self._tokeniser, CdrTokeniser):
+            raise NotImplementedError("The calc_residue_representations method is currently only supported on SCEPTR model variants that 1) use both the alpha and beta chains, and 2) take into account all three CDR loops from each chain.")
+
         instances = instances.copy()
 
         for col in ("TRAV", "CDR3A", "TRAJ", "TRBV", "CDR3B", "TRBJ"):
