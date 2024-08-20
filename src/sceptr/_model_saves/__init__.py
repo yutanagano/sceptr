@@ -12,7 +12,7 @@ def load_variant(model_name: str) -> Sceptr:
         config = json.load(f)
 
     with (model_save_dir / "state_dict.pt").open("rb") as f:
-        state_dict = torch.load(f)
+        state_dict = torch.load(f, weights_only=True)
 
     config_reader = ConfigReader(config)
 

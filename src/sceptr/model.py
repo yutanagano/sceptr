@@ -91,7 +91,7 @@ class ResidueRepresentations:
     Now we have a list containing four numpy ndarrays, each of which is a matrix whose row vectors are representations of individual CDR3B amino acid residues.
 
     >>> type(cdr3b_reps[0])
-    numpy.ndarray
+    <class 'numpy.ndarray'>
     >>> cdr3b_reps[0].shape
     (14, 64)
 

@@ -35,14 +35,14 @@ As the name suggests, :py:func:`~sceptr.calc_cdist_matrix` gives you an easy way
 >>> import sceptr
 >>> cdist_matrix = sceptr.calc_cdist_matrix(tcrs.iloc[:2], tcrs.iloc[2:])
 >>> print(cdist_matrix)
-[[1.2849896  0.75219345]
- [1.4653426  1.4646543 ]]
+[[1.2849896 0.7521934]
+ [1.4653426 1.4646543]]
 
 If you're only interested in calculating distances within a set, :py:func:`~sceptr.calc_pdist_vector` gives you a one-dimensional array of within-set distances.
 
 >>> pdist_vector = sceptr.calc_pdist_vector(tcrs)
 >>> print(pdist_vector)
-[1.4135991 1.2849895 0.7521934 1.4653426 1.4646543 1.287208 ]
+[1.4135991  1.2849895  0.75219345 1.4653426  1.4646543  1.287208  ]
 
 .. tip::
 	The end result of using the :py:func:`~sceptr.calc_cdist_matrix` and :py:func:`~sceptr.calc_pdist_vector` functions are equivalent to generating sceptr's TCR representations first with :py:func:`~sceptr.calc_vector_representations`, then using `scipy <https://scipy.org/>`_'s `cdist <https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.cdist.html>`_ or `pdist <https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist>`_ functions to get the corresponding matrix or vector, respectively.
@@ -52,7 +52,7 @@ If you want to directly operate on sceptr's TCR representations, you can use :py
 
 >>> reps = sceptr.calc_vector_representations(tcrs)
 >>> print(reps.shape)
-(4,64)
+(4, 64)
 
 .. _model_variants:
 
