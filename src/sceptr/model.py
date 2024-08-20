@@ -104,6 +104,9 @@ class ResidueRepresentations:
         self.representation_array = representation_array
         self.compartment_mask = compartment_mask
 
+    def __repr__(self) -> str:
+        return f"ResidueRepresentations[num_tcrs: {self.representation_array.shape[0]}, rep_dim: {self.representation_array.shape[2]}]"
+
 
 class Sceptr:
     """
