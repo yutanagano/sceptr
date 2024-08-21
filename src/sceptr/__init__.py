@@ -10,7 +10,7 @@ from numpy import ndarray
 from pandas import DataFrame
 
 
-__version__ = "1.1.0-dev"
+__version__ = "1.1.0-beta.1"
 
 
 def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
