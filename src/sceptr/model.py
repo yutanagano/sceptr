@@ -137,7 +137,8 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs.
+            It must be in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
@@ -160,11 +161,13 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs.
+            It must be in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
         :py:class:`~sceptr.model.ResidueRepresentations`
+            An array of representation vectors for each amino acid residue in the tokenised forms of the input TCRs.
             For details on how to interpret/use this output, please refer to the documentation for :py:class:`~sceptr.model.ResidueRepresentations`.
         """
         if not isinstance(self._tokeniser, CdrTokeniser):
@@ -239,9 +242,12 @@ class Sceptr:
         Parameters
         ----------
         anchors : DataFrame
-            DataFrame in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the first (anchor) collection of input TCRs.
+            It must be in the :ref:`prescribed format <data_format>`.
+
         comparisons : DataFrame
-            DataFrame in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the second (comparison) collection of input TCRs.
+            It must be in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
@@ -263,7 +269,8 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs.
+            It must be in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
