@@ -18,18 +18,18 @@ class ResidueRepresentations:
     An object containing information necessary to interpret and operate on residue-level representations from the SCEPTR family of models.
     Instances of this class can be obtained via the :py:func:`sceptr.calc_residue_representations` function and a method of the same name on the :py:class:`~sceptr.model.Sceptr` class.
 
-    This feature is implemented for the curious users who would like to tinker around and examine what kind of information SCEPTR focuses on at the individual amino acid residue level, and do so without completely hacking into the source code of :py:mod:`sceptr`.
-    For some examples of how to use instances of this class to make useful examinations of SCEPTR's residue-level embeddings, please refer to the "Examples" section below.
+    This feature is implemented to give power-users easy access to model internals to tinker around and examine what kind of information SCEPTR focuses on at the individual amino acid residue level.
+    The "Examples" section below illustrates how to use instances of this class to examine SCEPTR's residue-level embeddings.
 
     Attributes
     ----------
     representation_array : ndarray
-        A numpy float ndarray containing the residue-level representation data.
-        The array is of shape :math:`(N, M, D)` where :math:`N` is the number of TCRs in the original input, :math:`M` is the maximum number of residues amongst the input TCRs when put into its tokenised form, and :math:`D` is the dimensionality of the model variant that produced the result.
+        A numpy float array containing the residue-level representation data.
+        The array is of shape :math:`(N, M, D)` where :math:`N` is the number of TCRs in the original input, :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form, and :math:`D` is the dimensionality of the model variant that produced the result.
 
     compartment_mask : ndarray
-        A numpy integer array containing information on which indices in the `representation_array` correspond to tokens that come from each CDR loop of the input TCRs.
-        The array is of shape :math:`(N, M)` where :math:`N` is the number of TCRs in the original input, and :math:`M` is the maximum number of residues amongst the input TCRs when put into its tokenised form.
+        A numpy integer array mapping residue indices in the `representation_array` to corresponding CDR loops of the input TCRs.
+        The array is of shape :math:`(N, M)` where :math:`N` is the number of TCRs in the original input, and :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form.
         Entries in `compartment_mask` have the following values:
 
         +------------------------------+------------------+
@@ -54,8 +54,8 @@ class ResidueRepresentations:
 
     Examples
     --------
-    As an example, let's see how one could get the residue-level representations for the beta-chain CDR3 amino acid sequences of all input TCR sequences.
-    Say we have some DataFrame ``tcrs`` that contains the sequence data for four TCRs.
+    In the following we show how to extract the residue-level representations for the beta-chain CDR3 amino acid sequences of all input TCR sequences.
+    To start with, we define a DataFrame ``tcrs`` that contains the sequence data for four TCRs.
 
     >>> from pandas import DataFrame
     >>> tcrs = DataFrame(
@@ -110,7 +110,7 @@ class ResidueRepresentations:
 
 class Sceptr:
     """
-    Loads a trained state of a SCEPTR (variant) and provides an easy interface for generating TCR representations and making inferences from them.
+    Loads a trained state of a SCEPTR model and provides an easy interface for generating TCR representations and making inferences from them.
     Instances can be obtained through the :py:mod:`sceptr.variant` submodule.
 
     Attributes
@@ -152,8 +152,8 @@ class Sceptr:
     @torch.no_grad()
     def calc_residue_representations(self, instances: DataFrame) -> ResidueRepresentations:
         """
-        Given multiple TCRs, map each TCR to a set of amino acid residue-level representations.
-        The residue-level representations are taken from the output of the penultimate self-attention layer, and are the same ones used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
+        Map each TCR to a set of amino acid residue-level representations.
+        The residue-level representations are the output of the penultimate self-attention layer, as also used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
 
         .. note ::
             This method is currently only supported on SCEPTR model variants such as the default one that 1) use both the alpha and beta chains, and 2) take into account all three CDR loops from each chain.
