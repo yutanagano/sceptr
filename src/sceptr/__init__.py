@@ -76,8 +76,8 @@ def calc_vector_representations(instances: DataFrame) -> ndarray:
 
 def calc_residue_representations(instances: DataFrame) -> ResidueRepresentations:
     """
-    Given multiple TCRs, map each TCR to a set of amino acid residue-level representations.
-    The residue-level representations are taken from the output of the penultimate self-attention layer, and are the same ones used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
+    Map each TCR to a set of amino acid residue-level representations.
+    The residue-level representations are the output of the penultimate self-attention layer, as also used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
 
     Parameters
     ----------
