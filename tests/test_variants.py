@@ -63,7 +63,7 @@ class TestVariant:
             "SCEPTR (small)",
             "SCEPTR (BLOSUM)",
             "SCEPTR (average-pooling)",
-            "SCEPTR (finetuned)"
+            "SCEPTR (finetuned)",
         ):
             result = model.calc_residue_representations(dummy_data)
 

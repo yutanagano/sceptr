@@ -198,6 +198,11 @@ def a_sceptr():
     """
     Load the alpha chain-only variant of SCEPTR.
     This variant has the same architecture as the default, but is specifically trained only with the alpha chain in distribution.
+    Thus, this model cannot interpret paired-chain or beta chain-only data.
+
+    .. important ::
+        **This variant is unrelated to the single-chain analysis in our preprint**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
+        In contrast, this variant is a *distinct model* that was pre-trained specifically *only on alpha chains*.
 
     .. note ::
         Because this model is trained only with the alpha chain in distribution, we expect it to perform slightly better than the default in settings where strictly only the alpha chains are available.
@@ -215,6 +220,11 @@ def b_sceptr():
     """
     Load the beta chain-only variant of SCEPTR.
     This variant has the same architecture as the default, but is specifically trained only with the beta chain in distribution.
+    Thus, this model cannot interpret paired-chain or alpha chain-only data.
+
+    .. important ::
+        **This variant is unrelated to the single-chain analysis in our preprint**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
+        In contrast, this variant is a *distinct model* that was pre-trained specifically *only on beta chains*.
 
     .. note ::
         Because this model is trained only with the beta chain in distribution, we expect it to perform slightly better than the default in settings where strictly only the beta chains are available.
