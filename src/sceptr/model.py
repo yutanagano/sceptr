@@ -97,10 +97,13 @@ class ResidueRepresentations:
 
     Note that the zeroth element of the shape tuple above is 14 because the CDR3B sequence of the first TCR in ``tcrs`` is 14 residues long, and the first element of the shape tuple is 64 because the model dimensionality of the default SCEPTR variant is 64.
     """
+
     representation_array: ndarray
     compartment_mask: ndarray
 
-    def __init__(self, representation_array: ndarray, compartment_mask: ndarray) -> None:
+    def __init__(
+        self, representation_array: ndarray, compartment_mask: ndarray
+    ) -> None:
         self.representation_array = representation_array
         self.compartment_mask = compartment_mask
 
@@ -150,7 +153,9 @@ class Sceptr:
         return torch_representations.cpu().numpy()
 
     @torch.no_grad()
-    def calc_residue_representations(self, instances: DataFrame) -> ResidueRepresentations:
+    def calc_residue_representations(
+        self, instances: DataFrame
+    ) -> ResidueRepresentations:
         """
         Map each TCR to a set of amino acid residue-level representations.
         The residue-level representations are the output of the penultimate self-attention layer, as also used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
@@ -171,7 +176,9 @@ class Sceptr:
             For details on how to interpret/use this output, please refer to the documentation for :py:class:`~sceptr.model.ResidueRepresentations`.
         """
         if not isinstance(self._tokeniser, CdrTokeniser):
-            raise NotImplementedError("The calc_residue_representations method is currently only supported on SCEPTR model variants that 1) use both the alpha and beta chains, and 2) take into account all three CDR loops from each chain.")
+            raise NotImplementedError(
+                "The calc_residue_representations method is currently only supported on SCEPTR model variants that 1) use both the alpha and beta chains, and 2) take into account all three CDR loops from each chain."
+            )
 
         instances = instances.copy()
 
@@ -196,7 +203,9 @@ class Sceptr:
             raw_token_embeddings = self._bert._embed(padded_batch)
             padding_mask = self._bert._get_padding_mask(padded_batch)
 
-            residue_reps = self._bert._self_attention_stack.get_token_embeddings_at_penultimate_layer(raw_token_embeddings, padding_mask)
+            residue_reps = self._bert._self_attention_stack.get_token_embeddings_at_penultimate_layer(
+                raw_token_embeddings, padding_mask
+            )
             residue_reps = residue_reps[:, 1:, :]
 
             compartment_masks = padded_batch[:, 1:, 3]
@@ -204,8 +213,12 @@ class Sceptr:
             residue_reps_collection.append(residue_reps)
             compartment_masks_collection.append(compartment_masks)
 
-        residue_reps_combined = torch.concatenate(residue_reps_collection, dim=0).cpu().numpy()
-        compartment_masks_combined = torch.concatenate(compartment_masks_collection, dim=0).cpu().numpy()
+        residue_reps_combined = (
+            torch.concatenate(residue_reps_collection, dim=0).cpu().numpy()
+        )
+        compartment_masks_combined = (
+            torch.concatenate(compartment_masks_collection, dim=0).cpu().numpy()
+        )
 
         return ResidueRepresentations(residue_reps_combined, compartment_masks_combined)
 
