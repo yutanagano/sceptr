@@ -6,7 +6,7 @@
 ![Tests](https://github.com/yutanagano/sceptr/actions/workflows/tests.yaml/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/sceptr/badge/?version=latest)](https://sceptr.readthedocs.io)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/yutanagano/sceptr?tab=MIT-1-ov-file#readme)
-[![arXiv](https://img.shields.io/badge/arXiv-arXiv:2406.06397-pink)](https://arxiv.org/abs/2406.06397v1)
+[![DOI](https://img.shields.io/badge/DOI-10.1016/j.cels.2024.12.006-pink)](https://www.cell.com/cell-systems/fulltext/S2405-4712(24)00369-7)
 
 ### Check out the [documentation page](https://sceptr.readthedocs.io).
 
@@ -15,7 +15,7 @@
 ---
 
 **SCEPTR** (**S**imple **C**ontrastive **E**mbedding of the **P**rimary sequence of **T** cell **R**eceptors) is a small, fast, and accurate TCR representation model that can be used for alignment-free TCR  analysis, including for TCR-pMHC interaction prediction and TCR clustering (metaclonotype discovery).
-Our [preprint](https://arxiv.org/abs/2406.06397) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
+Our [manuscript](https://www.cell.com/cell-systems/fulltext/S2405-4712(24)00369-7) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
 
 SCEPTR is a BERT-like transformer-based neural network implemented in [Pytorch](https://pytorch.org).
 With the default model providing best-in-class performance with only 153,108 parameters (typical protein language models have tens or hundreds of millions), SCEPTR runs fast- even on a CPU!
@@ -31,16 +31,25 @@ pip install sceptr
 ```
 
 ## Citing SCEPTR
-Please cite our [preprint](https://arxiv.org/abs/2406.06397).
+Please cite our [manuscript](https://www.cell.com/cell-systems/fulltext/S2405-4712(24)00369-7).
 
 ### BibTex
 ```bibtex
-@misc{nagano2024contrastive,
-      title={Contrastive learning of T cell receptor representations}, 
-      author={Yuta Nagano and Andrew Pyo and Martina Milighetti and James Henderson and John Shawe-Taylor and Benny Chain and Andreas Tiffeau-Mayer},
-      year={2024},
-      eprint={2406.06397},
-      archivePrefix={arXiv},
-      primaryClass={q-bio.BM}
+@article{nagano_contrastive_2025,
+	title = {Contrastive learning of {T} cell receptor representations},
+	volume = {16},
+	issn = {2405-4712, 2405-4720},
+	url = {https://www.cell.com/cell-systems/abstract/S2405-4712(24)00369-7},
+	doi = {10.1016/j.cels.2024.12.006},
+	language = {English},
+	number = {1},
+	urldate = {2025-01-19},
+	journal = {Cell Systems},
+	author = {Nagano, Yuta and Pyo, Andrew G. T. and Milighetti, Martina and Henderson, James and Shawe-Taylor, John and Chain, Benny and Tiffeau-Mayer, Andreas},
+	month = jan,
+	year = {2025},
+	pmid = {39778580},
+	note = {Publisher: Elsevier},
+	keywords = {contrastive learning, protein language models, representation learning, T cell receptor, T cell specificity, TCR, TCR repertoire},
 }
 ```
