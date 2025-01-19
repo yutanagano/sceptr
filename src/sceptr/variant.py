@@ -201,7 +201,7 @@ def a_sceptr():
     Thus, this model cannot interpret paired-chain or beta chain-only data.
 
     .. important ::
-        **This variant is unrelated to the single-chain analysis in our preprint**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
+        **This variant is unrelated to the single-chain analysis in our manuscript**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
         In contrast, this variant is a *distinct model* that was pre-trained specifically *only on alpha chains*.
 
     .. note ::
@@ -223,7 +223,7 @@ def b_sceptr():
     Thus, this model cannot interpret paired-chain or alpha chain-only data.
 
     .. important ::
-        **This variant is unrelated to the single-chain analysis in our preprint**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
+        **This variant is unrelated to the single-chain analysis in our manuscript**, which involved applying the :py:func:`~sceptr.variant.default` model to single-chain data.
         In contrast, this variant is a *distinct model* that was pre-trained specifically *only on beta chains*.
 
     .. note ::
