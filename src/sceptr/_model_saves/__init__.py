@@ -1,11 +1,17 @@
 from importlib import resources
 import json
-from sceptr.model import Sceptr
 from libtcrlm.config_reader import ConfigReader
+import logging
+from sceptr.model import Sceptr
 import torch
 
 
+logger = logging.getLogger(__name__)
+
+
 def load_variant(model_name: str) -> Sceptr:
+    logger.debug(f"Loading SCEPTR variant: {model_name}")
+
     model_save_dir = resources.files(__name__) / model_name
 
     with (model_save_dir / "config.json").open("r") as f:
@@ -17,8 +23,13 @@ def load_variant(model_name: str) -> Sceptr:
     config_reader = ConfigReader(config)
 
     if torch.cuda.is_available():
+        logger.debug("Setting device to CUDA:0")
         device = torch.device("cuda:0")
+    elif torch.mps.is_available():
+        logger.debug("Setting device to MPS")
+        device = torch.device("mps")
     else:
+        logger.debug("Setting device to CPU")
         device = torch.device("cpu")
 
     name = config_reader.get_model_name()
