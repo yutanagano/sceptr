@@ -14,6 +14,8 @@
 
 ---
 
+![Graphical abstract.](docs/graphical_abstract.png)
+
 **SCEPTR** (**S**imple **C**ontrastive **E**mbedding of the **P**rimary sequence of **T** cell **R**eceptors) is a small, fast, and accurate TCR representation model that can be used for alignment-free TCR  analysis, including for TCR-pMHC interaction prediction and TCR clustering (metaclonotype discovery).
 Our [manuscript](https://www.cell.com/cell-systems/fulltext/S2405-4712(24)00369-7) demonstrates that SCEPTR can be used for few-shot TCR specificity prediction with improved accuracy over previous methods.
 
