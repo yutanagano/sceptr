@@ -2,8 +2,12 @@ import logging
 import numpy as np
 import pandas as pd
 import pytest
+import sceptr
 from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
+
+
+sceptr.ignore_hardware_acceleration()
 
 
 @pytest.fixture
@@ -41,6 +45,7 @@ class TestVariant:
         caplog.set_level(logging.DEBUG)
         model.use_hardware_acceleration()
         assert "use_hardware_acceleration" in caplog.text
+        model.ignore_hardware_acceleration()
 
     def test_ignore_hardware_acceleration(self, model, caplog):
         caplog.set_level(logging.DEBUG)
