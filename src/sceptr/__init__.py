@@ -3,7 +3,6 @@ SCEPTR is a small, fast, and performant TCR representation model for alignment-f
 The root module provides easy access to SCEPTR through a functional API which uses the default model.
 """
 
-
 from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
 from numpy import ndarray
@@ -102,7 +101,7 @@ def calc_residue_representations(instances: DataFrame) -> ResidueRepresentations
 def use_hardware_acceleration() -> None:
     """
     Instruct SCEPTR to detect and use available hardware acceleration, such as CUDA or MPS.
-    
+
     While hardware acceleration is toggled on by default, it can be turned off manually by calling :py:func:`sceptr.ignore_hardware_acceleration`.
     This function allows you to turn the setting back on.
 
@@ -121,7 +120,7 @@ def use_hardware_acceleration() -> None:
 def ignore_hardware_acceleration() -> None:
     """
     Instruct SCEPTR to ignore hardware acceleration options and only use the CPU.
-    
+
     By default, SCEPTR will look for available hardware acceleration devices such as CUDA- or MPS-enabled GPUs and perform computations there.
     However, in some cases it may be favourable to explicitly keep models on the CPU (e.g. a CUDA-enabled GPU is available but does not have sufficient VRAM for your use case).
     This function is useful for such scenarios.

@@ -129,9 +129,7 @@ class Sceptr:
     name: str = None
     distance_bins = np.linspace(0, 2, num=21)
 
-    def __init__(
-        self, name: str, tokeniser: Tokeniser, bert: Bert
-    ) -> None:
+    def __init__(self, name: str, tokeniser: Tokeniser, bert: Bert) -> None:
         self.name = name
         self._tokeniser = tokeniser
         self._bert = bert.eval()
@@ -144,7 +142,9 @@ class Sceptr:
         """
         self._device = _get_hardware_accelerated_device()
         self._bert.to(self._device)
-        logger.debug(f"use_hardware_acceleration called on {self} ({self.name}), setting device to {self._device}")
+        logger.debug(
+            f"use_hardware_acceleration called on {self} ({self.name}), setting device to {self._device}"
+        )
 
     def ignore_hardware_acceleration(self) -> None:
         """
@@ -153,7 +153,9 @@ class Sceptr:
         """
         self._device = torch.device("cpu")
         self._bert.to(self._device)
-        logger.debug(f"ignore_hardware_acceleration called on {self} ({self.name}), setting device to cpu")
+        logger.debug(
+            f"ignore_hardware_acceleration called on {self} ({self.name}), setting device to cpu"
+        )
 
     def calc_vector_representations(self, instances: DataFrame) -> ndarray:
         """
