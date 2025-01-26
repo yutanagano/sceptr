@@ -1,10 +1,12 @@
 Usage
 =====
 
+.. _functional_api:
+
 Functional API (Recommended)
 ----------------------------
 
-The functional :ref:`API <api>` is accessible from the root module, and is the easiest way to use SCEPTR.
+The functional :ref:`API <root>` is accessible from the root module, and is the easiest way to use SCEPTR.
 When using the functional API, you will be using the default SCEPTR model (see the :ref:`model variants <model_variants>` section below).
 To begin analysing TCR data with sceptr, you must first load the TCR data into memory in the :ref:`prescribed format <data_format>` using `pandas <https://pandas.pydata.org/>`_.
 
@@ -89,6 +91,13 @@ For example:
 >>> tiny_reps = sceptr_tiny.calc_vector_representations(tcrs)
 >>> print(tiny_reps.shape)
 (4, 16)
+
+Hardware acceleration / device selection
+----------------------------------------
+
+By default, SCEPTR will detect any available devices with harware-acceleration capabilities and automatically load models onto those devices.
+`CUDA- <https://developer.nvidia.com/cuda-zone>`_ and `MPS-enabled <https://developer.apple.com/documentation/metalperformanceshaders>`_ devices are supported.
+In cases where you would like to explicitly limit SCEPTR to using the CPU, you can call :py:func:`sceptr.disable_hardware_acceleration`.
 
 .. _data_format:
 

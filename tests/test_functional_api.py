@@ -5,6 +5,9 @@ import pandas as pd
 import pytest
 
 
+sceptr.disable_hardware_acceleration()
+
+
 @pytest.fixture
 def dummy_data():
     df = pd.read_csv("tests/mock_data.csv")
@@ -38,3 +41,14 @@ def test_pdist(dummy_data):
 
     assert isinstance(result, np.ndarray)
     assert result.shape == (3,)
+
+
+def test_enable_hardware_acceleration():
+    sceptr.enable_hardware_acceleration()
+    assert sceptr._USE_HARDWARE_ACCELERATION == True
+    sceptr.disable_hardware_acceleration()
+
+
+def test_disable_hardware_acceleration():
+    sceptr.disable_hardware_acceleration()
+    assert sceptr._USE_HARDWARE_ACCELERATION == False
