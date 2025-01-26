@@ -14,7 +14,7 @@
 
 ---
 
-| <img src="https://raw.githubusercontent.com/yutanagano/sceptr/main/docs/graphical_abstract.png" width=500> |
+| <img src="https://raw.githubusercontent.com/yutanagano/sceptr/main/docs/graphical_abstract.png" width=700> |
 |---|
 | Graphical abstract. Traditional protein language models that are trained purely on masked-language modelling underperform sequence alignment models on TCR specificity prediction. In contrast, our model SCEPTR is jointly trained on masked-language modelling and contrastive learning, allowing it to outperform other language models as well as the best sequence alignment models to achieve state-of-the-art performance. |
 
