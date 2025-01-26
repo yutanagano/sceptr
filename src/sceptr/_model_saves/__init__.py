@@ -31,6 +31,6 @@ def load_variant(model_name: str) -> Sceptr:
     model = Sceptr(name=name, tokeniser=tokeniser, bert=bert)
 
     if sceptr._USE_HARDWARE_ACCELERATION:
-        model.use_hardware_acceleration()
+        model.enable_hardware_acceleration()
 
     return model

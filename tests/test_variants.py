@@ -7,7 +7,7 @@ from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
 
 
-sceptr.ignore_hardware_acceleration()
+sceptr.disable_hardware_acceleration()
 
 
 @pytest.fixture
@@ -41,16 +41,16 @@ class TestVariant:
     def test_load_variant(self, model):
         assert isinstance(model, Sceptr)
 
-    def test_use_hardware_acceleration(self, model, caplog):
+    def test_enable_hardware_acceleration(self, model, caplog):
         caplog.set_level(logging.DEBUG)
-        model.use_hardware_acceleration()
-        assert "use_hardware_acceleration" in caplog.text
-        model.ignore_hardware_acceleration()
+        model.enable_hardware_acceleration()
+        assert "enable_hardware_acceleration" in caplog.text
+        model.disable_hardware_acceleration()
 
-    def test_ignore_hardware_acceleration(self, model, caplog):
+    def test_disable_hardware_acceleration(self, model, caplog):
         caplog.set_level(logging.DEBUG)
-        model.ignore_hardware_acceleration()
-        assert "ignore_hardware_acceleration" in caplog.text
+        model.disable_hardware_acceleration()
+        assert "disable_hardware_acceleration" in caplog.text
 
     def test_embed(self, model, dummy_data):
         result = model.calc_vector_representations(dummy_data)

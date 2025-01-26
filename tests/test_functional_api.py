@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 
-sceptr.ignore_hardware_acceleration()
+sceptr.disable_hardware_acceleration()
 
 
 @pytest.fixture
@@ -43,12 +43,12 @@ def test_pdist(dummy_data):
     assert result.shape == (3,)
 
 
-def test_use_hardware_acceleration():
-    sceptr.use_hardware_acceleration()
+def test_enable_hardware_acceleration():
+    sceptr.enable_hardware_acceleration()
     assert sceptr._USE_HARDWARE_ACCELERATION == True
-    sceptr.ignore_hardware_acceleration()
+    sceptr.disable_hardware_acceleration()
 
 
-def test_ignore_hardware_acceleration():
-    sceptr.ignore_hardware_acceleration()
+def test_disable_hardware_acceleration():
+    sceptr.disable_hardware_acceleration()
     assert sceptr._USE_HARDWARE_ACCELERATION == False

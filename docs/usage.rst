@@ -115,3 +115,11 @@ Extra columns are also allowed.
 +-------------+-----------------+-----------------------------------------------------------------------------------------------------+
 |CDR3B        |str              |Amino acid sequence of the beta chain CDR3, including the first C and last W/F residues, in all caps |
 +-------------+-----------------+-----------------------------------------------------------------------------------------------------+
+
+Hardware acceleration / device selection
+----------------------------------------
+
+By default, SCEPTR will detect any available devices with harware-acceleration capabilities and automatically load models onto those devices.
+`CUDA- <https://developer.nvidia.com/cuda-zone>`_ and `MPS-enabled <https://developer.apple.com/documentation/metalperformanceshaders>`_ devices are supported.
+In cases where you would like to explicitly limit SCEPTR to using the CPU, the functions :py:func:`sceptr.disable_hardware_acceleration` is available.
+The setting can also be manually toggled back with :py:func:`sceptr.enable_hardware_acceleration`.

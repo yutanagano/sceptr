@@ -98,44 +98,44 @@ def calc_residue_representations(instances: DataFrame) -> ResidueRepresentations
     return _get_default_model().calc_residue_representations(instances)
 
 
-def use_hardware_acceleration() -> None:
+def enable_hardware_acceleration() -> None:
     """
     Instruct SCEPTR to detect and use available hardware acceleration, such as CUDA or MPS.
 
-    While hardware acceleration is toggled on by default, it can be turned off manually by calling :py:func:`sceptr.ignore_hardware_acceleration`.
+    While hardware acceleration is toggled on by default, it can be turned off manually by calling :py:func:`sceptr.disable_hardware_acceleration`.
     This function allows you to turn the setting back on.
 
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.use_hardware_acceleration`.
+        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.enable_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = True
 
     if _DEFAULT_MODEL is not None:
-        _DEFAULT_MODEL.use_hardware_acceleration()
+        _DEFAULT_MODEL.enable_hardware_acceleration()
 
 
-def ignore_hardware_acceleration() -> None:
+def disable_hardware_acceleration() -> None:
     """
     Instruct SCEPTR to ignore hardware acceleration options and only use the CPU.
 
     By default, SCEPTR will look for available hardware acceleration devices such as CUDA- or MPS-enabled GPUs and perform computations there.
     However, in some cases it may be favourable to explicitly keep models on the CPU (e.g. a CUDA-enabled GPU is available but does not have sufficient VRAM for your use case).
     This function is useful for such scenarios.
-    This setting can be reversed using :py:func:`sceptr.use_hardware_acceleration`.
+    This setting can be reversed using :py:func:`sceptr.enable_hardware_acceleration`.
 
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.ignore_hardware_acceleration`.
+        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.disable_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = False
 
     if _DEFAULT_MODEL is not None:
-        _DEFAULT_MODEL.ignore_hardware_acceleration()
+        _DEFAULT_MODEL.disable_hardware_acceleration()
 
 
 def _get_default_model() -> Sceptr:

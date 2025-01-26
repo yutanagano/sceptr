@@ -6,7 +6,7 @@ Our `manuscript <https://www.cell.com/cell-systems/fulltext/S2405-4712(24)00369-
 
 SCEPTR is a BERT-like transformer-based neural network implemented in `Pytorch <https://pytorch.org>`_.
 With the default model providing best-in-class performance with only 153,108 parameters (typical protein language models have tens or hundreds of millions), SCEPTR runs fast- even on a CPU!
-And if your computer does have a `CUDA-enabled GPU <https://en.wikipedia.org/wiki/CUDA>`_, the sceptr package will automatically detect and use it, giving you blazingly fast performance without the hassle.
+And if your computer does have a `CUDA- <https://developer.nvidia.com/cuda-zone>`_ or `MPS-enabled <https://developer.apple.com/documentation/metalperformanceshaders>`_ GPU, the sceptr package will automatically detect and use it, giving you blazingly fast performance without the hassle.
 
 sceptr's :ref:`API <api>` exposes three intuitive functions: :py:func:`~sceptr.calc_vector_representations`, :py:func:`~sceptr.calc_cdist_matrix`, and :py:func:`~sceptr.calc_pdist_vector`-- and it's all you need to make full use of the SCEPTR models.
 What's even better is that they are fully compliant with `pyrepseq <https://pyrepseq.readthedocs.io>`_'s `tcr_metric <https://pyrepseq.readthedocs.io/en/latest/api.html#pyrepseq.metric.tcr_metric.TcrMetric>`_ API, so sceptr will fit snugly into the rest of your repertoire analysis toolkit.
