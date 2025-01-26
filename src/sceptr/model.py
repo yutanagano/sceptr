@@ -1,16 +1,21 @@
-import torch
-from torch import FloatTensor
-from torch.nn import utils
-import numpy as np
-from numpy import ndarray
-from pandas import DataFrame
 from libtcrlm.bert import Bert
 from libtcrlm.tokeniser import Tokeniser, CdrTokeniser
 from libtcrlm.tokeniser.token_indices import DefaultTokenIndex
 from libtcrlm import schema
+import logging
+import numpy as np
+from numpy import ndarray
+from pandas import DataFrame
+import sceptr
+import torch
+from torch import FloatTensor
+from torch.nn import utils
 
 
 BATCH_SIZE = 512
+
+
+logger = logging.getLogger(__name__)
 
 
 class ResidueRepresentations:
@@ -126,12 +131,22 @@ class Sceptr:
     distance_bins = np.linspace(0, 2, num=21)
 
     def __init__(
-        self, name: str, tokeniser: Tokeniser, bert: Bert, device: torch.device
+        self, name: str, tokeniser: Tokeniser, bert: Bert
     ) -> None:
         self.name = name
         self._tokeniser = tokeniser
         self._bert = bert.eval()
-        self._device = device
+        self._device = torch.device("cpu")
+
+    def use_hardware_acceleration(self):
+        self._device = _get_hardware_accelerated_device()
+        self._bert.to(self._device)
+        logger.debug(f"use_hardware_acceleration called on {self} ({self.name}), setting device to {self._device}")
+
+    def ignore_hardware_acceleration(self):
+        self._device = torch.device("cpu")
+        self._bert.to(self._device)
+        logger.debug(f"ignore_hardware_acceleration called on {self} ({self.name}), setting device to CPU")
 
     def calc_vector_representations(self, instances: DataFrame) -> ndarray:
         """
@@ -294,3 +309,13 @@ class Sceptr:
         representations = self._calc_torch_representations(instances)
         pdist_vector = torch.pdist(representations, p=2)
         return pdist_vector.cpu().numpy()
+
+
+def _get_hardware_accelerated_device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+
+    if torch.mps.is_available():
+        return torch.device("mps")
+
+    return torch.device("cpu")

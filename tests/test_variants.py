@@ -36,6 +36,12 @@ class TestVariant:
     def test_load_variant(self, model):
         assert isinstance(model, Sceptr)
 
+    def test_use_hardware_acceleration(self, model):
+        raise NotImplementedError
+
+    def test_ignore_hardware_acceleration(self, model):
+        raise NotImplementedError
+
     def test_embed(self, model, dummy_data):
         result = model.calc_vector_representations(dummy_data)
 

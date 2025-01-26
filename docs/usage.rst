@@ -1,10 +1,12 @@
 Usage
 =====
 
+.. _functional_api:
+
 Functional API (Recommended)
 ----------------------------
 
-The functional :ref:`API <api>` is accessible from the root module, and is the easiest way to use SCEPTR.
+The functional :ref:`API <root>` is accessible from the root module, and is the easiest way to use SCEPTR.
 When using the functional API, you will be using the default SCEPTR model (see the :ref:`model variants <model_variants>` section below).
 To begin analysing TCR data with sceptr, you must first load the TCR data into memory in the :ref:`prescribed format <data_format>` using `pandas <https://pandas.pydata.org/>`_.
 

@@ -38,3 +38,13 @@ def test_pdist(dummy_data):
 
     assert isinstance(result, np.ndarray)
     assert result.shape == (3,)
+
+
+def test_use_hardware_acceleration():
+    sceptr.use_hardware_acceleration()
+    assert sceptr._USE_HARDWARE_ACCELERATION == True
+
+
+def test_ignore_hardware_acceleration():
+    sceptr.ignore_hardware_acceleration()
+    assert sceptr._USE_HARDWARE_ACCELERATION == False
