@@ -1,6 +1,7 @@
 /.pytest_cache
 /.venv
 /.ropeproject
+/.tox
 /build
 /docs/_build
 __pycache__
