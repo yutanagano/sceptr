@@ -108,7 +108,7 @@ def enable_hardware_acceleration() -> None:
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To enable hardware acceleration for existing model instances, use :py:meth:`Sceptr.enable_hardware_acceleration`.
+        To enable hardware acceleration for existing model instances, use :py:meth:`sceptr.model.Sceptr.enable_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = True
@@ -129,7 +129,7 @@ def disable_hardware_acceleration() -> None:
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To disable hardware acceleration for existing model instances, use :py:meth:`Sceptr.disable_hardware_acceleration`.
+        To disable hardware acceleration for existing model instances, use :py:meth:`sceptr.model.Sceptr.disable_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = False
