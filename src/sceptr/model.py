@@ -6,7 +6,6 @@ import logging
 import numpy as np
 from numpy import ndarray
 from pandas import DataFrame
-import sceptr
 import torch
 from torch import FloatTensor
 from torch.nn import utils
@@ -138,7 +137,7 @@ class Sceptr:
         self._bert = bert.eval()
         self._device = torch.device("cpu")
 
-    def use_hardware_acceleration(self):
+    def use_hardware_acceleration(self) -> None:
         """
         Move this `Sceptr` instance and its computations to a hardware-accelerated device, if available (e.g. CUDA- or MPS-enabled GPU).
         For toggling the package-level setting, see :py:func:`sceptr.use_hardware_acceleration`.
@@ -147,7 +146,7 @@ class Sceptr:
         self._bert.to(self._device)
         logger.debug(f"use_hardware_acceleration called on {self} ({self.name}), setting device to {self._device}")
 
-    def ignore_hardware_acceleration(self):
+    def ignore_hardware_acceleration(self) -> None:
         """
         Move this `Sceptr` instance and its computations to the CPU.
         For toggling the package-level setting, see :py:func:`sceptr.ignore_hardware_acceleration`.

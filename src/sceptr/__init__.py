@@ -109,7 +109,7 @@ def use_hardware_acceleration() -> None:
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To move model variant instances across devices, use :py:meth:'sceptr.model.Sceptr.use_hardware_acceleration'.
+        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.use_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = True
@@ -130,7 +130,7 @@ def ignore_hardware_acceleration() -> None:
     .. note ::
         Toggling this setting will affect the behaviour of the :ref:`functional API <functional_api>` and any new :ref:`variants <model_variants>` instantiated after the fucntion call.
         However, any variants instantiated before the call will remain unaffected.
-        To move model variant instances across devices, use :py:meth:'sceptr.model.Sceptr.ignore_hardware_acceleration'.
+        To move model variant instances across devices, use :py:meth:`sceptr.model.Sceptr.ignore_hardware_acceleration`.
     """
     global _USE_HARDWARE_ACCELERATION
     _USE_HARDWARE_ACCELERATION = False
