@@ -12,7 +12,7 @@ From `Source <https://github.com/yutanagano/sceptr>`_
 -----------------------------------------------------
 
 .. important::
-	To install ``sceptr`` from source, you must have `git-lfs <https://git-lfs.com/>`_ installed and set up on your system.
+	To install ``sceptr`` versions 1.1.0 and below from source, you must have `git-lfs <https://git-lfs.com/>`_ installed and set up on your system.
 	This is because you must be able to download the trained model weights directly from the Git LFS servers during your install.
 
 From your Python environment, run the following replacing ``<VERSION_TAG>`` with the appropriate version specifier (e.g. ``v1.0.0-beta.1``).
@@ -32,6 +32,15 @@ Note that even for manual installation, you still need ``git-lfs`` to properly d
 
 Troubleshooting
 ...............
+
+Installing on Python 3.13 on Windows
+************************************
+
+While in general SCEPTR is supported up to the latest versions of Python, CI testing suggests that there may be potential issues using SCEPTR on Python >= 3.13 on Windows.
+If Windows users run into any issues, for now please try using Python 3.12.
+
+Git LFS
+*******
 
 A recent security update to ``git`` has resulted in some difficulties cloning repositories that rely on ``git-lfs``.
 This can result in an error message with a message along the lines of:
