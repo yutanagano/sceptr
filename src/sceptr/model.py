@@ -11,7 +11,7 @@ from torch import FloatTensor
 from torch.nn import utils
 
 
-BATCH_SIZE = 512
+BATCH_SIZE_DEFAULT = 512
 
 
 logger = logging.getLogger(__name__)
@@ -134,6 +134,7 @@ class Sceptr:
         self._tokeniser = tokeniser
         self._bert = bert.eval()
         self._device = torch.device("cpu")
+        self._batch_size = BATCH_SIZE_DEFAULT
 
     def enable_hardware_acceleration(self) -> None:
         """
@@ -156,6 +157,17 @@ class Sceptr:
         logger.debug(
             f"disable_hardware_acceleration called on {self} ({self.name}), setting device to cpu"
         )
+
+    def set_batch_size(self, batch_size: int) -> None:
+        """
+        Set the batch size used when generating TCR vector representations.
+        That is, how many representations are computed at a time on the CPU / GPU.
+        By default, the batch size is set to 512.
+        """
+        if not isinstance(batch_size, int):
+            raise TypeError(f"The batch size must be an int. Got {type(batch_size)}.")
+
+        self._batch_size = batch_size
 
     def calc_vector_representations(self, instances: DataFrame) -> ndarray:
         """
@@ -215,8 +227,8 @@ class Sceptr:
         residue_reps_collection = []
         compartment_masks_collection = []
 
-        for idx in range(0, len(tcrs), BATCH_SIZE):
-            batch = tcrs.iloc[idx : idx + BATCH_SIZE]
+        for idx in range(0, len(tcrs), self._batch_size):
+            batch = tcrs.iloc[idx : idx + self._batch_size]
             tokenised_batch = [self._tokeniser.tokenise(tcr) for tcr in batch]
             padded_batch = utils.rnn.pad_sequence(
                 sequences=tokenised_batch,
@@ -257,8 +269,8 @@ class Sceptr:
         tcrs = schema.generate_tcr_series(instances)
 
         representations = []
-        for idx in range(0, len(tcrs), BATCH_SIZE):
-            batch = tcrs.iloc[idx : idx + BATCH_SIZE]
+        for idx in range(0, len(tcrs), self._batch_size):
+            batch = tcrs.iloc[idx : idx + self._batch_size]
             tokenised_batch = [self._tokeniser.tokenise(tcr) for tcr in batch]
             padded_batch = utils.rnn.pad_sequence(
                 sequences=tokenised_batch,
