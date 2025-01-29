@@ -96,7 +96,7 @@ Hardware acceleration / device selection
 ----------------------------------------
 
 By default, SCEPTR will detect any available devices with harware-acceleration capabilities and automatically load models onto those devices.
-`CUDA- <https://developer.nvidia.com/cuda-zone>`_ and `MPS-enabled <https://developer.apple.com/documentation/metalperformanceshaders>`_ devices are supported.
+Currently, `CUDA-enabled <https://developer.nvidia.com/cuda-zone>`_ devices are supported, with MPS pending on `better upstream Pytorch support <https://github.com/pytorch/pytorch/issues/77764>`_.
 In cases where you would like to explicitly limit SCEPTR to using the CPU, you can call :py:func:`sceptr.disable_hardware_acceleration`.
 
 .. _data_format:

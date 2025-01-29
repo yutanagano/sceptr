@@ -137,7 +137,7 @@ class Sceptr:
 
     def enable_hardware_acceleration(self) -> None:
         """
-        Move this `Sceptr` instance and its computations to a hardware-accelerated device, if available (e.g. CUDA- or MPS-enabled GPU).
+        Move this `Sceptr` instance and its computations to a hardware-accelerated device, if available (e.g. CUDA-enabled GPU).
         For toggling the package-level setting, see :py:func:`sceptr.enable_hardware_acceleration`.
         """
         self._device = _get_hardware_accelerated_device()

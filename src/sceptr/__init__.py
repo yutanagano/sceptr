@@ -100,7 +100,7 @@ def calc_residue_representations(instances: DataFrame) -> ResidueRepresentations
 
 def enable_hardware_acceleration() -> None:
     """
-    Instruct SCEPTR to detect and use available hardware acceleration, such as CUDA or MPS.
+    Instruct SCEPTR to detect and use available hardware acceleration, such as CUDA.
 
     While hardware acceleration is toggled on by default, it can be turned off manually by calling :py:func:`sceptr.disable_hardware_acceleration`.
     This function allows you to turn the setting back on.
@@ -121,7 +121,7 @@ def disable_hardware_acceleration() -> None:
     """
     Instruct SCEPTR to ignore hardware acceleration options and only use the CPU.
 
-    By default, SCEPTR will look for available hardware acceleration devices such as CUDA- or MPS-enabled GPUs and perform computations there.
+    By default, SCEPTR will look for available hardware acceleration devices such as CUDA-enabled GPUs and perform computations there.
     However, in some cases it may be favourable to explicitly keep models on the CPU (e.g. a CUDA-enabled GPU is available but does not have sufficient VRAM for your use case).
     This function is useful for such scenarios.
     This setting can be reversed using :py:func:`sceptr.enable_hardware_acceleration`.

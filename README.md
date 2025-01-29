@@ -15,7 +15,7 @@
 ---
 
 | <img src="https://raw.githubusercontent.com/yutanagano/sceptr/main/docs/graphical_abstract.png" width=700> |
-|---|
+|-|
 | Graphical abstract. Traditional protein language models that are trained purely on masked-language modelling underperform sequence alignment models on TCR specificity prediction. In contrast, our model SCEPTR is jointly trained on masked-language modelling and contrastive learning, allowing it to outperform other language models as well as the best sequence alignment models to achieve state-of-the-art performance. |
 
 **SCEPTR** (**S**imple **C**ontrastive **E**mbedding of the **P**rimary sequence of **T** cell **R**eceptors) is a small, fast, and informative TCR representation model that can be used for alignment-free TCR  analysis, including for TCR-pMHC interaction prediction and TCR clustering (metaclonotype discovery).
