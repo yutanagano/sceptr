@@ -324,7 +324,8 @@ def _get_hardware_accelerated_device() -> torch.device:
     if torch.cuda.is_available():
         return torch.device("cuda")
 
-    if torch.mps.is_available():
-        return torch.device("mps")
+    # Below is commented out for now until MPS support is more stable / complete
+    # if torch.mps.is_available():
+    #     return torch.device("mps")
 
     return torch.device("cpu")
