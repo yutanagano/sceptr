@@ -16,6 +16,11 @@ def dummy_data():
     return df
 
 
+@pytest.fixture
+def default_model():
+    return variant.default()
+
+
 @pytest.mark.parametrize(
     "model",
     (
@@ -45,12 +50,14 @@ class TestVariant:
         caplog.set_level(logging.DEBUG)
         model.enable_hardware_acceleration()
         assert "enable_hardware_acceleration" in caplog.text
+        assert model.name in caplog.text
         model.disable_hardware_acceleration()
 
     def test_disable_hardware_acceleration(self, model, caplog):
         caplog.set_level(logging.DEBUG)
         model.disable_hardware_acceleration()
         assert "disable_hardware_acceleration" in caplog.text
+        assert model.name in caplog.text
 
     def test_embed(self, model, dummy_data):
         result = model.calc_vector_representations(dummy_data)
@@ -94,3 +101,14 @@ class TestVariant:
         ):
             with pytest.raises(NotImplementedError):
                 model.calc_residue_representations(dummy_data)
+
+
+def test_set_batch_size(default_model):
+    assert default_model._batch_size == 512
+    default_model.set_batch_size(128)
+    assert default_model._batch_size == 128
+
+
+def test_set_batch_size_type_error(default_model):
+    with pytest.raises(TypeError):
+        default_model.set_batch_size("128")
