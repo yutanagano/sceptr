@@ -33,15 +33,6 @@ Note that even for manual installation, you still need ``git-lfs`` to properly d
 Troubleshooting
 ...............
 
-Installing on Python 3.13 on Windows
-************************************
-
-While in general SCEPTR is supported up to the latest versions of Python, CI testing suggests that there may be potential issues using SCEPTR on Python >= 3.13 on Windows.
-If Windows users run into any issues, for now please try using Python 3.12.
-
-Git LFS
-*******
-
 A recent security update to ``git`` has resulted in some difficulties cloning repositories that rely on ``git-lfs``.
 This can result in an error message with a message along the lines of:
 
