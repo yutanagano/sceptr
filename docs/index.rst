@@ -26,6 +26,7 @@ What's even better is that they are fully compliant with `pyrepseq <https://pyre
    installation
    usage
    api
+   troubleshooting
    citing
 
 Indices and tables
