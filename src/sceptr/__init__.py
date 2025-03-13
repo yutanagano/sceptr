@@ -5,7 +5,8 @@ The root module provides easy access to SCEPTR through a functional API which us
 
 from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
-from numpy import ndarray
+import numpy as np
+from numpy.typing import NDArray
 from pandas import DataFrame
 from typing import Optional
 
@@ -17,7 +18,9 @@ _DEFAULT_MODEL: Optional[Sceptr] = None
 _USE_HARDWARE_ACCELERATION = True
 
 
-def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
+def calc_cdist_matrix(
+    anchors: DataFrame, comparisons: DataFrame
+) -> NDArray[np.float32]:
     """
     Generate a cdist matrix between two collections of TCRs.
 
@@ -33,14 +36,14 @@ def calc_cdist_matrix(anchors: DataFrame, comparisons: DataFrame) -> ndarray:
 
     Returns
     -------
-    ndarray
+    NDArray[numpy.float32]
         A 2D numpy ndarray representing a cdist matrix between TCRs from `anchors` and `comparisons`.
         The returned array will have shape :math:`(X, Y)` where :math:`X` is the number of TCRs in `anchors` and :math:`Y` is the number of TCRs in `comparisons`.
     """
     return _get_default_model().calc_cdist_matrix(anchors, comparisons)
 
 
-def calc_pdist_vector(instances: DataFrame) -> ndarray:
+def calc_pdist_vector(instances: DataFrame) -> NDArray[np.float32]:
     r"""
     Generate a pdist vector of distances between each pair of TCRs in the input data.
 
@@ -52,14 +55,14 @@ def calc_pdist_vector(instances: DataFrame) -> ndarray:
 
     Returns
     -------
-    ndarray
+    NDArray[numpy.float32]
         A 1D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
         The returned array will have shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number of TCRs in `instances`.
     """
     return _get_default_model().calc_pdist_vector(instances)
 
 
-def calc_vector_representations(instances: DataFrame) -> ndarray:
+def calc_vector_representations(instances: DataFrame) -> NDArray[np.float32]:
     """
     Map TCRs to their corresponding vector representations.
 
@@ -71,7 +74,7 @@ def calc_vector_representations(instances: DataFrame) -> ndarray:
 
     Returns
     -------
-    ndarray
+    NDArray[numpy.float32]
         A 2D numpy ndarray object where every row vector corresponds to a row in `instances`.
         The returned array will have shape :math:`(N, 64)` where :math:`N` is the number of TCRs in `instances`.
     """

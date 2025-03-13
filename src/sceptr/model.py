@@ -4,7 +4,7 @@ from libtcrlm.tokeniser.token_indices import DefaultTokenIndex
 from libtcrlm import schema
 import logging
 import numpy as np
-from numpy import ndarray
+from numpy.typing import NDArray
 from pandas import DataFrame
 import torch
 from torch import FloatTensor
@@ -27,11 +27,11 @@ class ResidueRepresentations:
 
     Attributes
     ----------
-    representation_array : ndarray
+    representation_array : NDArray[numpy.float32]
         A numpy float array containing the residue-level representation data.
         The array is of shape :math:`(N, M, D)` where :math:`N` is the number of TCRs in the original input, :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form, and :math:`D` is the dimensionality of the model variant that produced the result.
 
-    compartment_mask : ndarray
+    compartment_mask : NDArray[numpy.int64]
         A numpy integer array mapping residue indices in the `representation_array` to corresponding CDR loops of the input TCRs.
         The array is of shape :math:`(N, M)` where :math:`N` is the number of TCRs in the original input, and :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form.
         Entries in `compartment_mask` have the following values:
@@ -102,11 +102,13 @@ class ResidueRepresentations:
     Note that the zeroth element of the shape tuple above is 14 because the CDR3B sequence of the first TCR in ``tcrs`` is 14 residues long, and the first element of the shape tuple is 64 because the model dimensionality of the default SCEPTR variant is 64.
     """
 
-    representation_array: ndarray
-    compartment_mask: ndarray
+    representation_array: NDArray[np.float32]
+    compartment_mask: NDArray[np.int64]
 
     def __init__(
-        self, representation_array: ndarray, compartment_mask: ndarray
+        self,
+        representation_array: NDArray[np.float32],
+        compartment_mask: NDArray[np.int64],
     ) -> None:
         self.representation_array = representation_array
         self.compartment_mask = compartment_mask
@@ -169,7 +171,7 @@ class Sceptr:
 
         self._batch_size = batch_size
 
-    def calc_vector_representations(self, instances: DataFrame) -> ndarray:
+    def calc_vector_representations(self, instances: DataFrame) -> NDArray[np.float32]:
         """
         Map TCRs to their corresponding vector representations.
 
@@ -181,7 +183,7 @@ class Sceptr:
 
         Returns
         -------
-        ndarray
+        NDArray[numpy.float32]
             A 2D numpy ndarray object where every row vector corresponds to a row in `instances`.
             The returned array will have shape :math:`(N, D)` where :math:`N` is the number of TCRs in `instances` and :math:`D` is the dimensionality of the current model variant.
         """
@@ -284,7 +286,9 @@ class Sceptr:
 
         return torch.concatenate(representations, dim=0)
 
-    def calc_cdist_matrix(self, anchors: DataFrame, comparisons: DataFrame) -> ndarray:
+    def calc_cdist_matrix(
+        self, anchors: DataFrame, comparisons: DataFrame
+    ) -> NDArray[np.float32]:
         """
         Generate a cdist matrix between two collections of TCRs.
 
@@ -300,7 +304,7 @@ class Sceptr:
 
         Returns
         -------
-        ndarray
+        NDArray[numpy.float32]
             A 2D numpy ndarray representing a cdist matrix between TCRs from `anchors` and `comparisons`.
             The returned array will have shape :math:`(X, Y)` where :math:`X` is the number of TCRs in `anchors` and :math:`Y` is the number of TCRs in `comparisons`.
         """
@@ -311,7 +315,7 @@ class Sceptr:
         )
         return cdist_matrix.cpu().numpy()
 
-    def calc_pdist_vector(self, instances: DataFrame) -> ndarray:
+    def calc_pdist_vector(self, instances: DataFrame) -> NDArray[np.float32]:
         r"""
         Generate a pdist vector of distances between each pair of TCRs in the input data.
 
@@ -323,7 +327,7 @@ class Sceptr:
 
         Returns
         -------
-        ndarray
+        NDArray[numpy.float32]
             A 1D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
             The returned array will have shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number of TCRs in `instances`.
         """
