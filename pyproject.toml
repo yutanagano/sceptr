@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "libtcrlm~=1.0",
+    "libtcrlm>=1.0.1, ==1.0.*",
     "numpy~=1.26",
     "pandas~=2.0",
     "torch~=2.0",
