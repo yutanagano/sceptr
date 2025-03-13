@@ -11,7 +11,7 @@ from pandas import DataFrame
 from typing import Optional
 
 
-__version__ = "1.1.0-post2"
+__version__ = "1.1.1"
 
 
 _DEFAULT_MODEL: Optional[Sceptr] = None
