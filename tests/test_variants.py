@@ -92,8 +92,8 @@ class TestVariant:
 
             assert isinstance(result, ResidueRepresentations)
             assert len(result.representation_array.shape) == 3
-            assert result.representation_array.shape[:2] == (3, 47)
-            assert result.compartment_mask.shape == (3, 47)
+            assert result.representation_array.shape[:2] == (3, 48)
+            assert result.compartment_mask.shape == (3, 48)
 
         if model.name in (
             "SCEPTR (CDR3 only)",
