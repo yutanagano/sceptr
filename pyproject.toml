@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools-scm[simple]"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -42,9 +42,6 @@ docs = ["sphinx_book_theme"]
 
 [tool.setuptools]
 include-package-data = true
-
-[tool.setuptools.dynamic]
-version = { attr = "sceptr.__version__" }
 
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:The PyTorch API"]
