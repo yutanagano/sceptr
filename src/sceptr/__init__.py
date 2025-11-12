@@ -33,11 +33,6 @@ def setup(species: Literal["homosapiens", "musmusculus"]):
     species : str
         SCEPTR currently supports ``"homosapiens"`` or ``"musmusculus"``.
     """
-    if species.lower() not in ("homosapiens", "musmusculus"):
-        raise ValueError(
-            f'the only two supported species are currently "homosapiens" or "musmusculus" (received: "{species}")'
-        )
-
     libtcrlm.setup(species)
 
 
