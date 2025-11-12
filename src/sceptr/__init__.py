@@ -6,14 +6,76 @@ through a functional API which uses the default model.
 
 from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
+import libtcrlm
 import numpy as np
 from numpy.typing import NDArray
 from pandas import DataFrame
-from typing import Optional
+from typing import Optional, Literal
 
 
 _DEFAULT_MODEL: Optional[Sceptr] = None
 _USE_HARDWARE_ACCELERATION = True
+
+
+def setup(species: Literal["homosapiens", "musmusculus"]):
+    """
+    Set up the SCEPTR package work on *Homo sapiens* / *Mus musculus* TCR data.
+
+    .. caution ::
+        *Mus musculus* support is considered experimental. All current SCEPTR
+        variants are trained only on *Homo sapiens* TCR data. Therefore,
+        strictly speaking, *Mus musculus* TCR data should be considered out of
+        distribution. How well the models work for inferences on *Mus musculus*
+        TCRs is currently untested.
+
+    Parameters
+    ----------
+    species : str
+        SCEPTR currently supports ``"homosapiens"`` or ``"musmusculus"``.
+
+
+    Examples
+    --------
+    This experimental feature allows you to send *Mus musculus* TCR data
+    through SCEPTR and produce representations for them. First, let's prepare a
+    toy set of two *Mus musculus* TCRs.
+
+    >>> import sceptr
+    >>> from pandas import DataFrame
+    >>> musmusculus_tcrs = DataFrame(
+    ... 	data = {
+    ... 		"TRAV": ["TRAV8D-1*01", "TRAV8-1*01"],
+    ... 		"CDR3A": ["CATDPRNNAGAKLTF", "CATETNNNAGAKLTF"],
+    ... 		"TRBV": ["TRBV12-1*01", "TRBV12-1*01"],
+    ... 		"CDR3B": ["CASSPRDWGSGEQYF", "CASSLGDWGNAEQFF"],
+    ... 	},
+    ... 	index = [0,1]
+    ... )
+    >>> print(musmusculus_tcrs)
+              TRAV            CDR3A         TRBV            CDR3B
+    0  TRAV8D-1*01  CATDPRNNAGAKLTF  TRBV12-1*01  CASSPRDWGSGEQYF
+    1   TRAV8-1*01  CATETNNNAGAKLTF  TRBV12-1*01  CASSLGDWGNAEQFF
+
+    Passing *Mus musculus* TCR data to SCEPTR without doing anything else will
+    result in an error, since the package is set up by default to recognize and
+    process human TCR gene symbols. We must therefore explicitly tell SCEPTR to
+    switch to its experimental *Mus musculus* mode using the
+    :py:func:`sceptr.setup` method.
+
+    >>> sceptr.setup("musmusculus")
+
+    SCEPTR is now ready to parse *Mus musculus* data!
+
+    >>> reps = sceptr.calc_vector_representations(musmusculus_tcrs)
+    >>> print(reps.shape)
+    (2, 64)
+
+    If you want to switch back to *Homo sapiens* mode, just call
+    :py:func:`sceptr.setup` again with ``"homosapiens"`` as the argument.
+
+    >>> sceptr.setup("homosapiens")
+    """
+    libtcrlm.setup(species)
 
 
 def calc_cdist_matrix(

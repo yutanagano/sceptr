@@ -19,22 +19,35 @@ logger = logging.getLogger(__name__)
 
 class ResidueRepresentations:
     """
-    An object containing information necessary to interpret and operate on residue-level representations from the SCEPTR family of models.
-    Instances of this class can be obtained via the :py:func:`sceptr.calc_residue_representations` function and a method of the same name on the :py:class:`~sceptr.model.Sceptr` class.
+    An object containing information necessary to interpret and operate on
+    residue-level representations from the SCEPTR family of models. Instances
+    of this class can be obtained via the
+    :py:func:`sceptr.calc_residue_representations` function and a method of the
+    same name on the :py:class:`~sceptr.model.Sceptr` class.
 
-    This feature is implemented to give power-users easy access to model internals to tinker around and examine what kind of information SCEPTR focuses on at the individual amino acid residue level.
-    The "Examples" section below illustrates how to use instances of this class to examine SCEPTR's residue-level embeddings.
+    This feature is implemented to give power-users easy access to model
+    internals to tinker around and examine what kind of information SCEPTR
+    focuses on at the individual amino acid residue level. The "Examples"
+    section below illustrates how to use instances of this class to examine
+    SCEPTR's residue-level embeddings.
 
     Attributes
     ----------
     representation_array : NDArray[numpy.float32]
         A numpy float array containing the residue-level representation data.
-        The array is of shape :math:`(N, M, D)` where :math:`N` is the number of TCRs in the original input, :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form, and :math:`D` is the dimensionality of the model variant that produced the result.
+        The array is of shape :math:`(N, M, D)` where :math:`N` is the number
+        of TCRs in the original input, :math:`M` is the maximum number of
+        residues among the input TCRs when put into its tokenised form, and
+        :math:`D` is the dimensionality of the model variant that produced the
+        result.
 
     compartment_mask : NDArray[numpy.int64]
-        A numpy integer array mapping residue indices in the `representation_array` to corresponding CDR loops of the input TCRs.
-        The array is of shape :math:`(N, M)` where :math:`N` is the number of TCRs in the original input, and :math:`M` is the maximum number of residues among the input TCRs when put into its tokenised form.
-        Entries in `compartment_mask` have the following values:
+        A numpy integer array mapping residue indices in the
+        `representation_array` to corresponding CDR loops of the input TCRs.
+        The array is of shape :math:`(N, M)` where :math:`N` is the number of
+        TCRs in the original input, and :math:`M` is the maximum number of
+        residues among the input TCRs when put into its tokenised form. Entries
+        in `compartment_mask` have the following values:
 
         +------------------------------+------------------+
         | If residue at index is from: | Entry has value: |
@@ -54,12 +67,15 @@ class ResidueRepresentations:
         | CDR3B                        | 6                |
         +------------------------------+------------------+
 
-        Within each CDR loop compartment, residues are ordered from C- to N-terminal from left to right.
+        Within each CDR loop compartment, residues are ordered from C- to
+        N-terminal from left to right.
 
     Examples
     --------
-    In the following we show how to extract the residue-level representations for the beta-chain CDR3 amino acid sequences of all input TCR sequences.
-    To start with, we define a DataFrame ``tcrs`` that contains the sequence data for four TCRs.
+    In the following we show how to extract the residue-level representations
+    for the beta-chain CDR3 amino acid sequences of all input TCR sequences. To
+    start with, we define a DataFrame ``tcrs`` that contains the sequence data
+    for four TCRs.
 
     >>> from pandas import DataFrame
     >>> tcrs = DataFrame(
@@ -85,21 +101,28 @@ class ResidueRepresentations:
     >>> print(res_reps)
     ResidueRepresentations[num_tcrs: 4, rep_dim: 64]
 
-    Now, we can iterate through the residue-level representation subarray corresponding to each TCR, and filter out/obtain the representations for the beta chain CDR3 sequence.
+    Now, we can iterate through the residue-level representation subarray
+    corresponding to each TCR, and filter out/obtain the representations for
+    the beta chain CDR3 sequence.
 
     >>> cdr3b_reps = []
     >>> for reps, mask in zip(res_reps.representation_array, res_reps.compartment_mask):
     ...     cdr3b_rep = reps[mask == 6] # collect only the residue representations for the beta CDR3 sequence
     ...     cdr3b_reps.append(cdr3b_rep)
 
-    Now we have a list containing four numpy ndarrays, each of which is a matrix whose row vectors are representations of individual CDR3B amino acid residues.
+    Now we have a list containing four numpy ndarrays, each of which is a
+    matrix whose row vectors are representations of individual CDR3B amino acid
+    residues.
 
     >>> type(cdr3b_reps[0])
     <class 'numpy.ndarray'>
     >>> cdr3b_reps[0].shape
     (14, 64)
 
-    Note that the zeroth element of the shape tuple above is 14 because the CDR3B sequence of the first TCR in ``tcrs`` is 14 residues long, and the first element of the shape tuple is 64 because the model dimensionality of the default SCEPTR variant is 64.
+    Note that the zeroth element of the shape tuple above is 14 because the
+    CDR3B sequence of the first TCR in ``tcrs`` is 14 residues long, and the
+    first element of the shape tuple is 64 because the model dimensionality of
+    the default SCEPTR variant is 64.
     """
 
     representation_array: NDArray[np.float32]
@@ -119,8 +142,9 @@ class ResidueRepresentations:
 
 class Sceptr:
     """
-    Loads a trained state of a SCEPTR model and provides an easy interface for generating TCR representations and making inferences from them.
-    Instances can be obtained through the :py:mod:`sceptr.variant` submodule.
+    Loads a trained state of a SCEPTR model and provides an easy interface for
+    generating TCR representations and making inferences from them. Instances
+    can be obtained through the :py:mod:`sceptr.variant` submodule.
 
     Attributes
     ----------
@@ -140,8 +164,10 @@ class Sceptr:
 
     def enable_hardware_acceleration(self) -> None:
         """
-        Move this `Sceptr` instance and its computations to a hardware-accelerated device, if available (e.g. CUDA-enabled GPU).
-        For toggling the package-level setting, see :py:func:`sceptr.enable_hardware_acceleration`.
+        Move this `Sceptr` instance and its computations to a
+        hardware-accelerated device, if available (e.g. CUDA-enabled GPU). For
+        toggling the package-level setting, see
+        :py:func:`sceptr.enable_hardware_acceleration`.
         """
         self._device = _get_hardware_accelerated_device()
         self._bert.to(self._device)
@@ -151,8 +177,9 @@ class Sceptr:
 
     def disable_hardware_acceleration(self) -> None:
         """
-        Move this `Sceptr` instance and its computations to the CPU.
-        For toggling the package-level setting, see :py:func:`sceptr.disable_hardware_acceleration`.
+        Move this `Sceptr` instance and its computations to the CPU. For
+        toggling the package-level setting, see
+        :py:func:`sceptr.disable_hardware_acceleration`.
         """
         self._device = torch.device("cpu")
         self._bert.to(self._device)
@@ -163,8 +190,8 @@ class Sceptr:
     def set_batch_size(self, batch_size: int) -> None:
         """
         Set the batch size used when generating TCR vector representations.
-        That is, how many representations are computed at a time on the CPU / GPU.
-        By default, the batch size is set to 512.
+        That is, how many representations are computed at a time on the CPU /
+        GPU. By default, the batch size is set to 512.
         """
         if not isinstance(batch_size, int):
             raise TypeError(f"The batch size must be an int. Got {type(batch_size)}.")
@@ -178,14 +205,16 @@ class Sceptr:
         Parameters
         ----------
         instances : DataFrame
-            DataFrame specifying the input TCRs.
-            It must be in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs. It must be in the
+            :ref:`prescribed format <data_format>`.
 
         Returns
         -------
         NDArray[numpy.float32]
-            A 2D numpy ndarray object where every row vector corresponds to a row in `instances`.
-            The returned array will have shape :math:`(N, D)` where :math:`N` is the number of TCRs in `instances` and :math:`D` is the dimensionality of the current model variant.
+            A 2D numpy ndarray object where every row vector corresponds to a
+            row in `instances`. The returned array will have shape :math:`(N,
+            D)` where :math:`N` is the number of TCRs in `instances` and
+            :math:`D` is the dimensionality of the current model variant.
         """
         torch_representations = self._calc_torch_representations(instances)
         return torch_representations.cpu().numpy()
@@ -195,23 +224,30 @@ class Sceptr:
         self, instances: DataFrame
     ) -> ResidueRepresentations:
         """
-        Map each TCR to a set of amino acid residue-level representations.
-        The residue-level representations are the output of the penultimate self-attention layer, as also used by the :py:func:`~sceptr.variant.average_pooling` variant when generating TCR receptor-level representations.
+        Map each TCR to a set of amino acid residue-level representations. The
+        residue-level representations are the output of the penultimate
+        self-attention layer, as also used by the
+        :py:func:`~sceptr.variant.average_pooling` variant when generating TCR
+        receptor-level representations.
 
         .. note ::
-            This method is currently only supported on SCEPTR model variants such as the default one that 1) use both the alpha and beta chains, and 2) take into account all three CDR loops from each chain.
+            This method is currently only supported on SCEPTR model variants
+            such as the default one that 1) use both the alpha and beta chains,
+            and 2) take into account all three CDR loops from each chain.
 
         Parameters
         ----------
         instances : DataFrame
-            DataFrame specifying the input TCRs.
-            It must be in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs. It must be in the
+            :ref:`prescribed format <data_format>`.
 
         Returns
         -------
         :py:class:`~sceptr.model.ResidueRepresentations`
-            An array of representation vectors for each amino acid residue in the tokenised forms of the input TCRs.
-            For details on how to interpret/use this output, please refer to the documentation for :py:class:`~sceptr.model.ResidueRepresentations`.
+            An array of representation vectors for each amino acid residue in
+            the tokenised forms of the input TCRs. For details on how to
+            interpret/use this output, please refer to the documentation for
+            :py:class:`~sceptr.model.ResidueRepresentations`.
         """
         if not isinstance(self._tokeniser, CdrTokeniser):
             raise NotImplementedError(
@@ -299,14 +335,16 @@ class Sceptr:
             It must be in the :ref:`prescribed format <data_format>`.
 
         comparisons : DataFrame
-            DataFrame specifying the second (comparison) collection of input TCRs.
-            It must be in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the second (comparison) collection of input
+            TCRs. It must be in the :ref:`prescribed format <data_format>`.
 
         Returns
         -------
         NDArray[numpy.float32]
-            A 2D numpy ndarray representing a cdist matrix between TCRs from `anchors` and `comparisons`.
-            The returned array will have shape :math:`(X, Y)` where :math:`X` is the number of TCRs in `anchors` and :math:`Y` is the number of TCRs in `comparisons`.
+            A 2D numpy ndarray representing a cdist matrix between TCRs from
+            `anchors` and `comparisons`. The returned array will have shape
+            :math:`(X, Y)` where :math:`X` is the number of TCRs in `anchors`
+            and :math:`Y` is the number of TCRs in `comparisons`.
         """
         anchor_representations = self._calc_torch_representations(anchors)
         comparison_representations = self._calc_torch_representations(comparisons)
@@ -317,19 +355,22 @@ class Sceptr:
 
     def calc_pdist_vector(self, instances: DataFrame) -> NDArray[np.float32]:
         r"""
-        Generate a pdist vector of distances between each pair of TCRs in the input data.
+        Generate a pdist vector of distances between each pair of TCRs in the
+        input data.
 
         Parameters
         ----------
         instances : DataFrame
-            DataFrame specifying the input TCRs.
-            It must be in the :ref:`prescribed format <data_format>`.
+            DataFrame specifying the input TCRs. It must be in the
+            :ref:`prescribed format <data_format>`.
 
         Returns
         -------
         NDArray[numpy.float32]
-            A 1D numpy ndarray representing a pdist vector of distances between each pair of TCRs in `instances`.
-            The returned array will have shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number of TCRs in `instances`.
+            A 1D numpy ndarray representing a pdist vector of distances between
+            each pair of TCRs in `instances`. The returned array will have
+            shape :math:`(\frac{1}{2}N(N-1),)`, where :math:`N` is the number
+            of TCRs in `instances`.
         """
         representations = self._calc_torch_representations(instances)
         pdist_vector = torch.pdist(representations, p=2)
