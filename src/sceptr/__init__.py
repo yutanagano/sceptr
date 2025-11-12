@@ -6,14 +6,39 @@ through a functional API which uses the default model.
 
 from sceptr import variant
 from sceptr.model import Sceptr, ResidueRepresentations
+import libtcrlm
 import numpy as np
 from numpy.typing import NDArray
 from pandas import DataFrame
-from typing import Optional
+from typing import Optional, Literal
 
 
 _DEFAULT_MODEL: Optional[Sceptr] = None
 _USE_HARDWARE_ACCELERATION = True
+
+
+def setup(species: Literal["homosapiens", "musmusculus"]):
+    """
+    Set up the SCEPTR package work on *Homo sapiens* / *Mus musculus* TCR data.
+
+    .. caution ::
+        *Mus musculus* support is considered experimental. All current SCEPTR
+        variants are trained only on *Homo sapiens* TCR data. Therefore,
+        strictly speaking, *Mus musculus* TCR data should be considered out of
+        distribution. How well the models work for inferences on *Mus musculus*
+        TCRs is currently untested.
+
+    Parameters
+    ----------
+    species : str
+        SCEPTR currently supports ``"homosapiens"`` or ``"musmusculus"``.
+    """
+    if species.lower() not in ("homosapiens", "musmusculus"):
+        raise ValueError(
+            f'the only two supported species are currently "homosapiens" or "musmusculus" (received: "{species}")'
+        )
+
+    libtcrlm.setup(species)
 
 
 def calc_cdist_matrix(
