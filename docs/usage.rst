@@ -132,7 +132,7 @@ like to explicitly limit SCEPTR to using the CPU, you can call
 
 .. _data_format:
 
-Mus musculus support (experimental)
+Mus musculus support (Experimental)
 -----------------------------------
 
 .. caution ::
