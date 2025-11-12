@@ -52,9 +52,9 @@ def setup(species: Literal["homosapiens", "musmusculus"]):
     ... 	index = [0,1]
     ... )
     >>> print(musmusculus_tcrs)
-                  TRAV               CDR3A         TRBV            CDR3B
-    0      TRAV8D-1*01     CATDPRNNAGAKLTF  TRBV12-1*01  CASSPRDWGSGEQYF
-    1       TRAV8-1*01     CATETNNNAGAKLTF  TRBV12-1*01  CASSLGDWGNAEQFF
+              TRAV            CDR3A         TRBV            CDR3B
+    0  TRAV8D-1*01  CATDPRNNAGAKLTF  TRBV12-1*01  CASSPRDWGSGEQYF
+    1   TRAV8-1*01  CATETNNNAGAKLTF  TRBV12-1*01  CASSLGDWGNAEQFF
 
     Passing *Mus musculus* TCR data to SCEPTR without doing anything else will
     result in an error, since the package is set up by default to recognize and
