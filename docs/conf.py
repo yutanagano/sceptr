@@ -1,4 +1,4 @@
-import sceptr
+from importlib import metadata
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -11,7 +11,7 @@ import sceptr
 project = "sceptr"
 copyright = "2024, Yuta Nagano"
 author = "Yuta Nagano"
-release = sceptr.__version__
+release = metadata.version("sceptr")
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
