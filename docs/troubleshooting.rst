@@ -1,8 +1,12 @@
 Troubleshooting
 ===============
 
-Installing on Python 3.13 on Windows
-------------------------------------
+Installing on Python :math:\geq 3.13 on Windows
+-----------------------------------------------
 
-While in general SCEPTR is supported up to the latest versions of Python, CI testing has suggested that there may be potential issues using SCEPTR on Python >= 3.13 on Windows.
-If Windows users run into any issues, please submit an issue on the repository to notify the maintainers, and for now please try using Python 3.12 instead.
+User reports / CI testing have suggested that up to version ``1.1.1``,
+installing SCEPTR on Python :math:\geq 3.13 on Windows results in an error.
+This issue is fixed from version ``1.2.0`` onwards. If Windows users notice any
+persisting problems despite using the latest version of SCEPTR, please submit
+an issue on the `GitHub repository
+<https://github.com/yutanagano/sceptr/issues>`_ to notify the maintainers.
