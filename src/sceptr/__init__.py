@@ -19,7 +19,7 @@ _USE_HARDWARE_ACCELERATION = True
 
 def setup(species: Literal["homosapiens", "musmusculus"]):
     """
-    Set up the SCEPTR package work on *Homo sapiens* / *Mus musculus* TCR data.
+    Set up the SCEPTR package for *Homo sapiens* / *Mus musculus* TCR data.
 
     .. caution ::
         *Mus musculus* support is considered experimental. All current SCEPTR
