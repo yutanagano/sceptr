@@ -11,6 +11,17 @@ persisting problems despite using the latest version of SCEPTR, please submit
 an issue on the `GitHub repository
 <https://github.com/yutanagano/sceptr/issues/new>`_ to notify the maintainers.
 
+*Mus musculus* TR genes / alleles not properly recognised as functional
+-----------------------------------------------------------------------
+
+This was `a known bug <https://github.com/yutanagano/sceptr/issues/58>`_ with
+old versions of the `libtcrlm <https://github.com/yutanagano/libtcrlm>`_
+dependency. This has now been fixed thanks to a contribution from `@celinebalaa
+<https://github.com/celinebalaa>`_ (thank you!). If you are still having this issue,
+please make sure your Python environment has libtcrlm updated to version 1.1.2
+or newer, and if the issue is persisting please open an `issue on the GitHub
+repository <https://github.com/yutanagano/sceptr/issues/new>`_.
+
 Error from git when installing from source (versions :math:`\leq` ``1.1.0``)
 ----------------------------------------------------------------------------
 
